@@ -26,7 +26,7 @@ const Header = () => {
           {/* Navigation */}
           <nav className="flex items-center gap-1">
             <Link
-              to="/"
+              to="/about"
               className={`px-4 py-2 rounded-lg transition-colors ${
                 location.pathname === "/about"
                   ? "bg-primary text-primary-foreground"
