@@ -12,6 +12,7 @@ import Quiz from "./pages/Quiz";
 import HomePage from "./HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Waitlist from "./pages/WaitList-Components/Waitlist";
 
 
 const queryClient = new QueryClient();
@@ -23,13 +24,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<About />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/intro" element={<BitcoinCultureHub/>}/>
           <Route path="/quiz" element={<Quiz/>}/>
-          <Route path="/home" element={<HomePage/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/join" element={<Waitlist/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

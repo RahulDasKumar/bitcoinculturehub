@@ -46,7 +46,7 @@ const Header = () => {
               Manifesto
             </Link>
             <Link
-              to="/home"
+              to="/"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/intro"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
@@ -55,13 +55,13 @@ const Header = () => {
               Home
             </Link>
             <Link
-              to="/login"
+              to="/join"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/intro"
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
             >
-              Sign In/Up
+              Join
             </Link>
           </nav>
         </div>
