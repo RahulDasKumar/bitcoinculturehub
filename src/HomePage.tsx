@@ -22,9 +22,9 @@ export default function HomePage() {
     const navigate = useNavigate()
     const handleLoginNavigation = () => {
         try {
-            navigate("/register")
+            navigate("/join")
         } catch (error) {
-            console.warn("Quiz route not found - /quiz route needs to be created")
+            console.warn("Join route not found")
             setDialogOpen(false)
         }
     }
@@ -65,7 +65,7 @@ export default function HomePage() {
                     `}
                                         onClick={handleLoginNavigation}
                                     >
-                                        Sign Up
+                                        Join Now
                                     </Button>
 
                                 <div className="text-center sm:text-left">
@@ -170,7 +170,7 @@ export default function HomePage() {
                                     <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full"
                                     onClick={handleLoginNavigation}
                                     >
-                                        Sign Up
+                                        Join Now
                                     </Button>
                             </div>
                         </div>
