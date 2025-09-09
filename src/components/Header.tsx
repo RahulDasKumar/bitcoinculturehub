@@ -5,7 +5,7 @@ const Header = () => {
   const navigate = useNavigate() 
 
   const logoHandler = ()=>{
-    navigate("/home")
+    navigate("/")
   }
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
