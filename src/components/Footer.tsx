@@ -56,7 +56,7 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-md font-medium text-foreground">Connect</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://x.com/btcculturehub" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
