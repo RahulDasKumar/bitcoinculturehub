@@ -28,7 +28,7 @@ const Header = () => {
             <Link
               to="/"
               className={`px-4 py-2 rounded-lg transition-colors ${
-                location.pathname === "/"
+                location.pathname === "/about"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               }`}
@@ -47,7 +47,7 @@ const Header = () => {
             </Link>
             <Link
               to="/"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/intro"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
@@ -56,7 +56,7 @@ const Header = () => {
             </Link>
             <Link
               to="/join"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/intro"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/join"
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
