@@ -176,7 +176,7 @@ export default function HomePage() {
                         </div>
 
                         {/* Right Column - Video Placeholder */}
-                        <div className="flex justify-center lg:justify-end">
+                       {/* <div className="flex justify-center lg:justify-end">
                             <div className="w-full max-w-lg">
                                 <div className="aspect-video bg-gray-900 rounded-2xl shadow-2xl flex items-center justify-center relative overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-purple-500/20"></div>
@@ -187,9 +187,23 @@ export default function HomePage() {
                                         <p className="text-white/80 text-sm">Video Coming Soon</p>
                                     </div>
                                 </div>
+                                </div>
+                            
+                        </div>*/}
+
+                        {/* Right Column - Video */}
+                            <div className="flex justify-center lg:justify-end">
+                                <div className="w-full max-w-lg">
+                                 <video
+                                   controls
+                                   className="w-full rounded-2xl shadow-2xl border-2 border-orange-500"
+                                 >
+                                   <source src="bchvid.mp4" type="video/mp4" />
+                                       Your browser does not support the video tag.
+                                 </video>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
 
