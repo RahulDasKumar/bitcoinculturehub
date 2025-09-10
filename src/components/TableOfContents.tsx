@@ -23,7 +23,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: "-20% 0% -35% 0%" }
+      { rootMargin: "0% 0% 0% 0%" }
     );
 
     items.forEach(({ id }) => {

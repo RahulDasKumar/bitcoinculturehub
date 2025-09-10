@@ -10,15 +10,6 @@ const tocItems = [
   { id: "about-company", title: "About the Company", level: 1 },
   { id: "our-mission", title: "Our Mission", level: 2 },
   { id: "our-values", title: "Our Values", level: 2 },
-  { id: "houses-explained", title: "Houses Explained", level: 1 },
-  { id: "house-structure", title: "House Structure", level: 2 },
-  { id: "house-benefits", title: "House Benefits", level: 2 },
-  { id: "archetypes-explained", title: "Archetypes Explained", level: 1 },
-  { id: "archetype-roles", title: "Archetype Roles", level: 2 },
-  { id: "archetype-progression", title: "Archetype Progression", level: 2 },
-  { id: "citadels-explained", title: "Citadels Explained", level: 1 },
-  { id: "citadel-governance", title: "Citadel Governance", level: 2 },
-  { id: "citadel-economy", title: "Citadel Economy", level: 2 },
   { id: "faq", title: "Frequently Asked Questions", level: 1 },
 ];
 
