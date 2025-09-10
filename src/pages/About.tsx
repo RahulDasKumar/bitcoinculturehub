@@ -10,15 +10,6 @@ const tocItems = [
   { id: "about-company", title: "About the Company", level: 1 },
   { id: "our-mission", title: "Our Mission", level: 2 },
   { id: "our-values", title: "Our Values", level: 2 },
-  { id: "houses-explained", title: "Houses Explained", level: 1 },
-  { id: "house-structure", title: "House Structure", level: 2 },
-  { id: "house-benefits", title: "House Benefits", level: 2 },
-  { id: "archetypes-explained", title: "Archetypes Explained", level: 1 },
-  { id: "archetype-roles", title: "Archetype Roles", level: 2 },
-  { id: "archetype-progression", title: "Archetype Progression", level: 2 },
-  { id: "citadels-explained", title: "Citadels Explained", level: 1 },
-  { id: "citadel-governance", title: "Citadel Governance", level: 2 },
-  { id: "citadel-economy", title: "Citadel Economy", level: 2 },
   { id: "faq", title: "Frequently Asked Questions", level: 1 },
 ];
 
@@ -83,7 +74,7 @@ const About = () => {
               </p>
               
               <div id="our-mission" className="scroll-mt-8 mb-12">
-                <h3 className="text-2xl font-semibold mb-4 text-foreground">Our Mission</h3>
+                <h3 className="text-2xl font-semibold mb-4 text-foreground text-center">Our Mission</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   We aim to incubate technologies and products that push forward the idea of a decentralized world.
                 </p>
@@ -108,7 +99,7 @@ const About = () => {
               </div>
 
               <div id="our-values" className="scroll-mt-8">
-                <h3 className="text-2xl font-semibold mb-6 text-foreground">Our Values</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-foreground text-center">Our Values</h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <FeatureCard
                     icon={<Shield className="w-6 h-6 text-primary-foreground" />}
@@ -135,7 +126,7 @@ const About = () => {
             </ContentSection>
 
             {/* Houses Explained */}
-            <ContentSection id="houses-explained" title="Houses Explained">
+            {/*<ContentSection id="houses-explained" title="Houses Explained">
               <p className="text-lg leading-relaxed mb-8">
                 Houses anchor identity and collective pride within our Bitcoin sovereignty ecosystem. Each House 
                 represents a fortress of shared values, cultural practices, and specialized focus areas that 
@@ -173,7 +164,7 @@ const About = () => {
                 
                 <div className="space-y-8">
                   {/* House Embrathor */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                 {/*} <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h4 className="text-xl font-semibold mb-3 text-foreground">House Embrathor - "Through Fire, We Build"</h4>
                     <p className="text-muted-foreground mb-4">
                       Forge is the crucible of creation. Members embrace trial to turn sparks into culture, tools, and progress.
@@ -195,7 +186,7 @@ const About = () => {
                   </div>
 
                   {/* House Luminor */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                  {/*<div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h4 className="text-xl font-semibold mb-3 text-foreground">House Luminor - "Where No One is a Stranger"</h4>
                     <p className="text-muted-foreground mb-4">
                       Luminor is the hearth of kinship. Members make sure culture stays human, inclusive, and warm.
@@ -217,7 +208,7 @@ const About = () => {
                   </div>
 
                   {/* House Runeborn */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                  {/*<div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h4 className="text-xl font-semibold mb-3 text-foreground">House Runeborn - "Carriers of Lore, Keepers of Signal"</h4>
                     <p className="text-muted-foreground mb-4">
                       Runeborn are lorekeepers and educators. They preserve Bitcoin's memory, protect against noise, and transmit signal.
@@ -242,7 +233,7 @@ const About = () => {
             </ContentSection>
 
             {/* Archetypes Explained */}
-            <ContentSection id="archetypes-explained" title="Archetypes Explained">
+           {/* <ContentSection id="archetypes-explained" title="Archetypes Explained">
               <p className="text-lg leading-relaxed mb-8">
                 Archetypes define your role and specialization within the community. Each Archetype comes with 
                 unique abilities, responsibilities, and pathways for growth and contribution.
@@ -277,7 +268,7 @@ const About = () => {
                 
                 <div className="space-y-8 mb-8">
                   {/* Forger Archetype */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                  {/*<div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h5 className="text-lg font-semibold mb-3 text-foreground">Forger - "Makers of Tomorrow"</h5>
                     <p className="text-muted-foreground mb-4">
                       Forgers are the individuals who transform pressure into creation. They ship first prototypes, iterate relentlessly, and inspire by making.
@@ -296,10 +287,10 @@ const About = () => {
                         <p className="text-muted-foreground"># first-time builders activated; % projects adopted</p>
                       </div>
                     </div>
-                  </div>
+                  </div> 
 
                   {/* Luminary Archetype */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                  {/*<div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h5 className="text-lg font-semibold mb-3 text-foreground">Luminary - "Carriers of Vision"</h5>
                     <p className="text-muted-foreground mb-4">
                       Luminaries guide others through clarity and inspiration. They provide cultural direction in moments of uncertainty.
@@ -321,7 +312,7 @@ const About = () => {
                   </div>
 
                   {/* Voyager Archetype */}
-                  <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
+                 {/* <div className="bg-accent/30 border border-primary/20 rounded-lg p-6">
                     <h5 className="text-lg font-semibold mb-3 text-foreground">Voyager - "Pathfinders of the Horizon"</h5>
                     <p className="text-muted-foreground mb-4">
                       Voyagers are explorers who seek out new paths and bring discoveries back to the culture.
@@ -368,7 +359,7 @@ const About = () => {
             </ContentSection>
 
             {/* Citadels Explained */}
-            <ContentSection id="citadels-explained" title="Citadels Explained">
+            {/*<ContentSection id="citadels-explained" title="Citadels Explained">
               <p className="text-lg leading-relaxed mb-8">
                 Citadels are the ultimate expression of our community's vision - self-governing territories where 
                 multiple Houses collaborate on major initiatives and shape the future of our ecosystem.

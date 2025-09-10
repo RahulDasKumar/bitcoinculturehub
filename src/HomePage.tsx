@@ -1,6 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { SiX } from "react-icons/si"
+
 import {
     User,
     Shield,
@@ -42,18 +44,20 @@ export default function HomePage() {
             <div className="bg-orange-500 bg-gradient-to-br from-orange-400 via-orange-500 to-amber-600 min-h-screen">
                 {/* Hero Section */}
                 <div className="container mx-auto px-6 py-16">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh] justify-items-center">
                         {/* Left Column - Hero Text */}
                         <div className="space-y-8">
                             <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
-                                Find Your <span className="text-gray-900">Bitcoin</span> <span className="text-gray-900">Tribe</span>
+                                Life Long Learning with Bitcoin <span className="text-gray-900">Championing success with bitcoin
+</span>
                             </h1>
 
                             <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-sm">
-                                Bitcoin isn't just money. It's a culture. Discover your House, claim your card, and belong.
+                                Building for the student in all of us. Lifelong learning is here in Bitcoin.
                             </p>
 
                             <div className="space-y-6 mt-12">
+
                                     <Button
                                         className={`
                       bg-white text-orange-600 hover:bg-gray-50 
@@ -67,6 +71,7 @@ export default function HomePage() {
                                     >
                                         Join Now
                                     </Button>
+                                
 
                                 <div className="text-center sm:text-left">
                                     {/* <Link
@@ -81,44 +86,11 @@ export default function HomePage() {
 
                         {/* Right Column - Floating Archetype Card */}
                         <div className="flex justify-center lg:justify-end">
-                            <div className="relative animate-bounce-slow">
-                                <div className="w-64 bg-gradient-to-br from-white to-gray-100 rounded-2xl p-6 shadow-2xl hover:scale-105 hover:rotate-1 transition-all duration-300 border border-gray-200">
-                                    <div className="h-full flex flex-col">
-                                        <div className="text-center mb-4">
-                                            <div className="text-lg font-bold text-orange-600">Level 3</div>
-                                            <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                                                <div className="bg-orange-500 h-2 rounded-full w-4/5 transition-all duration-1000"></div>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex-1 flex flex-col items-center justify-center space-y-4">
-                                            {/* Image container */}
-                                            <div className="w-1/2">
-                                                <img
-                                                    src="images/Grey-Profile-Card.png"
-                                                    alt="Grey-Profile-Card"
-                                                    className="w-full h-auto"
-                                                />
-                                            </div>
-
-                                            {/* Text content */}
-                                            <div className="text-center">
-                                                <h3 className="font-bold text-xl text-gray-900">THE SCHOLAR</h3>
-                                                <p className="text-sm text-gray-600 mt-1">Knowledge Seeker</p>
-                                                <p className="text-xs text-orange-600 font-medium mt-2">HOUSE WISDOM</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex justify-center">
-                                            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                                                <Castle className="w-5 h-5 text-white" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="absolute -inset-4 bg-gradient-to-r from-orange-400/20 to-purple-400/20 rounded-3xl blur-xl -z-10"></div>
-                            </div>
+                            <img
+                                src="images/Satoshi_Nakamoto_Emblem_with_Volcano.png"
+                                alt="badge"
+                                className="relative animate-bounce-slow" 
+  />
                         </div>
 
                     </div>
@@ -127,21 +99,22 @@ export default function HomePage() {
 
             <div className="bg-white py-16">
                 <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-12">Your Profile is Your Key</h2>
+
+                    <div className="grid lg:grid-cols-2 gap-12 items-center justify-items-center">
                         {/* Left Column - Stacked Content */}
                         <div className="space-y-8">
-                            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">Your Profile is Your Key</h2>
-
                             {/* Block 1 - Connect */}
                             <div className="flex items-start gap-4">
                                 <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                                     <Users className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Connect</h3>
-                                    <p className="text-gray-600">Meet people in your House, online and IRL.</p>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Learn</h3>
+                                    <p className="text-gray-600">lifelong learning</p>
                                 </div>
                             </div>
+
 
                             {/* Block 2 - Earn Reputation */}
                             <div className="flex items-start gap-4">
@@ -149,8 +122,8 @@ export default function HomePage() {
                                     <Star className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Earn Reputation</h3>
-                                    <p className="text-gray-600">Build XP from games, referrals, and contributions.</p>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Work</h3>
+                                    <p className="text-gray-600">endless accessible opportunities</p>
                                 </div>
                             </div>
 
@@ -160,13 +133,13 @@ export default function HomePage() {
                                     <Shield className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Stay Private</h3>
-                                    <p className="text-gray-600">Pseudonymous by default. You decide what's public.</p>
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Save</h3>
+                                    <p className="text-gray-600">hardest money the world has ever seen</p>
                                 </div>
                             </div>
 
                             {/* CTA Button */}
-                            <div className="pt-4">
+                            <div className="flex justify-center mt-8">
                                     <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full"
                                     onClick={handleLoginNavigation}
                                     >
@@ -209,7 +182,7 @@ export default function HomePage() {
 
             {/* Layer 1: Proof / Stats Band */}
             <div className="bg-slate-900 py-12 lg:py-14">
-                <div className="container mx-auto px-6">
+                {/* <div className="container mx-auto px-6">
                     <div className="text-center">
                         <div className="text-white/80 text-xl lg:text-2xl leading-relaxed">
                             <span className="font-semibold text-white">12,847</span> cards created •{" "}
@@ -217,17 +190,17 @@ export default function HomePage() {
                             <span className="font-semibold text-white">89%</span> connected
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Houses, Archetypes, Citadels Section */}
             <div className="bg-white py-20 lg:py-24">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Foundations of Your Identity</h2>
+                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4"> Foundations of Our Community</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
                         {/* Card 1 - Houses */}
                         <div className="group">
                             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-orange-200 relative overflow-hidden">
@@ -239,7 +212,7 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Houses</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Tribes of belonging and shared values. Your cultural anchor online and IRL.
+                                            Communities of Belonging.  
                                         </p>
                                     </div>
                                 </div>
@@ -258,7 +231,7 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Archetypes</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Ways of identifying and evolving in Bitcoin culture, shaping how you contribute.
+                                           Identities for Discovery
                                         </p>
                                     </div>
                                 </div>
@@ -277,7 +250,7 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Citadels</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Local hubs where Houses and Archetypes converge—spaces for security, creation, kinship, and lore.
+                                            Localized Participation Opportunities
                                         </p>
                                     </div>
                                 </div>
@@ -311,6 +284,15 @@ export default function HomePage() {
                                     {/* <Link href="/about" className="text-gray-400 hover:text-white text-sm">
                                         About
                                     </Link> */}
+                                    <a
+                                        href="https://x.com/btcculturehub"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
+                                    >
+                                        Hodlama
+
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -321,12 +303,13 @@ export default function HomePage() {
                             <ul className="space-y-2">
                                 <li>
                                     <a
-                                        href="https://twitter.com"
+                                        href="https://x.com/btcculturehub"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-400 hover:text-white text-sm"
+                                        className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
                                     >
-                                        Twitter/X
+                                        < SiX className="w-5 h-5" />
+                                        
                                     </a>
                                 </li>
                             </ul>
