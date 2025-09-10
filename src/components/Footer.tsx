@@ -1,95 +1,95 @@
 import { Link } from "react-router-dom";
 import { Github, Twitter, Mail, Globe } from "lucide-react";
+import { SiX } from "react-icons/si";
+import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   return (
-    <footer className="bg-card border-t border-border mt-16">
-      <div className="container mx-auto px-6 py-12">
+    <footer className="bg-gray-950 py-12">
+      <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-8">
-          {/* About Section */}
+          {/* Logo & Tagline */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">Bitcoin Culture Hub</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Building durable, scalable Bitcoin culture through Houses, Archetypes, and decentralized governance.
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">₿</span>
+              </div>
+              <span className="text-xl font-bold text-white">Bitcoin Culture Hub</span>
+            </div>
+            <p className="text-gray-400 text-sm">The first place where Bitcoin culture lives and thrives.</p>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-md font-medium text-foreground">Quick Links</h4>
-            <div className="space-y-2 text-sm">
-              <Link to="/about" className="block text-muted-foreground hover:text-foreground transition-colors">
-                About Us
-              </Link>
-              <Link to="/manifesto" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Manifesto
-              </Link>
-              <Link to="#houses" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Houses
-              </Link>
-              <Link to="#archetypes" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Archetypes
-              </Link>
-            </div>
+          {/* Product */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
+              <li>
+                {/* <Link href="/about" className="text-gray-400 hover:text-white text-sm">
+                                        About
+                                    </Link> */}
+                <a
+                  href="https://x.com/btcculturehub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
+                >
+                  Hodlama
+
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* Community */}
-          <div className="space-y-4">
-            <h4 className="text-md font-medium text-foreground">Community</h4>
-            <div className="space-y-2 text-sm">
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Join a House
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Discover Your Archetype
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Community Guidelines
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-foreground transition-colors">
-                Events & Rituals
-              </a>
-            </div>
+          <div>
+            <h4 className="text-white font-semibold mb-4">Community</h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://x.com/btcculturehub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
+                >
+                  < SiX className="w-5 h-5" />
+
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Connect */}
-          <div className="space-y-4">
-            <h4 className="text-md font-medium text-foreground">Connect</h4>
-            <div className="flex space-x-4">
-              <a href="https://x.com/btcculturehub" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Mail className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                <Globe className="w-5 h-5" />
-              </a>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              <p>contact@bitcoinculturehub.com</p>
+          {/* Newsletter */}
+          <div>
+            <h4 className="text-white font-semibold mb-4">Stay Updated</h4>
+            <div className="space-y-3">
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white text-sm focus:outline-none focus:border-orange-500"
+                />
+                <Button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-r-lg text-sm">
+                  Subscribe
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2024 Bitcoin Culture Hub. All rights reserved.
+        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Bitcoin Culture Hub. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Cookie Policy
-            </a>
+          <div className="flex gap-6">
+            {/* <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
+                                Terms
+                            </Link>
+                            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
+                                Privacy
+                            </Link>
+                            <Link href="/contact" className="text-gray-400 hover:text-white text-sm">
+                                Contact
+                            </Link> */}
           </div>
         </div>
       </div>
