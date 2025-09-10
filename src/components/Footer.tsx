@@ -12,11 +12,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">₿</span>
+                <img src="/images/08fc4c04-8697-4208-88bd-114b9a0d94cb.png" alt="" className="rounded-full"/>
               </div>
               <span className="text-xl font-bold text-white">Bitcoin Culture Hub</span>
             </div>
-            <p className="text-gray-400 text-sm">The first place where Bitcoin culture lives and thrives.</p>
+            <p className="text-gray-400 text-sm">The world’s leading community for lifelong learning with Bitcoin</p>
           </div>
 
           {/* Product */}
@@ -61,17 +61,15 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h4 className="text-white font-semibold mb-4">Stay Updated</h4>
-            <div className="space-y-3">
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white text-sm focus:outline-none focus:border-orange-500"
-                />
-                <Button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-r-lg text-sm">
-                  Subscribe
-                </Button>
-              </div>
+            <div className="flex">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 min-w-0 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white text-sm focus:outline-none focus:border-orange-500"
+              />
+              <Button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-r-lg text-sm whitespace-nowrap">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>

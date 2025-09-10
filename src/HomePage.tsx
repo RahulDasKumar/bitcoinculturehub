@@ -18,6 +18,7 @@ import {
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 export default function HomePage() {
     const [showPulse, setShowPulse] = useState(false)
@@ -48,12 +49,13 @@ export default function HomePage() {
                         {/* Left Column - Hero Text */}
                         <div className="space-y-8">
                             <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
-                                Life Long Learning with Bitcoin <span className="text-gray-900">Championing success with bitcoin
+                                Lifelong Learning<span className="text-gray-900"> with Bitcoin
 </span>
                             </h1>
 
                             <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-sm">
-                                Building for the student in all of us. Lifelong learning is here in Bitcoin.
+                                Lifelong learning is here in Bitcoin.
+
                             </p>
 
                             <div className="space-y-6 mt-12">
@@ -111,7 +113,8 @@ export default function HomePage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-2">Learn</h3>
-                                    <p className="text-gray-600">lifelong learning</p>
+                                    <p className="text-gray-600"><b>Lifelong mastery</b>. Grow skills, earn recognition, and evolve with your network.
+</p>
                                 </div>
                             </div>
 
@@ -123,7 +126,8 @@ export default function HomePage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-2">Work</h3>
-                                    <p className="text-gray-600">endless accessible opportunities</p>
+                                    <p className="text-gray-600"><b>Identity as opportunity.</b> Access borderless work and collaborate in the new economy.
+</p>
                                 </div>
                             </div>
 
@@ -134,7 +138,8 @@ export default function HomePage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-2">Save</h3>
-                                    <p className="text-gray-600">hardest money the world has ever seen</p>
+                                    <p className="text-gray-600"><b>Protect your future.</b> Anchor your progress in Bitcoin—the world’s hardest money.
+</p>
                                 </div>
                             </div>
 
@@ -165,16 +170,17 @@ export default function HomePage() {
                         </div>*/}
 
                         {/* Right Column - Video */}
-                            <div className="flex justify-center lg:justify-end">
+                            <div className="flex flex-col justify-center lg:justify-end">
                                 <div className="w-full max-w-lg">
                                  <video
                                    controls
                                    className="w-full rounded-2xl shadow-2xl border-2 border-orange-500"
                                  >
-                                   <source src="bchvid.mp4" type="video/mp4" />
+                                   <source src="second-video.mp4" type="video/mp4" />
                                        Your browser does not support the video tag.
                                  </video>
                                 </div>
+                            <p className="text-gray-600 text-center mt-2"><b>Checkout what it means to be part of Bitcoin Culture Hub</b></p>
                             </div>
                         </div>
                 </div>
@@ -191,6 +197,78 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div> */}
+            </div>
+            <div className="bg-white py-20 lg:py-24">
+                <div className="container mx-auto px-6">
+                    {/* Centered Headline */}
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                            The Cultural OS for Students
+                        </h2>
+                    </div>
+
+                    {/* Two-Column Layout */}
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+                        {/* Left Column - Mockup Image */}
+                        <div className="flex justify-center lg:justify-start">
+                            <div className="max-w-lg w-full">
+                                <img
+                                    src="images/hodloma-mockup.png"
+                                    alt="Hodloma platform mockup showing campus citadel interface"
+                                    className="w-full h-auto rounded-2xl shadow-2xl"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Right Column - Bulleted Copy */}
+                        <div className="space-y-8">
+                            {/* Connect */}
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <Users className="w-6 h-6 text-white" />
+                                </div>
+                                <div className="max-w-md">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Connect</h3>
+                                    <p className="text-gray-600 text-base leading-relaxed">Meet people in your House, online and IRL.</p>
+                                </div>
+                            </div>
+
+                            {/* Earn Reputation */}
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 bg-teal-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <Star className="w-6 h-6 text-white" />
+                                </div>
+                                <div className="max-w-md">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Earn Reputation</h3>
+                                    <p className="text-gray-600 text-base leading-relaxed">
+                                        Build XP from games, referrals, and contributions.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Credibility */}
+                            <div className="flex items-start gap-4">
+                                <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                                    <Shield className="w-6 h-6 text-white" />
+                                </div>
+                                <div className="max-w-md">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Credibility</h3>
+                                    <p className="text-gray-600 text-base leading-relaxed">
+                                        Pseudonymous by default. You decide what's public.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Centered CTA */}
+                    <div className="text-center">
+                        <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full"
+                            onClick={handleLoginNavigation}>
+                            Join Waitlist
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             {/* Houses, Archetypes, Citadels Section */}
@@ -212,7 +290,8 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Houses</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Communities of Belonging.  
+                                            Tribes of belonging that ground you in shared values and culture. They’re your anchor for connection, both online and IRL.
+ 
                                         </p>
                                     </div>
                                 </div>
@@ -231,7 +310,7 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Archetypes</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                           Identities for Discovery
+                                            Evolving roles that shape how you contribute and grow in Bitcoin culture. They let you express identity while unlocking recognition.
                                         </p>
                                     </div>
                                 </div>
@@ -250,7 +329,7 @@ export default function HomePage() {
                                     <div>
                                         <h3 className="text-2xl font-bold text-gray-900 mb-4">Citadels</h3>
                                         <p className="text-gray-600 leading-relaxed">
-                                            Localized Participation Opportunities
+                                            Local hubs where Houses and Archetypes converge to take action. Spaces for security, collaboration, and building culture together.
                                         </p>
                                     </div>
                                 </div>
@@ -261,96 +340,7 @@ export default function HomePage() {
                 </div>
             </div>
 
-            {/* Comprehensive Footer */}
-            <footer className="bg-gray-950 py-12">
-                <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-4 gap-8">
-                        {/* Logo & Tagline */}
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                                    <span className="text-white font-bold text-sm">₿</span>
-                                </div>
-                                <span className="text-xl font-bold text-white">Bitcoin Culture Hub</span>
-                            </div>
-                            <p className="text-gray-400 text-sm">The first place where Bitcoin culture lives and thrives.</p>
-                        </div>
-
-                        {/* Product */}
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Product</h4>
-                            <ul className="space-y-2">
-                                <li>
-                                    {/* <Link href="/about" className="text-gray-400 hover:text-white text-sm">
-                                        About
-                                    </Link> */}
-                                    <a
-                                        href="https://x.com/btcculturehub"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
-                                    >
-                                        Hodlama
-
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Community */}
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Community</h4>
-                            <ul className="space-y-2">
-                                <li>
-                                    <a
-                                        href="https://x.com/btcculturehub"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
-                                    >
-                                        < SiX className="w-5 h-5" />
-                                        
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {/* Newsletter */}
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Stay Updated</h4>
-                            <div className="space-y-3">
-                                <div className="flex">
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg text-white text-sm focus:outline-none focus:border-orange-500"
-                                    />
-                                    <Button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-r-lg text-sm">
-                                        Subscribe
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-gray-400 text-sm">
-                            © {new Date().getFullYear()} Bitcoin Culture Hub. All rights reserved.
-                        </p>
-                        <div className="flex gap-6">
-                            {/* <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
-                                Terms
-                            </Link>
-                            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
-                                Privacy
-                            </Link>
-                            <Link href="/contact" className="text-gray-400 hover:text-white text-sm">
-                                Contact
-                            </Link> */}
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer/>
         </div>
     )
 }
