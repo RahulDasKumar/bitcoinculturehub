@@ -12,11 +12,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">₿</span>
+                <img src="/images/08fc4c04-8697-4208-88bd-114b9a0d94cb.png" alt="" className="rounded-full"/>
               </div>
               <span className="text-xl font-bold text-white">Bitcoin Culture Hub</span>
             </div>
-            <p className="text-gray-400 text-sm">The first place where Bitcoin culture lives and thrives.</p>
+            <p className="text-gray-400 text-sm">The world’s leading community for lifelong learning with Bitcoin</p>
           </div>
 
           {/* Product */}
