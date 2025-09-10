@@ -2,6 +2,7 @@ import BitcoinIcon from "./Bitcoin";
 import SignupForm from "./SignupForm";
 import CountdownTimer from "./CountdownTimer";
 import "./waitlist.css"
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 const Waitlist = () => {
     return (
@@ -29,10 +30,14 @@ const Waitlist = () => {
                     </p>
 
                     {/* Beta notice */}
-                    <div className="inline-flex items-center gap-2 bg-bitcoin-orange/10 border border-bitcoin-orange/20 rounded-full px-4 py-2 mb-8">
-                        <div className="w-2 h-2 bg-bitcoin-orange rounded-full animate-pulse" />
-                        <span className="text-sm font-medium text-bitcoin-orange">Early Access</span>
+                    <div className="inline-flex items-center justify-center bg-orange-500 text-white font-bold px-6 py-2 rounded-lg mb-8">
+                        Early Access
                     </div>
+
+
+
+
+
 
                     {/* Countdown */}
                     <div className="mb-8">
@@ -72,6 +77,7 @@ const Waitlist = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };

@@ -1,6 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { SiX } from "react-icons/si"
+
 import {
     User,
     Shield,
@@ -54,6 +56,7 @@ export default function HomePage() {
                             </p>
 
                             <div className="space-y-6 mt-12">
+
                                     <Button
                                         className={`
                       bg-white text-orange-600 hover:bg-gray-50 
@@ -67,6 +70,7 @@ export default function HomePage() {
                                     >
                                         Join Now
                                     </Button>
+                                
 
                                 <div className="text-center sm:text-left">
                                     {/* <Link
@@ -117,7 +121,7 @@ export default function HomePage() {
                                     </div>
                                 </div>
 
-                                <div className="absolute -inset-4 bg-gradient-to-r from-orange-400/20 to-purple-400/20 rounded-3xl blur-xl -z-10"></div>
+                               {/*} <div className="absolute -inset-4 bg-gradient-to-r from-orange-400/20 to-purple-400/20 rounded-3xl blur-xl -z-10"></div>*/}
                             </div>
                         </div>
 
@@ -143,6 +147,7 @@ export default function HomePage() {
                                 </div>
                             </div>
 
+
                             {/* Block 2 - Earn Reputation */}
                             <div className="flex items-start gap-4">
                                 <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
@@ -166,7 +171,7 @@ export default function HomePage() {
                             </div>
 
                             {/* CTA Button */}
-                            <div className="pt-4">
+                            <div className="flex justify-center mt-8">
                                     <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full"
                                     onClick={handleLoginNavigation}
                                     >
@@ -321,12 +326,13 @@ export default function HomePage() {
                             <ul className="space-y-2">
                                 <li>
                                     <a
-                                        href="https://twitter.com"
+                                        href="https://x.com/btcculturehub"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-gray-400 hover:text-white text-sm"
+                                        className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
                                     >
-                                        Twitter/X
+                                        < SiX className="w-5 h-5" />
+                                        
                                     </a>
                                 </li>
                             </ul>
