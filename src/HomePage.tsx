@@ -50,7 +50,7 @@ export default function HomePage() {
                         <div className="space-y-8">
                             <h1 className="text-5xl lg:text-7xl font-bold text-white leading-tight text-balance drop-shadow-lg">
                                 Lifelong Learning<span className="text-gray-900"> with Bitcoin
-</span>
+                                </span>
                             </h1>
 
                             <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-sm">
@@ -67,9 +67,8 @@ export default function HomePage() {
                                 rounded-full w-full sm:w-auto min-w-[280px]
                                 hover:scale-105 hover:shadow-2xl hover:shadow-white/25
                                 transition-all duration-300 ease-out
-                                border-2 border-white
+                                border-2 border-white mx-auto sm:mx-0
                                 `}
-                                style={{ marginLeft: '40px' }}
                                 onClick={handleLoginNavigation}
                             >
                                 Join Now
@@ -93,7 +92,7 @@ export default function HomePage() {
                                 src="images/Satoshi_Nakamoto_Emblem_with_Volcano.png"
                                 alt="badge"
                                 className="relative animate-bounce-slow" 
-  />
+                            />
                         </div>
 
                     </div>
@@ -101,98 +100,90 @@ export default function HomePage() {
             </div>
 
             <div className="bg-white py-16">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-12">Own Your Future</h2>
+  <div className="container mx-auto px-6">
+    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-12 font-sans">
+      Own Your Future
+    </h2>
 
-                    <div className="grid lg:grid-cols-2 gap-12 items-center justify-items-center">
-                        {/* Left Column - Stacked Content */}
-                        <div className="space-y-8">
-                            {/* Block 1 - Connect */}
-                            <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-orange-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-orange-500">
-                            <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
-                                <Users className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">Learn</h3>
-                                <p className="text-gray-600"><b>Lifelong mastery</b>. Grow skills, earn recognition, and evolve with your network.</p>
-                                </div>
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-
-
-                            {/* Block 2 - Earn Reputation */}
-                            <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-green-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-green-500">
-                            <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
-                                <Star className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">Work</h3>
-                                <p className="text-gray-600"><b>Identity as opportunity.</b> Access borderless work and collaborate in the new economy.</p>
-                                </div>
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-
-                            {/* Block 3 - Stay Private */}
-                            <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-purple-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-purple-500">
-                            <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
-                                <Shield className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">Save</h3>
-                                <p className="text-gray-600"><b>Protect your future.</b> Grow and safeguard wealth in the crypto economy.</p>
-                                </div>
-                            </div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-
-                            {/* CTA Button */}
-                            <div className="w-full">
-                            <Button
-                                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full mt-30 ml-[540px]"
-                                onClick={handleLoginNavigation}
-                            >
-                                Join Now
-                            </Button>
-                            </div>
-                        </div>
-
-                        {/* Right Column - Video Placeholder */}
-                       {/* <div className="flex justify-center lg:justify-end">
-                            <div className="w-full max-w-lg">
-                                <div className="aspect-video bg-gray-900 rounded-2xl shadow-2xl flex items-center justify-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-purple-500/20"></div>
-                                    <div className="relative z-10 text-center">
-                                        <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 mx-auto">
-                                            <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
-                                        </div>
-                                        <p className="text-white/80 text-sm">Video Coming Soon</p>
-                                    </div>
-                                </div>
-                                </div>
-                            
-                        </div>*/}
-
-                        {/* Right Column - Video */}
-                            <div className="flex flex-col justify-center lg:justify-end">
-                                <div className="w-full max-w-lg">
-                                 <video
-                                   controls
-                                   className="w-full rounded-2xl shadow-2xl border-2 border-orange-500"
-                                 >
-                                   <source src="second-video.mp4" type="video/mp4" />
-                                       Your browser does not support the video tag.
-                                 </video>
-                                </div>
-                            <p className="text-gray-600 text-center mt-2"><b>Checkout what it means to be part of Bitcoin Culture Hub.</b></p>
-                            </div>
-                        </div>
-                </div>
+    {/* Two-column grid */}
+    <div className="grid lg:grid-cols-2 gap-12 items-center justify-items-center">
+      {/* Left Column - Stacked Content */}
+      <div className="space-y-8">
+        {/* Block 1 - Learn */}
+        <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-orange-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-orange-500">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
+              <Users className="w-6 h-6 text-white" />
             </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Learn</h3>
+              <p className="text-gray-600">
+                <b>Lifelong mastery</b>. Grow skills, earn recognition, and evolve with your network.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Block 2 - Work */}
+        <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-green-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-green-500">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
+              <Star className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Work</h3>
+              <p className="text-gray-600">
+                <b>Identity as opportunity.</b> Access borderless work and collaborate in the new economy.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Block 3 - Save */}
+        <div className="group bg-white p-6 rounded-xl border-2 border-transparent hover:border-purple-300 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden max-w-[500px] group-hover:bg-purple-500">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg transition-transform duration-300 group-hover:scale-110">
+              <Shield className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Save</h3>
+              <p className="text-gray-600">
+                <b>Protect your future.</b> Grow and safeguard wealth in the crypto economy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column - Video */}
+      <div className="flex flex-col justify-center lg:justify-end">
+        <div className="w-full max-w-lg">
+          <video
+            controls
+            className="w-full rounded-2xl shadow-2xl border-2 border-orange-500"
+          >
+            <source src="second-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <p className="text-gray-600 text-center mt-2">
+          <b>Checkout what it means to be part of Bitcoin Culture Hub.</b>
+        </p>
+      </div>
+    </div> {/* ✅ properly close grid here */}
+
+    {/* CTA button centered below grid */}
+    <div className="w-full flex justify-center mt-8">
+      <Button
+        className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 h-14 text-lg font-bold rounded-full"
+        onClick={handleLoginNavigation}
+      >
+        Join Now
+      </Button>
+    </div>
+  </div>
+</div>
+
 
             {/* Layer 1: Proof / Stats Band */}
             <div className="bg-slate-900 py-12 lg:py-14">
@@ -211,7 +202,7 @@ export default function HomePage() {
                     {/* Centered Headline */}
                     <div className="text-center mb-12">
                         <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                            The Cultural OS for Students
+                        The Cultural OS for Bitcoin
                         </h2>
                     </div>
 
@@ -225,6 +216,9 @@ export default function HomePage() {
                             alt="Hodloma platform mockup showing campus citadel interface"
                             className="w-full h-auto rounded-2xl shadow-2xl border-2 border-orange-500"
                             />
+                            <p className="text-gray-600 text-center mt-2">
+                            <b>Hodloma, the first Bitcoin product built for students.</b>
+                            </p>
                         </div>
                         </div>
 
@@ -291,6 +285,19 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
+            {/* Layer 1: Proof / Stats Band */}
+            <div className="bg-slate-900 py-12 lg:py-14">
+                {/* <div className="container mx-auto px-6">
+                    <div className="text-center">
+                        <div className="text-white/80 text-xl lg:text-2xl leading-relaxed">
+                            <span className="font-semibold text-white">12,847</span> cards created •{" "}
+                            <span className="font-semibold text-white">127</span> campuses •{" "}
+                            <span className="font-semibold text-white">89%</span> connected
+                        </div>
+                    </div>
+                </div> */}
+            </div>
+
             {/* Houses, Archetypes, Citadels Section */}
             <div className="bg-white py-20 lg:py-24">
                 <div className="container mx-auto px-6">

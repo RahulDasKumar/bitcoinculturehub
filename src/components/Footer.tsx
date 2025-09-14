@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { Github, Twitter, Mail, Globe } from "lucide-react";
 import { SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import { FaDiscord } from "react-icons/fa"
+
+
 
 const Footer = () => {
   return (
@@ -16,7 +19,7 @@ const Footer = () => {
               </div>
               <span className="text-xl font-bold text-white">Bitcoin Culture Hub</span>
             </div>
-            <p className="text-gray-400 text-sm">The world’s leading community for lifelong learning with Bitcoin</p>
+            <p className="text-gray-400 text-sm">The world’s leading community for lifelong learning with Bitcoin.</p>
           </div>
 
           {/* Product */}
@@ -31,32 +34,38 @@ const Footer = () => {
                   href="https://x.com/btcculturehub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
+                  className="text-gray-400 hover:text-orange-500 text-sm  flex items-center gap-2"
                 >
-                  Hodlama
+                  Hodloma
 
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Community */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Community</h4>
-            <ul className="space-y-2">
-              <li>
+          
+         {/* Community */}
+            <div>
+              <h4 className="text-white font-semibold mb-4">Community</h4>
+              <div className="flex items-center gap-6">
                 <a
                   href="https://x.com/btcculturehub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white text-sm  flex items-center gap-2"
+                  className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors cursor-pointer"
                 >
-                  < SiX className="w-5 h-5" />
-
+                  <SiX className="w-5 h-5" />
                 </a>
-              </li>
-            </ul>
-          </div>
+                <a
+                  href="https://discord.gg/QDDdsmNx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors cursor-pointer"
+                >
+                  <FaDiscord className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
 
           {/* Newsletter */}
           <div>
