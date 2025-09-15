@@ -24,12 +24,7 @@ export default function HomePage() {
     const [showPulse, setShowPulse] = useState(false)
     const navigate = useNavigate()
     const handleLoginNavigation = () => {
-        try {
             navigate("/join")
-        } catch (error) {
-            console.warn("Join route not found")
-            setDialogOpen(false)
-        }
     }
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -123,7 +118,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
                 
@@ -141,7 +136,7 @@ export default function HomePage() {
                     </p>
                     </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
 
                 {/* Block 3 - Save */}
@@ -158,7 +153,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
             </div>
 
             {/* Right Column - Video */}
@@ -242,7 +237,7 @@ export default function HomePage() {
                                 </div>
                             </div>
 
-                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                             </div>
 
                             {/* Earn Reputation */}
@@ -258,7 +253,7 @@ export default function HomePage() {
                                 </p>
                                 </div>
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                             </div>
 
                             {/* Credibility */}
@@ -274,7 +269,7 @@ export default function HomePage() {
                                     </p>
                                     </div>
                                 </div>
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                             </div>
 
                         </div>
@@ -328,7 +323,7 @@ export default function HomePage() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400/20 to-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10"></div>
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400/20 to-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10 pointer-events-none"></div>
                             </div>
                         </div>
 
@@ -347,7 +342,7 @@ export default function HomePage() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10"></div>
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10 pointer-events-none"></div>
                             </div>
                         </div>
 
@@ -366,7 +361,7 @@ export default function HomePage() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10"></div>
+                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10 pointer-events-none"></div>
                             </div>
                         </div>
                     </div>
@@ -376,7 +371,4 @@ export default function HomePage() {
             <Footer/>
         </div>
     )
-}
-function setDialogOpen(arg0: boolean) {
-    throw new Error("Function not implemented.")
 }
