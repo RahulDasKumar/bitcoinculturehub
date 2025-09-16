@@ -510,12 +510,12 @@ Generated: ${new Date().toLocaleDateString()}
                             ) : (
                                 <div className="text-center space-y-4">
                                     <div className="text-green-600 font-semibold text-lg">Profile Saved ✓</div>
-                                    <Button
+                                    {/*<Button
                                         className="w-full bg-orange-500 hover:bg-orange-600 text-white min-h-[48px] text-base"
                                         onClick={() => handleDownload(primaryArchetype)}
                                     >
                                         Download Identity Card
-                                    </Button>
+                                    </Button>*/}
                                 </div>
                             )}
                         </Card>
