@@ -24,7 +24,7 @@ export default function HomePage() {
     const [showPulse, setShowPulse] = useState(false)
     const navigate = useNavigate()
     const handleLoginNavigation = () => {
-            navigate("/join")
+            navigate("/quiz")
     }
     useEffect(() => {
         const timer = setTimeout(() => {

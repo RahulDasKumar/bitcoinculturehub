@@ -82,9 +82,9 @@ const Header = () => {
 
             {/* Join */}
             <Link
-              to="/join"
+              to="/quiz"
               className={`px-4 py-2 rounded-lg transition-colors ${
-                location.pathname === "/join"
+                location.pathname === "/quiz"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
               }`}
