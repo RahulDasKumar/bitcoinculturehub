@@ -4,6 +4,8 @@ import type React from "react"
 import { useState, useEffect, useCallback } from "react"
 import { Check, ChevronLeft, SkipForward, Bitcoin, Eye, EyeOff, Lock, Loader2 } from "lucide-react"
 import Header from "@/components/Header"
+import ArchtypeProgress from "./Quiz-Components/ArchtypeProgress";
+
 
 // Types
 interface QuizOption {
@@ -34,21 +36,42 @@ interface QuizState {
     isComplete: boolean
 }
 
+
+
+  
+
 // Quiz Data
 const archetypes = {
-    maker: { name: "Maker", color: "#f97316", description: "You see Bitcoin as a tool for creation and innovation." },
-    defender: {
-        name: "Defender",
+    forger: { 
+        name: "forger", 
+        color: "#f97316",
+        description: "You see Bitcoin as a tool for creation and innovation.",
+        logo: "/images/Forger-Archetype.png"
+    },
+    voyager: {
+        name: "voyager",
         color: "#3b82f6",
         description: "You value Bitcoin's security and decentralization above all.",
+        logo: "/images/Voyager-Archetype.png"
     },
-    guardian: { name: "Guardian", color: "#10b981", description: "You believe Bitcoin can protect and preserve wealth." },
-    seeker: {
-        name: "Seeker",
+    luminary: { 
+        name: "luminary",
+        color: "#10b981",
+        description: "You believe Bitcoin can protect and preserve wealth.",
+        logo: "/images/Luminary-Archetype.png"
+    },
+    sentinel: {
+        name: "sentinel",
         color: "#8b5cf6",
         description: "You're drawn to Bitcoin's philosophical and cultural aspects.",
+        logo: "/images/Sentinel-Archetype.png"
     },
-    builder: { name: "Builder", color: "#ef4444", description: "You want to build the future with Bitcoin technology." },
+    builder: { 
+        name: "builder", 
+        color: "#ef4444", 
+        description: "You want to build the future with Bitcoin technology.",
+        logo: "/images/Builder-Archetype.png" // Added missing logo
+    },
 }
 
 const quizData = {
@@ -58,18 +81,18 @@ const quizData = {
             topic: "Initial Attraction",
             question: "What draws you to Bitcoin?",
             options: [
-                { id: "q1a", text: "Its long-term value and historical significance", archetype: "guardian", weight: 3 },
+                { id: "q1a", text: "Its long-term value and historical significance", archetype: "luminary", weight: 3 },
                 {
                     id: "q1b",
                     text: "The chance to create art or memes, Bitcoin Ordinals, trading cards, or digital art",
-                    archetype: "maker",
+                    archetype: "forger",
                     weight: 3,
                 },
-                { id: "q1c", text: "Curiosity about its culture and basics", archetype: "seeker", weight: 3 },
+                { id: "q1c", text: "Curiosity about its culture and basics", archetype: "voyager", weight: 3 },
                 {
                     id: "q1d",
                     text: "Belief in its exclusive superiority and ability to revolutionize finance into sound money",
-                    archetype: "defender",
+                    archetype: "sentinel",
                     weight: 3,
                 },
             ],
@@ -79,11 +102,11 @@ const quizData = {
             topic: "Technology Perspective",
             question: "How do you view Bitcoin's technology?",
             options: [
-                { id: "q2a", text: "A revolutionary breakthrough in monetary systems", archetype: "defender", weight: 2 },
-                { id: "q2b", text: "A platform for creative expression and innovation", archetype: "maker", weight: 2 },
-                { id: "q2c", text: "A fascinating system I want to understand better", archetype: "seeker", weight: 2 },
+                { id: "q2a", text: "A revolutionary breakthrough in monetary systems", archetype: "sentinel", weight: 2 },
+                { id: "q2b", text: "A platform for creative expression and innovation", archetype: "forger", weight: 2 },
+                { id: "q2c", text: "A fascinating system I want to understand better", archetype: "voyager", weight: 2 },
                 { id: "q2d", text: "A foundation for building new financial infrastructure", archetype: "builder", weight: 2 },
-                { id: "q2e", text: "A store of value that preserves purchasing power", archetype: "guardian", weight: 2 },
+                { id: "q2e", text: "A store of value that preserves purchasing power", archetype: "luminary", weight: 2 },
             ],
         },
         {
@@ -91,9 +114,9 @@ const quizData = {
             topic: "Community Engagement",
             question: "How do you prefer to engage with the Bitcoin community?",
             options: [
-                { id: "q3a", text: "Creating and sharing Bitcoin-related content", archetype: "maker", weight: 2 },
-                { id: "q3b", text: "Educating others about Bitcoin's benefits", archetype: "defender", weight: 2 },
-                { id: "q3c", text: "Learning from experienced Bitcoiners", archetype: "seeker", weight: 2 },
+                { id: "q3a", text: "Creating and sharing Bitcoin-related content", archetype: "forger", weight: 2 },
+                { id: "q3b", text: "Educating others about Bitcoin's benefits", archetype: "sentinel", weight: 2 },
+                { id: "q3c", text: "Learning from experienced Bitcoiners", archetype: "voyager", weight: 2 },
                 { id: "q3d", text: "Building tools and applications", archetype: "builder", weight: 2 },
             ],
         },
@@ -102,11 +125,11 @@ const quizData = {
             topic: "Future Vision",
             question: "What excites you most about Bitcoin's future?",
             options: [
-                { id: "q4a", text: "Mass adoption as global sound money", archetype: "defender", weight: 3 },
-                { id: "q4b", text: "New forms of digital art and culture", archetype: "maker", weight: 3 },
-                { id: "q4c", text: "Understanding its full potential and implications", archetype: "seeker", weight: 3 },
+                { id: "q4a", text: "Mass adoption as global sound money", archetype: "sentinel", weight: 3 },
+                { id: "q4b", text: "New forms of digital art and culture", archetype: "forger", weight: 3 },
+                { id: "q4c", text: "Understanding its full potential and implications", archetype: "voyager", weight: 3 },
                 { id: "q4d", text: "Building the infrastructure of tomorrow", archetype: "builder", weight: 3 },
-                { id: "q4e", text: "Protecting wealth for future generations", archetype: "guardian", weight: 3 },
+                { id: "q4e", text: "Protecting wealth for future generations", archetype: "luminary", weight: 3 },
             ],
         },
         {
@@ -114,9 +137,9 @@ const quizData = {
             topic: "Learning Style",
             question: "How do you prefer to learn about Bitcoin?",
             options: [
-                { id: "q5a", text: "Hands-on experimentation and creation", archetype: "maker", weight: 2 },
-                { id: "q5b", text: "Reading whitepapers and technical documentation", archetype: "defender", weight: 2 },
-                { id: "q5c", text: "Listening to podcasts and community discussions", archetype: "seeker", weight: 2 },
+                { id: "q5a", text: "Hands-on experimentation and creation", archetype: "forger", weight: 2 },
+                { id: "q5b", text: "Reading whitepapers and technical documentation", archetype: "sentinel", weight: 2 },
+                { id: "q5c", text: "Listening to podcasts and community discussions", archetype: "voyager", weight: 2 },
                 { id: "q5d", text: "Building projects and applications", archetype: "builder", weight: 2 },
             ],
         },
@@ -125,11 +148,11 @@ const quizData = {
             topic: "Value Proposition",
             question: "What's Bitcoin's most important feature to you?",
             options: [
-                { id: "q6a", text: "Decentralization and censorship resistance", archetype: "defender", weight: 3 },
+                { id: "q6a", text: "Decentralization and censorship resistance", archetype: "sentinel", weight: 3 },
                 { id: "q6b", text: "Programmable money and smart contracts", archetype: "builder", weight: 3 },
-                { id: "q6c", text: "Digital scarcity and collectibles", archetype: "maker", weight: 3 },
-                { id: "q6d", text: "Store of value properties", archetype: "guardian", weight: 3 },
-                { id: "q6e", text: "Cultural and philosophical implications", archetype: "seeker", weight: 3 },
+                { id: "q6c", text: "Digital scarcity and collectibles", archetype: "forger", weight: 3 },
+                { id: "q6d", text: "Store of value properties", archetype: "luminary", weight: 3 },
+                { id: "q6e", text: "Cultural and philosophical implications", archetype: "voyager", weight: 3 },
             ],
         },
         {
@@ -137,11 +160,11 @@ const quizData = {
             topic: "Personal Goals",
             question: "What do you hope to achieve with Bitcoin?",
             options: [
-                { id: "q7a", text: "Create something unique and valuable", archetype: "maker", weight: 3 },
-                { id: "q7b", text: "Contribute to financial sovereignty", archetype: "defender", weight: 3 },
-                { id: "q7c", text: "Deepen my understanding of money and technology", archetype: "seeker", weight: 3 },
+                { id: "q7a", text: "Create something unique and valuable", archetype: "forger", weight: 3 },
+                { id: "q7b", text: "Contribute to financial sovereignty", archetype: "sentinel", weight: 3 },
+                { id: "q7c", text: "Deepen my understanding of money and technology", archetype: "voyager", weight: 3 },
                 { id: "q7d", text: "Build solutions for real-world problems", archetype: "builder", weight: 3 },
-                { id: "q7e", text: "Preserve and grow wealth responsibly", archetype: "guardian", weight: 3 },
+                { id: "q7e", text: "Preserve and grow wealth responsibly", archetype: "luminary", weight: 3 },
             ],
         },
     ],
@@ -168,23 +191,29 @@ function shuffleArray<T>(array: T[], seed: number): T[] {
 
 function calculateResults(answers: QuizAnswer[]) {
     const scores: Record<string, number> = {}
-
+  
     answers.forEach((answer) => {
-        if (answer) {
-            scores[answer.archetype] = (scores[answer.archetype] || 0) + answer.weight
-        }
+      if (answer) {
+        scores[answer.archetype] = (scores[answer.archetype] || 0) + answer.weight
+      }
     })
-
+  
     return Object.entries(scores)
-        .map(([archetype, totalWeight]) => ({
-            name: archetypes[archetype as keyof typeof archetypes]?.name || archetype,
-            description: archetypes[archetype as keyof typeof archetypes]?.description || "",
-            color: archetypes[archetype as keyof typeof archetypes]?.color || "#6b7280",
-            totalWeight,
-            archetype,
-        }))
-        .sort((a, b) => b.totalWeight - a.totalWeight)
-}
+      .map(([archetype, totalWeight]) => {
+        const archetypeData = archetypes[archetype as keyof typeof archetypes]
+  
+        return {
+          name: archetypeData?.name || archetype,
+          description: archetypeData?.description || "",
+          color: archetypeData?.color || "#6b7280",
+          logo: archetypeData?.logo || "",   // ✅ now works
+          totalWeight,
+          archetype,
+        }
+      })
+      .sort((a, b) => b.totalWeight - a.totalWeight)
+  }
+  
 
 // Components
 function Button({
@@ -422,16 +451,33 @@ Generated: ${new Date().toLocaleDateString()}
                         </div>
 
                         <Card className="p-8 mb-8 animate-slide-up">
-                            <div className="text-center mb-6">
-                                <div className="relative w-40 h-24 mx-auto bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg border-2 border-dashed border-orange-300 flex items-center justify-center mb-4">
+                            {/*<div className="text-center mb-6">
+                                   {/* <div className="relative w-40 h-24 mx-auto bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg border-2 border-dashed border-orange-300 flex items-center justify-center mb-4">
                                     <div className="absolute inset-0 bg-white/60 backdrop-blur-sm rounded-lg" />
                                     <div className="relative text-center">
                                         <Lock className="w-5 h-5 mx-auto text-orange-600 mb-1" />
                                         <p className="text-xs text-orange-700 font-medium">Identity Card</p>
                                     </div>
                                 </div>
+                                <div className="relative w-40 h-24 mx-auto flex items-center justify-center mb-4">
+                                <img
+                                    src={primaryArchetype.logo}
+                                    alt={primaryArchetype.name}
+                                    className="max-h-20 object-contain"
+                                />
+                                </div>
+                                <h2 className="text-xl font-bold text-foreground mb-2">Save Your Profile</h2>
+                            </div>*/}
+
+                            <div className="text-center mb-6">
+                                <img
+                                src={primaryArchetype.logo}
+                                alt={primaryArchetype.name}
+                                className="w-32 h-32 mx-auto mb-4 object-contain"
+                                />
                                 <h2 className="text-xl font-bold text-foreground mb-2">Save Your Profile</h2>
                             </div>
+
 
                             {!isSuccess ? (
                                 <form onSubmit={handleSubmit} className="space-y-4">

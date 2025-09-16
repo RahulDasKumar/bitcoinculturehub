@@ -23,33 +23,33 @@ const ArchtypeProgress: React.FC<TestProps> = ({ selection }) => {
                 "M 6 10 Q 5.773 9.54 5.387 9.359 Q 5 9.2 4.902 8.835 Q 4.867 8.691 4.864 8.558 Q 4.865 8.463 4.865 8.383 L 4.862 8.257",
             segment:
                 "M 6 10 Q 5.773 9.54 5.387 9.359 Q 5 9.2 4.902 8.835 Q 4.867 8.691 4.864 8.558 Q 4.865 8.463 4.865 8.383 L 4.862 8.257",
-            img: "images/Citadel representation logo.png",
+            img: "/images/Citadel representation logo.png",
         },
         Creator: {
             holder:
                 "M 6 10 Q 5.882 9.458 5.656 9.306 Q 5.423 9.154 5.381 9.011 Q 5.353 8.918 5.347 8.768 Q 5.339 8.606 5.341 8.438 L 5.341 8.274",
             segment:
                 "M 6 10 Q 5.882 9.458 5.656 9.306 Q 5.423 9.154 5.381 9.011 Q 5.353 8.918 5.347 8.768 Q 5.339 8.606 5.341 8.438 L 5.341 8.274",
-            img: "images/Forger-Archetype.png",
+            img: "/images/Forger-Archetype.png",
         },
         Explorer: {
             holder: "M 6 10 L 6 9.5 L 6 9.2 L 6.001 8.801 L 6 8.453 L 6 8.26",
             segment: "M 6 10 L 6 9.5 L 6 9.2 L 6.001 8.801 L 6 8.453 L 6 8.26",
-            img: "images/Luminary-Archetype.png",
+            img: "/images/Luminary-Archetype.png",
         },
         Maximalist: {
             holder:
                 "M 6 10 Q 6.12 9.459 6.362 9.305 Q 6.584 9.151 6.627 9.026 Q 6.657 8.926 6.676 8.752 Q 6.689 8.611 6.701 8.441 Q 6.707 8.319 6.705 8.278",
             segment:
                 "M 6 10 Q 6.12 9.459 6.362 9.305 Q 6.584 9.151 6.627 9.026 Q 6.657 8.926 6.676 8.752 Q 6.689 8.611 6.701 8.441 Q 6.707 8.319 6.705 8.278",
-            img: "images/Sentinel-Archetype.png",
+            img: "/images/Sentinel-Archetype.png",
         },
-        Begninner: {
+        Beginner: {
             holder:
                 "M 6 10 Q 6.251 9.532 6.658 9.312 Q 7.021 9.172 7.097 8.748 Q 7.119 8.613 7.126 8.506 Q 7.129 8.406 7.126 8.337 L 7.124 8.266",
             segment:
                 "M 6 10 Q 6.251 9.532 6.658 9.312 Q 7.021 9.172 7.097 8.748 Q 7.119 8.613 7.126 8.506 Q 7.129 8.406 7.126 8.337 L 7.124 8.266",
-            img: "images/Voyager-Archetype.png",
+            img: "/images/Voyager-Archetype.png",
         },
     };
 
