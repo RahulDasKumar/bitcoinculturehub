@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-export type Archtypes = "HODLer" | "Creator" | "Explorer" | "Maximalist" | "Begninner";
+export type Archtypes = "HODLer" | "Creator" | "Explorer" | "Maximalist" | "Beginner";
 
 type QuizState = {
     archtypes: Record<Archtypes, number>;
@@ -15,7 +15,7 @@ const useArchtype = create<QuizState>((set) => ({
         "Creator": 0,
         'Explorer': 0,
         "Maximalist": 0,
-        "Begninner": 0,
+        "Beginner": 0,
     },
     selection:"",
 
