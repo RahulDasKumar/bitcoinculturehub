@@ -73,7 +73,7 @@ const bitcoinQBank : QuestionType[] = [
         id: 7,
         question: "What defines your Bitcoin identity?",
         options: [
-            ["A guardian of its past", "HODLer"],
+            ["A luminary of its past", "HODLer"],
             ["An innovator of its culture", "Creator"],
             ["A seeker of its future", "Explorer"],
             ["A defender of its truth", "Maximalist"],

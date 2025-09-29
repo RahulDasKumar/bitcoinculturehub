@@ -68,6 +68,18 @@ const Header = () => {
               </Link>
             )}
 
+            {/* Explore */}
+            <Link
+              to="/explore"
+              className={`px-4 py-2 rounded-lg transition-colors ${
+                location.pathname === "/explore"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              }`}
+            >
+              Explore
+            </Link>
+
             {/* Home
             <Link
               to="/"

@@ -13,6 +13,9 @@ import HomePage from "./HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Waitlist from "./pages/WaitList-Components/Waitlist";
+import BookmarkToggle from "@/components/BookmarkToggle";
+import ExplorePage from "./pages/explore/Explore"; 
+
 
 
 const queryClient = new QueryClient();
@@ -31,6 +34,7 @@ const App = () => (
           <Route path="/about" element={<About/>}/>
           <Route path="/join" element={<Waitlist/>}/>
           <Route path="*" element={<NotFound />} />
+          <Route path="/explore" element={<ExplorePage />} /> 
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
