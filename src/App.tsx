@@ -13,7 +13,7 @@ import HomePage from "./HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Waitlist from "./pages/WaitList-Components/Waitlist";
-
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +30,9 @@ const App = () => (
           <Route path="/quiz" element={<Quiz/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/join" element={<Waitlist/>}/>
+          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

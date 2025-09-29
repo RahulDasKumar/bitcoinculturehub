@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+import useAuthStore from "@/hooks/use-auth"
 const Header = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -13,6 +13,9 @@ const Header = () => {
   const logoHandler = () => {
     navigate("/")
   }
+
+  const { user, isLoggedIn, login, logout, updateProfile } = useAuthStore();
+
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
@@ -55,7 +58,6 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              // On other pages → simple About link
               <Link
                 to="/about"
                 className={`px-4 py-2 rounded-lg transition-colors ${
@@ -79,18 +81,47 @@ const Header = () => {
             >
               Home
             </Link>
-
+            
             {/* Join */}
-            <Link
-              to="/quiz"
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                location.pathname === "/quiz"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              }`}
-            >
-              Join
-            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link
+                  to="/login"
+                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/login"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    }`}
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/quiz"
+                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/quiz"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    }`}
+                >
+                  Join
+                </Link>
+              </>
+            ) : (
+              // If logged in → show dropdown with user info + logout
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  className="px-4 py-2 rounded-lg transition-colors bg-primary text-primary-foreground"
+                >
+                  {user?.username ?? "Account"}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
           </nav>
         </div>
       </div>
