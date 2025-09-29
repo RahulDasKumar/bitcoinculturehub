@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
-import Modal from "./modal.tsx";
+import Modal from "./Modal";
 import { categories, Category } from "./data";
 import { recommendationsData } from "./recommendations-data";
 import UnifiedCard from "@/components/UnifiedCard";
