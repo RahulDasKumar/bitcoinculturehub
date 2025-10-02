@@ -8,7 +8,7 @@ import BookmarkButton from "../../components/BookmarkButton";
 import { FEATURE_EXPLORE_MODAL_NAV } from "@/lib/features";
 import { inferItemType, type ItemType } from "@/lib/bookmark-utils";
 interface ModalItem {
-  id: string;
+  id?: string;
   title: string;
   description?: string;
   summary?: string;
@@ -70,7 +70,12 @@ const ExploreModal = ({ item, isOpen, onClose, onPrev, onNext, canGoPrev, canGoN
 
   if (!item) return null;
 
-  const imgSrc = item.image_url || item.image || `https://images.unsplash.com/${item.id}?w=800&h=600&fit=crop`;
+  const imgSrc = item.image_url 
+  ? item.image_url.startsWith("/") 
+    ? item.image_url 
+    : `/${item.image_url}`
+  : "/placeholder.svg";
+
 
   return (
     <Dialog open={Boolean(item && isOpen)} onOpenChange={(open) => !open && onClose()}>

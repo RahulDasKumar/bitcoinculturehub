@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Modal from "./Modal";
 import { categories, Category } from "./data";
-import { recommendationsData } from "./recommendations-data";
 import UnifiedCard from "@/components/UnifiedCard";
 import { ExploreItem } from "./data";
+import { exploreData } from "@/pages/explore/explore-data";
+
 
 
 // Feature flag for modal navigation
@@ -24,8 +25,8 @@ const ExplorePage = () => {
   // Modal navigation state
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [visibleItemsSnapshot, setVisibleItemsSnapshot] = useState<ExploreItem [] | null>(null);
-  // Use static recommendationsData
-  const allItems = useMemo(() => recommendationsData, []);
+ 
+  const allItems = useMemo(() => exploreData, []);
 
   // Apply filters (category + search)
   const filteredData = useMemo(() => {
@@ -51,29 +52,9 @@ const ExplorePage = () => {
   const hasMore = visibleCount < filteredData.length;
 
   // Card click opens modal
-  const handleCardClick = (item: ExploreItem ) => {
-    setVisibleItemsSnapshot(visibleItems);
-    const itemIndex = visibleItems.findIndex(i => i.id === item.id);
-    setCurrentIndex(itemIndex);
+  const handleCardClick = (item: ExploreItem) => {
     setSelectedItem(item);
     setIsModalOpen(true);
-  };
-
-  // Modal navigation
-  const goToPrevious = () => {
-    if (currentIndex !== null && currentIndex > 0 && visibleItemsSnapshot) {
-      const newIndex = currentIndex - 1;
-      setCurrentIndex(newIndex);
-      setSelectedItem(visibleItemsSnapshot[newIndex]);
-    }
-  };
-
-  const goToNext = () => {
-    if (currentIndex !== null && visibleItemsSnapshot && currentIndex < visibleItemsSnapshot.length - 1) {
-      const newIndex = currentIndex + 1;
-      setCurrentIndex(newIndex);
-      setSelectedItem(visibleItemsSnapshot[newIndex]);
-    }
   };
 
   // Derive selected item from navigation
@@ -203,20 +184,14 @@ const ExplorePage = () => {
 
       {/* Modal */}
       <Modal
-        item={derivedSelectedItem}
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setSelectedItem(null);
-          setCurrentIndex(null);
-          setVisibleItemsSnapshot(null);
-        }}
-        onPrev={FEATURE_EXPLORE_MODAL_NAV ? goToPrevious : undefined}
-        onNext={FEATURE_EXPLORE_MODAL_NAV ? goToNext : undefined}
-        canGoPrev={FEATURE_EXPLORE_MODAL_NAV && currentIndex !== null && currentIndex > 0}
-        canGoNext={FEATURE_EXPLORE_MODAL_NAV && currentIndex !== null && visibleItemsSnapshot !== null && currentIndex < visibleItemsSnapshot.length - 1}
-      />
-    </div>
+  item={selectedItem}
+  isOpen={isModalOpen}
+  onClose={() => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  }}
+/>
+</div>
   );
 };
 
