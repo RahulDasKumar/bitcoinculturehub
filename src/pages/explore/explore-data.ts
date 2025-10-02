@@ -39,7 +39,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Mérida, Mexico, 2025 exploring Bitcoin culture and finance in North America.",
       "category": "Events",
       "tags": ["Event", "Conference", "NA"],
-      "image_url": "/database_images/events/events_mayanbitcoinconference.png",
+      "image_url": "/database_images/events/events_mayanbitcoin.png",
       "type": "event"
     },
     {
@@ -55,7 +55,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Taipei, Taiwan, 2025 focused on Bitcoin development and community building.",
       "category": "Events",
       "tags": ["Event", "Conference", "Asia"],
-      "image_url": "/database_images/events/events_bitcoin_taipei.png",
+      "image_url": "/database_images/events/events_bitcoinplusplus_taipei.png",
       "type": "event"
     },
     {
@@ -71,7 +71,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Naples, Florida, USA, 2026 focused on Bitcoin education and community growth.",
       "category": "Events",
       "tags": ["Event", "Conference", "NA"],
-      "image_url": "/database_images/events/ events_bitcoinday_naples.png",
+      "image_url": "/database_images/events/events_bitcoinday_naples.png",
       "type": "event"
     },
     {
@@ -87,7 +87,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Cape Town, South Africa, 2026 exploring Bitcoin adoption and innovation in Africa.",
       "category": "Events",
       "tags": ["Event", "Conference", "Africa"],
-      "image_url": "/database_images/events/events_adopting_bitcoin_cape_town.png",
+      "image_url": "/database_images/events/events_adoptingbitcoin_capetown.png",
       "type": "event"
     },
     {
@@ -103,7 +103,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Kreuzlingen, Switzerland, 2026 focused on European Bitcoin adoption and innovation.",
       "category": "Events",
       "tags": ["Event", "Conference", "EU"],
-      "image_url": "/database_images/events/events_swiss_bitcoin_conference.png",
+      "image_url": "/database_images/events/events_swissbitcoinconference.png",
       "type": "event"
     },
     {
@@ -111,7 +111,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference in Las Vegas, USA, 2026 — one of the largest global Bitcoin events.",
       "category": "Events",
       "tags": ["Event", "Conference", "NA"],
-      "image_url": "/database_images/events/events_bitcoin2026.png",
+      "image_url": "/database_images/events/events_btc2026vegas.png",
       "type": "event"
     },
     {
@@ -119,7 +119,7 @@ export const exploreData: ExploreItem[] = [
       "description": "Conference and film festival in Warsaw, Poland, 2026 dedicated to Bitcoin films and media.",
       "category": "Events",
       "tags": ["Event", "Conference", "EU"],
-      "image_url": "/database_images/events/events_bitcoinfilmfest.png",
+      "image_url": "/database_images/events/events_filmfest.png",
       "type": "event"
     },
     
@@ -128,7 +128,7 @@ export const exploreData: ExploreItem[] = [
       "description": "A large-format book chronicling Bitcoin culture and history.",
       "category": "Artifacts",
       "tags": ["Artifact", "Literature", "Culture"],
-      "image_url": "/database_images/artifacts/artifact_bigbitcoinbook.png",
+      "image_url": "/database_images/artifacts/artifacts_bigbitcoinbook.png",
       "type": "artifact"
     },
     {
@@ -136,7 +136,7 @@ export const exploreData: ExploreItem[] = [
       "description": "A unique Bitcoin-themed electric guitar auctioned on Scarce.City.",
       "category": "Artifacts",
       "tags": ["Artifact", "Instrument", "Culture"],
-      "image_url": "/database_images/artifacts/artifacts_bigbitcoinbook.png",
+      "image_url": "/database_images/artifacts/artifacts_electricguitar.png",
       "type": "artifact"
     },
     {
