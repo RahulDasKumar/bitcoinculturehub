@@ -2,19 +2,66 @@ import * as React from "react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
-
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-
+import useAuthStore from "../hooks/use-auth"
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
+
     const [pw, setPw] = useState("");
+
     const location = useLocation();
 
-    const onSubmit = (e: React.FormEvent) => {
+    const [name,setName] = useState("")
+
+    const [message, setMessage] = useState("");
+
+    const navigate = useNavigate()
+
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+      });
+
+    const { user, isLoggedIn, login, logout, updateProfile } = useAuthStore();
+
+    const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ email, pw });
+
+        try {
+            const res = await fetch("https://bch-backend-7vjs.onrender.com/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: pw,
+                }),
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                setMessage(`Error: ${errorData.detail || "Login failed"}`);
+                return;
+            }
+
+            const data = await res.json();
+            console.log("Login response:", data);
+
+            login({
+                username: data.username,
+                email: data.email
+            });
+
+            setMessage(`Login successful!`);
+            navigate("/");
+        } catch (err) {
+            console.error(err);
+            setMessage("Network error. Try again.");
+        }
     };
 
     return (

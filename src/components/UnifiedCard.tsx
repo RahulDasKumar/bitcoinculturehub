@@ -67,6 +67,8 @@ const UnifiedCard = ({
         <BookmarkToggle 
           itemId={itemId}
           itemType={itemType}
+          title={title}
+          tags={tags}
           className="absolute top-2 sm:top-3 right-2 sm:right-3"
         />
       </div>

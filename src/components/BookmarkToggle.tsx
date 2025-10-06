@@ -3,38 +3,41 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { Bookmark } from "lucide-react";
+import { useBookmarkStore } from "@/hooks/use-bookmark";
 
 interface BookmarkToggleProps {
   itemId: string;
   itemType: string;
   onToggle?: (isBookmarked: boolean) => void;
+  title:string;
   className?: string;
+  tags:string[]
 }
 
-const BookmarkToggle = ({ itemId, itemType, onToggle, className = "" }: BookmarkToggleProps) => {
+const BookmarkToggle = ({ itemId, itemType, onToggle, title, tags,className = "" }: BookmarkToggleProps) => {
+  const { bookmarks, toggleBookmark } = useBookmarkStore()
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const addBookmark = useBookmarkStore((state) => state.addBookmark)
 
   const handleToggleBookmark = async (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
+    console.log('clicking')
 
-    if (!itemId || !itemType) {
-      toast({
-        title: "Error",
-        description: "Invalid item - cannot bookmark",
-        variant: "destructive",
-      });
-      return;
-    }
 
     setIsLoading(true);
-
     try {
       const newState = !isBookmarked;
       setIsBookmarked(newState);
+      const newItem = {
 
+        title: title,
+        itemType:itemType,
+        tags:tags
+      }
+      addBookmark(newItem)
       toast({
         title: newState ? "Added to collection" : "Removed from collection",
         description: newState
