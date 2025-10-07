@@ -719,10 +719,19 @@ Generated: ${new Date().toLocaleDateString()}
 
                     {/* Navigation */}
                     <div className="flex items-center justify-between gap-4">
-                        <Button variant="outline" onClick={handleNext} className="flex items-center gap-2 bg-transparent" size="sm">
-                            <SkipForward className="w-4 h-4" />
-                            Skip
-                        </Button>
+                        {/* Show Skip only if NOT on the last question */}
+                                {!isLastQuestion && (
+                                <Button
+                                    variant="outline"
+                                    onClick={handleNext}
+                                    className="flex items-center gap-2 bg-transparent"
+                                    size="sm"
+                                >
+                                    <SkipForward className="w-4 h-4" />
+                                    Skip
+                                </Button>
+                                )}
+
 
                         <div className="flex gap-4">
                             {quizState.currentStep > 0 && (
