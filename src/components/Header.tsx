@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { User } from "lucide-react"  
 import useAuthStore from "@/hooks/use-auth"
 const Header = () => {
   const location = useLocation()
@@ -82,49 +83,24 @@ const Header = () => {
               Explore
             </Link>
 
-            {/* Home
-            <Link
-              to="/"
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                location.pathname === "/"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
-              }`}
-            >
-              Home
-            </Link>
-            
-            {/* Join */}
+            {/* 👤 Profile / Login Icon */}
             {!isLoggedIn ? (
-              <>
-                <Link
-                  to="/login"
-                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/login"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                >
-                  Login
-                </Link>
-                {/*
-                <Link
-                  to="/quiz"
-                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/quiz"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                >
-                  Join
-                </Link>
-              */}
-              </>
+              <button
+                onClick={() => navigate("/login")}
+                className="p-2 rounded-full hover:bg-accent transition-colors"
+                title="Login"
+              >
+                <User className="w-6 h-6 text-muted-foreground hover:text-foreground" />
+              </button>
             ) : (
-              // If logged in → show dropdown with user info + logout
               <DropdownMenu>
-                <DropdownMenuTrigger
-                  className="px-4 py-2 rounded-lg transition-colors bg-primary text-primary-foreground"
-                >
-                  {user?.username ?? "Account"}
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="p-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
+                    title="Profile"
+                  >
+                    <User className="w-5 h-5" />
+                  </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
@@ -134,6 +110,7 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+
 
           </nav>
         </div>
