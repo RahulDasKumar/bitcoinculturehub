@@ -106,7 +106,7 @@ const Header = () => {
                 >
                   Login
                 </Link>
-
+                {/*
                 <Link
                   to="/quiz"
                   className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/quiz"
@@ -116,6 +116,7 @@ const Header = () => {
                 >
                   Join
                 </Link>
+              */}
               </>
             ) : (
               // If logged in → show dropdown with user info + logout
