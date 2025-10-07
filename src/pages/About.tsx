@@ -10,7 +10,6 @@ const tocItems = [
   { id: "about-company", title: "About the Company", level: 1 },
   { id: "our-mission", title: "Our Mission", level: 2 },
   { id: "our-values", title: "Our Values", level: 2 },
-  { id: "faq", title: "Frequently Asked Questions", level: 1 },
 ];
 
 const faqItems = [
@@ -68,9 +67,7 @@ const About = () => {
             {/* About the Company */}
             <ContentSection id="about-company" title="About the Company">
               <p className="text-lg leading-relaxed mb-6">
-                The Cultural OS makes Bitcoin culture durable, scalable, and actionable. We are a sovereignty-focused 
-                community that anchors identity through Houses, provides meaning through Archetypes, ensures continuity 
-                through rituals, and achieves scalability through shared culture across digital and physical worlds.
+              The Bitcoin Culture Hub exists to accelerate retail adoption by making Bitcoin easier to discover, understand, and engage with. We view Bitcoin not just as an asset, but as a cultural movement: personal, accessible, and enduring for the next generation.
               </p>
               
               <div id="our-mission" className="scroll-mt-8 mb-12">
@@ -81,19 +78,19 @@ const About = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
                   <FeatureCard
                     title="Belonging"
-                    description="Houses anchor identity and collective pride"
+                    description="Unite Bitcoiners across generations through shared identity, stories, and purpose."
                   />
                   <FeatureCard
-                    title="Meaning"
-                    description="Archetypes give personal roles and growth arcs"
+                    title="Discovery"
+                    description="Highlight the art, events, and voices shaping Bitcoin culture through our Explore platform."
                   />
                   <FeatureCard
-                    title="Continuity"
-                    description="Rituals tie culture to Bitcoin's key dates (Genesis, Halving, Pizza Day)"
+                    title="Education"
+                    description="Empower students and communities with resources to learn, teach, and lead the next wave of Bitcoin adoption."
                   />
                   <FeatureCard
                     title="Scalability"
-                    description="Crests, lore, and rituals travel easily across digital + physical worlds"
+                    description="Bridge digital and physical worlds — ensuring Bitcoin’s culture, ideas, and symbols travel globally and endure."
                   />
                 </div>
               </div>
@@ -404,9 +401,9 @@ const About = () => {
             </ContentSection>
 
             {/* FAQ */}
-            <ContentSection id="faq" title="Frequently Asked Questions">
+            {/*<ContentSection id="faq" title="Frequently Asked Questions">
               <FAQ items={faqItems} />
-            </ContentSection>
+            </ContentSection>*/}
           </main>
         </div>
       </div>

@@ -1,5 +1,5 @@
 export interface ExploreItem {
-    id: string;
+    id?: string;
     realId?: string;
     title: string;
     description: string;
