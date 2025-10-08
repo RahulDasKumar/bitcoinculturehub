@@ -30,15 +30,7 @@ const Footer = () => {
                 {/* <Link href="/about" className="text-gray-400 hover:text-white text-sm">
                                         About
                                     </Link> */}
-                <a
-                  href="https://x.com/btcculturehub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-orange-500 text-sm  flex items-center gap-2"
-                >
-                  Hodloma
-
-                </a>
+                
               </li>
             </ul>
           </div>
