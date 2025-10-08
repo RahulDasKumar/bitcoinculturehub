@@ -214,12 +214,13 @@ export default function HomePage() {
                         <div className="flex justify-center lg:justify-start">
                         <div className="max-w-lg w-full relative">
                             <img
-                            src="images/hodloma-mockup.png"
+                            src="images/explore.jpg"
                             alt="Hodloma platform mockup showing campus citadel interface"
                             className="w-full h-auto rounded-2xl shadow-2xl border-2 border-orange-500"
                             />
                             <p className="text-gray-600 text-center mt-2">
-                            <b>Hodloma, the first Bitcoin product built for students.</b>
+                            <b>Every card a piece of history.
+                               Every click a new discovery.</b>
                             </p>
                         </div>
                         </div>
