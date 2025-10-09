@@ -20,7 +20,8 @@ const BookmarkToggle = ({ title, itemType, tags, className = "" }: BookmarkToggl
   const username = useAuthStore(state=>state.user)
   console.log(username)
   // always derive bookmark state from store
-  const { bookmarks, addBookmark, removeBookmark } = useBookmarkStore(username.email);
+  const email = username?.email || null;
+  const { bookmarks, addBookmark, removeBookmark } = useBookmarkStore(email);
 
   const existingBookmark = bookmarks.find((b) => b.title === title);
 
