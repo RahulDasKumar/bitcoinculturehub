@@ -18,13 +18,14 @@ interface BookmarkButtonProps {
 
 const BookmarkButton = ({ title, itemType, tags = [], className = "", onToggled }: BookmarkButtonProps) => {
   const { user, isLoggedIn } = useAuthStore();
+
   const { bookmarks, addBookmark, removeBookmark, fetchBookmarks } = useBookmarkStore(user.email);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
-  // Check if this item is already bookmarked
+  if (!isLoggedIn) return;
   useEffect(() => {
+    console.log(bookmarks)
     setIsBookmarked(bookmarks.some(b => b.title === title));
   }, [bookmarks, title]);
 

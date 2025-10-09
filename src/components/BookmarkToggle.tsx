@@ -9,7 +9,6 @@ interface BookmarkToggleProps {
   title: string;
   itemType: string;
   tags: string[];
-  user: User;
   className?: string;
 }
 
@@ -18,7 +17,7 @@ const BookmarkToggle = ({ title, itemType, tags, className = "" }: BookmarkToggl
   const { isLoggedIn } = useAuthStore();
   const { toast } = useToast();
   const username = useAuthStore(state=>state.user)
-  console.log(username)
+  console.log('Hi')
   // always derive bookmark state from store
   const email = username?.email || null;
   const { bookmarks, addBookmark, removeBookmark } = useBookmarkStore(email);

@@ -9,8 +9,6 @@ import UnifiedCard from "@/components/UnifiedCard";
 import { ExploreItem } from "./data";
 import { exploreData } from "@/pages/explore/explore-data";
 
-
-
 // Feature flag for modal navigation
 const FEATURE_EXPLORE_MODAL_NAV = true;
 
@@ -53,8 +51,9 @@ const ExplorePage = () => {
 
   // Card click opens modal
   const handleCardClick = (item: ExploreItem) => {
-    setSelectedItem(item);
-    setIsModalOpen(true);
+    
+    // setSelectedItem(item);
+    // setIsModalOpen(true);
   };
 
   // Derive selected item from navigation
