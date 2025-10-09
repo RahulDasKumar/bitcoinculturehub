@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import useAuthStore from "@/hooks/use-auth"
 import Header from "@/components/Header"
 import { useBookmarkStore } from "@/hooks/use-bookmark"
-
+import { useEffect } from "react"
 
 const archetypes = [
     {
@@ -39,8 +39,18 @@ const archetypes = [
 ]
 
 export default function Profile() {
-    const { user, isLoggedIn, login, logout, updateProfile } = useAuthStore();
-    const {bookmarks} = useBookmarkStore();
+    const { user, isLoggedIn } = useAuthStore();
+    const { bookmarks, fetchBookmarks } = useBookmarkStore(user.email);
+
+    // Fetch bookmarks when component mounts
+    useEffect(() => {
+        if (isLoggedIn) {
+            fetchBookmarks();
+        }
+    }, [isLoggedIn, fetchBookmarks,user.email]);
+
+    console.log(bookmarks); // now this will be fresh from backend
+
     return <>
         <Header></Header>
         <div className="min-h-screen bg-background">
@@ -83,32 +93,35 @@ export default function Profile() {
                                         className={`space-y-4 ${bookmarks.length > 3 ? "max-h-72 overflow-y-auto pr-2" : ""
                                             }`}
                                     >
-                                        {bookmarks.map((item, index) => (
-                                            <div
-                                                key={index}
-                                                className="p-4 border border-border rounded-lg"
-                                            >
-                                                <div className="flex items-center justify-between mb-2">
-                                                    <div className="font-medium text-sm">{item.title}</div>
-                                                    <span className="text-xs bg-muted px-2 py-0.5 rounded">
-                                                        {item.itemType}
-                                                    </span>
-                                                </div>
+                                            {bookmarks.length === 0 ? (
+                                                <p className="text-center text-muted-foreground text-sm">
+                                                    No items yet — bookmark something to see it here!
+                                                </p>
+                                            ) : (
+                                                <div className={`space-y-4 ${bookmarks.length > 3 ? "max-h-72 overflow-y-auto pr-2" : ""}`}>
+                                                    {bookmarks.map((item) => (
+                                                        <div key={item.id} className="p-4 border border-border rounded-lg">
+                                                            <div className="flex items-center justify-between mb-2">
+                                                                <div className="font-medium text-sm">{item.title}</div>
+                                                                <span className="text-xs bg-muted px-2 py-0.5 rounded">{item.itemType}</span>
+                                                            </div>
 
-                                                {item.tags?.length > 0 && (
-                                                    <div className="flex flex-wrap gap-2 mb-2">
-                                                        {item.tags.map((tag, i) => (
-                                                            <span
-                                                                key={i}
-                                                                className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full"
-                                                            >
-                                                                #{tag}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
+                                                            {item.tags?.length > 0 && (
+                                                                <div className="flex flex-wrap gap-2 mb-2">
+                                                                    {item.tags.map((tag, i) => (
+                                                                        <span
+                                                                            key={i}
+                                                                            className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full"
+                                                                        >
+                                                                            #{tag}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                     </div>
                                 )}
                             </div>
