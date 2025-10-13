@@ -65,7 +65,6 @@ const UnifiedCard = ({
         
         {/* Bookmark Toggle - Always visible in top-right */}
         <BookmarkToggle 
-          itemId={itemId}
           itemType={itemType}
           title={title}
           tags={tags}

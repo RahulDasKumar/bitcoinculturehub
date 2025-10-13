@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
-
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
@@ -15,7 +15,7 @@ const Register: React.FC = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -40,9 +40,7 @@ const Register: React.FC = () => {
       }
 
       const data = await res.json();
-      setMessage(`Signup successful! Token: ${data.access_token}`);
-      // optionally, you can redirect after signup here
-
+      navigate("/login")
     } catch (err) {
       setMessage("Network error. Try again.");
     }

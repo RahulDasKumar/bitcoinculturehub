@@ -7,7 +7,6 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import BookmarkButton from "../../components/BookmarkButton";
 import { FEATURE_EXPLORE_MODAL_NAV } from "@/lib/features";
 import { inferItemType, type ItemType } from "@/lib/bookmark-utils";
-import { API_BASE_URL } from "@/config";
 interface ModalItem {
   id?: string;
   title: string;
@@ -70,58 +69,12 @@ const ExploreModal = ({ item, isOpen, onClose, onPrev, onNext, canGoPrev, canGoN
   }, [isOpen, item]);
 
   if (!item) return null;
-  console.log("🟣 [Modal] Opened modal with item:", item.title, {
-    image_url: item.image_url,
-    fullImage: item.image_url?.startsWith("http") ? item.image_url : `${API_BASE_URL}${item.image_url}`,
-    isOpen,
-  });
 
-  const imgSrc = (() => {
-    const imgSrc = (() => {
-      if (!item) return "/placeholder.svg";
-      
-      // Log item to inspect
-      console.log("🧩 [Modal] Item received in modal:", item);
-      
-      // Determine image URL logic
-      if (!item.image_url) {
-        console.warn("⚠️ [Modal] item.image_url is missing, using placeholder.");
-        return "/placeholder.svg";
-      }
-      
-      if (item.image_url.startsWith("http")) {
-        console.log("🟢 [Modal] Using full URL:", item.image_url);
-        return item.image_url;
-      }
-      
-      const finalUrl = `${API_BASE_URL}${item.image_url}`;
-      console.log("🟢 [Modal] Constructed image URL:", finalUrl);
-      return finalUrl;
-    })();
-
-    console.log("🟢 [Modal] Final image src resolved to:", imgSrc);
-
-    if (!item) return "/placeholder.svg";
-  
-    // Log item to inspect
-    console.log("🧩 [Modal] Item received in modal:", item);
-  
-    // Determine image URL logic
-    if (!item.image_url) {
-      console.warn("⚠️ [Modal] item.image_url is missing, using placeholder.");
-      return "/placeholder.svg";
-    }
-  
-    if (item.image_url.startsWith("http")) {
-      console.log("🟢 [Modal] Using full URL:", item.image_url);
-      return item.image_url;
-    }
-  
-    const finalUrl = `${API_BASE_URL}${item.image_url}`;
-    console.log("🟢 [Modal] Constructed image URL:", finalUrl);
-    return finalUrl;
-  })();
-  
+  const imgSrc = item.image_url 
+  ? item.image_url.startsWith("/") 
+    ? item.image_url 
+    : `/${item.image_url}`
+  : "/placeholder.svg";
 
 
   return (
@@ -174,16 +127,11 @@ const ExploreModal = ({ item, isOpen, onClose, onPrev, onNext, canGoPrev, canGoN
             className={`w-full h-full object-cover transition-opacity duration-300 ${
               imageLoaded ? "opacity-100" : "opacity-0"
             }`}
-            onLoad={() => {
-              console.log("✅ [Modal] Image loaded successfully:", imgSrc);
-              setImageLoaded(true);
-            }}
+            onLoad={() => setImageLoaded(true)}
             onError={(e) => {
-              console.error("❌ [Modal] Image failed to load:", imgSrc);
               setImageLoaded(true);
               e.currentTarget.src = "/placeholder.svg";
             }}
-            
           />
           {!imageLoaded && <div className="absolute inset-0 bg-muted animate-pulse" />}
 
@@ -200,6 +148,11 @@ const ExploreModal = ({ item, isOpen, onClose, onPrev, onNext, canGoPrev, canGoN
               <h1 className="text-4xl font-bold text-card-foreground leading-tight">
                 {item.title}
               </h1>
+              <BookmarkButton 
+                itemId={item.id} 
+                itemType={inferItemType(item)}
+                className="ml-4"
+              />
             </div>
             <div className="flex flex-wrap gap-2">
               {(item.tags ?? []).map((tag) => (
