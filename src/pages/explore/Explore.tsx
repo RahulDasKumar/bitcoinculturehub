@@ -70,8 +70,9 @@ const ExplorePage = () => {
 
   // Card click opens modal
   const handleCardClick = (item: ExploreItem) => {
-    setSelectedItem(item);
-    setIsModalOpen(true);
+    
+    // setSelectedItem(item);
+    // setIsModalOpen(true);
   };
 
   const derivedSelectedItem = useMemo(() => {

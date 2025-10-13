@@ -63,11 +63,7 @@ const UniversalCard = ({ item, onClick, variant = 'explore', className = "" }: U
         {/* Category Badge - moved to bottom-right inside the content area */}
 
         {/* Bookmark Toggle - Always visible */}
-        <BookmarkButton 
-          itemId={item.id} 
-          itemType={(item.type || 'artifact') as 'artifact' | 'creator' | 'community' | 'event' | 'meme'}
-          className="absolute top-3 right-3"
-        />
+  
         
         {/* External Link Icon for Communities - shown in addition to bookmark */}
         {isCommunity && (
