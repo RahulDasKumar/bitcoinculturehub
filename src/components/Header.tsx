@@ -11,12 +11,17 @@ const Header = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
+
+  const { user, isLoggedIn, login, logout, updateProfile } = useAuthStore();
+
   const logoHandler = () => {
     navigate("/")
   }
 
-  const { user, isLoggedIn, login, logout, updateProfile } = useAuthStore();
-
+  const logoutHandler = () =>{
+    logout()
+    navigate("/")
+  }
 
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
@@ -106,7 +111,7 @@ const Header = () => {
                   <DropdownMenuItem asChild>
                     <Link to="/profile">Profile</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
+                    <DropdownMenuItem onClick={logoutHandler}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
