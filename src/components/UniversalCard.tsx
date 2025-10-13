@@ -5,6 +5,7 @@ import { ExternalLink } from "lucide-react";
 import { ExploreItem } from "@/pages/explore/data";
 import DynamicImage from "@/components/DynamicImage";
 import BookmarkButton from "@/components/BookmarkButton";
+import { API_BASE_URL } from "@/config"; 
 
 interface UniversalCardProps {
   item: ExploreItem;
@@ -24,9 +25,14 @@ const UniversalCard = ({ item, onClick, variant = 'explore', className = "" }: U
     }
   };
 
-  const imageSource = isCommunity && item.logo_url 
-    ? item.logo_url 
-    : `https://images.unsplash.com/${item.image_url}?w=400&h=300&fit=crop`;
+  const imageSource =
+  isCommunity && item.logo_url
+    ? item.logo_url
+    : item.image_url
+      ? item.image_url.startsWith("http")
+        ? item.image_url
+        : `${API_BASE_URL}${item.image_url}`
+      : "/placeholder.svg";
 
   return (
     <Card 

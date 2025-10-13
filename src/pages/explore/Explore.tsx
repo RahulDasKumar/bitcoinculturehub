@@ -7,31 +7,50 @@ import Modal from "./Modal";
 import { categories, Category } from "./data";
 import UnifiedCard from "@/components/UnifiedCard";
 import { ExploreItem } from "./data";
-import { exploreData } from "@/pages/explore/explore-data";
+import { API_BASE_URL } from "@/config"; // ✅ dynamic backend base URL
 
 // Feature flag for modal navigation
 const FEATURE_EXPLORE_MODAL_NAV = true;
 
 const ExplorePage = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
-  const [selectedItem, setSelectedItem] = useState<ExploreItem  | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ExploreItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(12);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [allItems, setAllItems] = useState<ExploreItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // Modal navigation state
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [visibleItemsSnapshot, setVisibleItemsSnapshot] = useState<ExploreItem [] | null>(null);
- 
-  const allItems = useMemo(() => exploreData, []);
+  const [visibleItemsSnapshot, setVisibleItemsSnapshot] = useState<ExploreItem[] | null>(null);
+
+  // ✅ Fetch data from FastAPI backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/explore/`);
+        if (!res.ok) throw new Error("Failed to fetch explore data");
+        const data = await res.json();
+        setAllItems(data);
+      } catch (err) {
+        console.error("❌ Error fetching explore data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Apply filters (category + search)
   const filteredData = useMemo(() => {
     let filtered = allItems;
 
     if (selectedCategory !== 'All') {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+      filtered = filtered.filter(item =>
+        item.category?.trim().replace(/,/, '').toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
 
     if (searchTerm.trim()) {
@@ -39,7 +58,7 @@ const ExplorePage = () => {
       filtered = filtered.filter(item =>
         item.title.toLowerCase().includes(searchLower) ||
         item.description.toLowerCase().includes(searchLower) ||
-        item.tags.some(tag => tag.toLowerCase().includes(searchLower))
+        item.tags?.some(tag => tag.toLowerCase().includes(searchLower))
       );
     }
 
@@ -56,7 +75,6 @@ const ExplorePage = () => {
     // setIsModalOpen(true);
   };
 
-  // Derive selected item from navigation
   const derivedSelectedItem = useMemo(() => {
     if (currentIndex !== null && visibleItemsSnapshot) {
       return visibleItemsSnapshot[currentIndex];
@@ -86,10 +104,20 @@ const ExplorePage = () => {
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-muted-foreground">Loading Explore content...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <Header />
+
+      {/* Hero */}
       <section className="py-12 sm:py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
@@ -148,20 +176,26 @@ const ExplorePage = () => {
           ) : (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-                {visibleItems.map((item) => (
+              {visibleItems.map((item) => {
+                // 🟡 Add your log here — this runs before rendering each card
+                console.log("🟡 Card item image:", item.image_url, "→", `${API_BASE_URL}${item.image_url}`);
+
+                return (
                   <UnifiedCard
-                    key={item.id}
+                    key={item.id || item.title}
                     title={item.title}
                     description={item.description}
-                    tags={item.tags}
-                    image_url={item.image_url}
+                    tags={item.tags || []}
+                    image_url={`${API_BASE_URL}${item.image_url}`}  // ✅ full URL to backend
                     type={item.category}
                     onClick={() => handleCardClick(item)}
                     itemId={item.realId}
                     itemType={item.type}
                   />
-                ))}
-              </div>
+                );
+              })}
+            </div>
+
 
               {hasMore && (
                 <div className="text-center">
@@ -183,14 +217,14 @@ const ExplorePage = () => {
 
       {/* Modal */}
       <Modal
-  item={selectedItem}
-  isOpen={isModalOpen}
-  onClose={() => {
-    setIsModalOpen(false);
-    setSelectedItem(null);
-  }}
-/>
-</div>
+        item={selectedItem}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedItem(null);
+        }}
+      />
+    </div>
   );
 };
 

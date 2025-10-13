@@ -14,7 +14,6 @@ interface AuthState {
     updateProfile: (updates: Partial<User>) => void;
 }
 
-
 const useAuthStore = create<AuthState>()(
     persist(
         (set, get) => ({
