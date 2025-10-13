@@ -1,84 +1,52 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Bookmark, BookmarkCheck, Loader2 } from "lucide-react";
-import { useBookmarkStore } from "@/hooks/use-bookmark";
-import useAuthStore from "@/hooks/use-auth";
-import { User } from "@/hooks/use-auth";
 
 type ItemType = 'artifact' | 'creator' | 'community' | 'event' | 'meme';
 
 interface BookmarkButtonProps {
-  title: string;
+  itemId: string;
   itemType: ItemType;
-  tags?: string[];
+  initialIsBookmarked?: boolean;
   className?: string;
   onToggled?: (isBookmarked: boolean) => void;
 }
 
-const BookmarkButton = ({ title, itemType, tags = [], className = "", onToggled }: BookmarkButtonProps) => {
-  const { user, isLoggedIn } = useAuthStore();
-  const { bookmarks, addBookmark, removeBookmark, fetchBookmarks } = useBookmarkStore(user.email);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+const BookmarkButton = ({ 
+  itemId, 
+  itemType, 
+  initialIsBookmarked = false, 
+  className = "",
+  onToggled 
+}: BookmarkButtonProps) => {
+  const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
-  // Check if this item is already bookmarked
-  useEffect(() => {
-    setIsBookmarked(bookmarks.some(b => b.title === title));
-  }, [bookmarks, title]);
 
   const handleBookmarkClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
 
-    if (!isLoggedIn || !user) {
-      toast({
-        title: "Error",
-        description: "You must be logged in to bookmark items.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsLoading(true);
 
-    const bookmarkItem = {
-      title,
-      itemType,
-      tags,
-      user,
-    };
-
     try {
-      if (isBookmarked) {
-        // Remove bookmark via store -> backend
-        await removeBookmark(title);
-        toast({
-          title: "Removed from collection",
-          description: `Item (${itemType}) removed from your bookmarks`,
-        });
-      } else {
-        // Add bookmark via store -> backend
-        await addBookmark(bookmarkItem);
-        toast({
-          title: "Added to collection",
-          description: `Item (${itemType}) saved to your bookmarks`,
-        });
-      }
+      // Toggle state locally (no backend)
+      const newState = !isBookmarked;
+      setIsBookmarked(newState);
 
-      setIsBookmarked(!isBookmarked);
-      onToggled?.(!isBookmarked);
+      toast({
+        title: newState ? "Added to collection" : "Removed from collection",
+        description: newState
+          ? `Item (${itemType}) saved to your bookmarks`
+          : `Item (${itemType}) removed from your bookmarks`,
+      });
 
-      // Refresh store from backend if needed
-      console.log('running')
-      await fetchBookmarks();
-
-    } catch (err) {
-      console.error("Bookmark error:", err);
+      onToggled?.(newState);
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: "Failed to update bookmark. Please try again.",
+        description: "Something went wrong.",
         variant: "destructive",
       });
     } finally {
@@ -92,7 +60,9 @@ const BookmarkButton = ({ title, itemType, tags = [], className = "", onToggled 
       size="sm"
       onClick={handleBookmarkClick}
       disabled={isLoading}
-      className={`h-8 w-8 p-0 min-w-[44px] min-h-[44px] transition-all duration-200 ${isBookmarked ? "hover:scale-110 animate-scale-in" : "hover:scale-105"} ${className}`}
+      className={`h-8 w-8 p-0 min-w-[44px] min-h-[44px] transition-all duration-200 ${
+        isBookmarked ? "hover:scale-110 animate-scale-in" : "hover:scale-105"
+      } ${className}`}
       aria-pressed={isBookmarked}
       aria-label={isBookmarked ? "Unsave item" : "Save item"}
     >
