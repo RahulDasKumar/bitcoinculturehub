@@ -16,7 +16,7 @@ import Waitlist from "./pages/WaitList-Components/Waitlist";
 import BookmarkToggle from "@/components/BookmarkToggle";
 import ExplorePage from "./pages/explore/Explore"; 
 import Profile from "./pages/Profile";
-
+import SubmitContent from "./pages/explore/SubmitContent";
 
 const queryClient = new QueryClient();
 
@@ -36,8 +36,9 @@ const App = () => (
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
-          <Route path="*" element={<NotFound />} />
           <Route path="/explore" element={<ExplorePage />} /> 
+          <Route path="/submit-content" element={<SubmitContent />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

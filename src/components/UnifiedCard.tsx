@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import DynamicImage from "@/components/DynamicImage";
 import BookmarkToggle from "@/components/BookmarkToggle";
+import BitcoinUpvote from "@/components/BitcoinUpvote";
 
 interface UnifiedCardProps {
   title: string;
@@ -26,9 +27,16 @@ const UnifiedCard = ({
 }: UnifiedCardProps) => {
   const handleClick = () => {
     if (onClick) {
+      console.log("🟢 Card clicked:", title);
       onClick();
     }
   };
+
+  const imgSrc = image_url
+    ? image_url.startsWith("http")
+      ? image_url
+      : `http://localhost:8000${image_url}`
+    : "/placeholder.svg";
 
   return (
     <Card 
@@ -49,7 +57,7 @@ const UnifiedCard = ({
         <div className="aspect-[3/2] bg-muted overflow-hidden">
           {image_url ? (
             <DynamicImage
-              src={image_url}
+              src={imgSrc}
               alt={title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               fallbackSrc="/placeholder.svg"
@@ -62,7 +70,11 @@ const UnifiedCard = ({
             </div>
           )}
         </div>
-        
+
+        <div
+          className="absolute top-2 sm:top-3 right-2 sm:right-3"
+          onClick={(e) => e.stopPropagation()} // ✨ prevents the modal from opening when clicking the bookmark
+        >
         {/* Bookmark Toggle - Always visible in top-right */}
         <BookmarkToggle 
           itemType={itemType}
@@ -70,6 +82,7 @@ const UnifiedCard = ({
           tags={tags}
           className="absolute top-2 sm:top-3 right-2 sm:right-3"
         />
+      </div>
       </div>
 
       <div className="p-4 sm:p-6">

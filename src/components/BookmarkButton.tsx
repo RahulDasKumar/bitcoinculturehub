@@ -18,12 +18,16 @@ interface BookmarkButtonProps {
 
 const BookmarkButton = ({ title, itemType, tags = [], className = "", onToggled }: BookmarkButtonProps) => {
   const { user, isLoggedIn } = useAuthStore();
-
+  const session = useSession?.(); // however you get it
+  const userEmail = session?.user?.email || null;
   const { bookmarks, addBookmark, removeBookmark, fetchBookmarks } = useBookmarkStore(user.email);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  if (!isLoggedIn) return;
+  if (!userEmail) {
+    console.warn("⚠️ [BookmarkButton] No user email found — disabling bookmark features.");
+    return null; // or render a placeholder button instead
+  }
   useEffect(() => {
     console.log(bookmarks)
     setIsBookmarked(bookmarks.some(b => b.title === title));
