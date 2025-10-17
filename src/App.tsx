@@ -16,7 +16,7 @@ import Waitlist from "./pages/WaitList-Components/Waitlist";
 import BookmarkToggle from "@/components/BookmarkToggle";
 import ExplorePage from "./pages/explore/Explore"; 
 import Profile from "./pages/Profile";
-import SubmitContent from "./pages/explore/SubmitContent";
+import SubmitContent from "./pages/explore/submitContent";
 
 const queryClient = new QueryClient();
 

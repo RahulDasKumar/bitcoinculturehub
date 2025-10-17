@@ -9,17 +9,18 @@ import { User } from "@/hooks/use-auth";
 type ItemType = 'artifact' | 'creator' | 'community' | 'event' | 'meme';
 
 interface BookmarkButtonProps {
-  title: string;
+  itemId: string;
+  title?: string;
   itemType: ItemType;
   tags?: string[];
   className?: string;
   onToggled?: (isBookmarked: boolean) => void;
 }
 
-const BookmarkButton = ({ title, itemType, tags = [], className = "", onToggled }: BookmarkButtonProps) => {
+const BookmarkButton = ({ itemId,title, itemType, tags = [], className = "", onToggled }: BookmarkButtonProps) => {
   const { user, isLoggedIn } = useAuthStore();
-  const session = useSession?.(); // however you get it
-  const userEmail = session?.user?.email || null;
+  const { data: session, status } = useSession() || {};
+  const userEmail = session?.user?.email ?? null;
   const { bookmarks, addBookmark, removeBookmark, fetchBookmarks } = useBookmarkStore(user.email);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
