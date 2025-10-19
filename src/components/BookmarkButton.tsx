@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useSession, signIn, signOut } from 'next-auth/react'
 import { Bookmark, BookmarkCheck, Loader2 } from "lucide-react";
 import { useBookmarkStore } from "@/hooks/use-bookmark";
 import useAuthStore from "@/hooks/use-auth";
