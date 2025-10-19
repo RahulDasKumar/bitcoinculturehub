@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useExploreData = (skip: number = 0, limit: number = 10) => {
+export const useAdminData = (skip: number = 0, limit: number = 10) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,7 +10,7 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
       setLoading(true);
       try {
         // ✅ FastAPI backend endpoint
-        const apiUrl = "https://bch-backend-7vjs.onrender.com";
+          const apiUrl = "https://bch-backend-7vjs.onrender.com";
 
         const res = await fetch(`${apiUrl}/explore`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -19,7 +19,7 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
         
         const dataArray = Array.isArray(json) ? json : json.data || [];
 
-        const filteredData = dataArray.filter(entry => entry.accepted === true);
+        const filteredData = dataArray.filter(entry => entry.accepted === false);
 
         console.log(filteredData);
 

@@ -9,7 +9,7 @@ import UnifiedCard from "@/components/UnifiedCard";
 import { categories, Category, ExploreItem } from "./data";
 import { useExploreData } from "@/hooks/useExploreData";
 import { useNavigate } from "react-router-dom"; 
-
+import useAuthStore from "@/hooks/use-auth";
 const ExplorePage = () => {
   // ------------------------------
   // 🧠 State Management
@@ -22,7 +22,7 @@ const ExplorePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const {isLoggedIn} = useAuthStore()
   // Modal navigation state (future support)
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [visibleItemsSnapshot, setVisibleItemsSnapshot] = useState<ExploreItem[] | null>(null);
@@ -147,13 +147,13 @@ const ExplorePage = () => {
           </div>
         </div>
       </section>
-
-      <Button
-      onClick={() => navigate("/submit-content")}
-      className="block mx-auto bg-[#FF5C35] hover:bg-[#ff3c00] text-white font-semibold rounded-full px-6 py-2 mb-6"
-    >
-    Submit Content
-    </Button>
+      {isLoggedIn && (<Button
+        onClick={() => navigate("/submit-content")}
+        className="block mx-auto bg-[#FF5C35] hover:bg-[#ff3c00] text-white font-semibold rounded-full px-6 py-2 mb-6"
+      >
+        Submit Content
+      </Button>)}
+     
 
       {/* Category Filter Buttons */}
       <section className="py-6 sm:py-8 bg-surface-dark border-y border-border">
