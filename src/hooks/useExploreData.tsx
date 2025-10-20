@@ -21,7 +21,7 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
 
         const filteredData = dataArray.filter(entry => entry.accepted === true);
         filteredData.forEach(element => {
-          element.image_url = element.image_url.replace(/\/\/explore/g, "/explore")
+          element.image_url = element.image_url?.replace(/\/\/explore/g, "/explore") || element.image_url;
         });
         console.log(filteredData)
 

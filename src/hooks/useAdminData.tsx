@@ -10,18 +10,19 @@ export const useAdminData = (skip: number = 0, limit: number = 10) => {
       setLoading(true);
       try {
         // ✅ FastAPI backend endpoint
-          const apiUrl = "https://bch-backend-7vjs.onrender.com";
+        const apiUrl = "https://bch-backend-7vjs.onrender.com";
 
         const res = await fetch(`${apiUrl}/explore`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+        console.log(res)
         const json = await res.json();
-        
+        console.log(json)
         const dataArray = Array.isArray(json) ? json : json.data || [];
 
         const filteredData = dataArray.filter(entry => entry.accepted === false);
+        console.log(filteredData)
         filteredData.forEach(element => {
-          element.image_url = element.image_url.replace(/\/\/explore/g, "/explore")
+          element.image_url = element.image_url?.replace(/\/\/explore/g, "/explore") || element.image_url;
         });
         console.log(filteredData);
         console.log(filteredData);
