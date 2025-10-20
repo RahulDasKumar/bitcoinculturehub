@@ -23,7 +23,7 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
         filteredData.forEach(element => {
           element.image_url = element.image_url.replace(/\/\/explore/g, "/explore")
         });
-    
+        console.log(filteredData)
 
         setData(filteredData);
 
