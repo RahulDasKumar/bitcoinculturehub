@@ -41,7 +41,7 @@ const ExploreModal = ({ item, isOpen, onClose, onPrev, onNext, canGoPrev, canGoN
   useEffect(() => {
     if (isOpen) setImageLoaded(false);
   }, [isOpen, item]);
-
+  console.log(item)
   // Keyboard navigation
   useEffect(() => {
     if (!isOpen || !FEATURE_EXPLORE_MODAL_NAV) return;

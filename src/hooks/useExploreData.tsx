@@ -20,8 +20,10 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
         const dataArray = Array.isArray(json) ? json : json.data || [];
 
         const filteredData = dataArray.filter(entry => entry.accepted === true);
-
-        console.log(filteredData);
+        filteredData.forEach(element => {
+          element.image_url = element.image_url.replace(/\/\/explore/g, "/explore")
+        });
+    
 
         setData(filteredData);
 

@@ -54,7 +54,9 @@ const ExplorePage = () => {
         (item) =>
           item.title.toLowerCase().includes(searchLower) ||
           item.description.toLowerCase().includes(searchLower) ||
-          item.tags.some((tag) => tag.toLowerCase().includes(searchLower))
+          item.tags.some((tag) => tag.toLowerCase().includes(searchLower)
+        )
+          
       );
     }
 
