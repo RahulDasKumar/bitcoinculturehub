@@ -1,9 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import DynamicImage from "@/components/DynamicImage";
-import BookmarkToggle from "@/components/BookmarkToggle";
-import BitcoinUpvote from "@/components/BitcoinUpvote";
-import { toast } from "sonner";
+import BookmarkToggle from "@/components/Explore/BookmarkToggle";
 
 interface UnifiedCardProps {
   title: string;
@@ -14,71 +12,26 @@ interface UnifiedCardProps {
   onClick?: () => void; // for modal trigger
   itemId: string; // for bookmarking
   itemType: string; // for bookmarking
-  isAdmin?:boolean
 }
 
-const UnifiedCard = ({ 
-  title, 
-  description, 
-  tags = [], 
-  image_url, 
-  type, 
+const UnifiedCard = ({
+  title,
+  description,
+  tags = [],
+  image_url,
+  type,
   onClick,
   itemId,
-  itemType,
-  isAdmin = false,
+  itemType
 }: UnifiedCardProps) => {
   const handleClick = () => {
     if (onClick) {
-      console.log("🟢 Card clicked:", title);
-      if (!isAdmin){
       onClick();
-      }
-      else{
-
-      }
     }
   };
-  console.log(isAdmin)
-  const imgSrc = image_url
-    ? image_url.startsWith("http")
-      ? image_url
-      : `http://localhost:8000${image_url}`
-    : "/placeholder.svg";
-  const onAccept = async (title)=>{
-    console.log('accept')
-    console.log(title)
-    const response = await fetch(`https://bch-backend-7vjs.onrender.com/explore/accept-by-title/${encodeURIComponent(title)}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      }},)
-    if (response.ok){
-      toast("Artifact Accepted")
-    }
-    else{
-      toast(response.statusText)
-    }
-  }
 
-  const onReject =async (title)=>{
-    console.log('reject')
-    const response = await fetch(`https://bch-backend-7vjs.onrender.com/explore/delete-by-title/${encodeURIComponent(title)}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type": "application/json",
-      }
-    })
-    if (response.ok){
-      toast("Artifac Deleted")
-    }
-    else{
-      toast(response.statusText)
-    }
-
-  }
   return (
-    <Card 
+    <Card
       className={`group ${onClick ? 'cursor-pointer' : ''} bg-card border-border hover:border-primary/50 transition-all duration-300 overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`}
       onClick={handleClick}
       role="article"
@@ -96,7 +49,7 @@ const UnifiedCard = ({
         <div className="aspect-[3/2] bg-muted overflow-hidden">
           {image_url ? (
             <DynamicImage
-              src={imgSrc}
+              src={image_url}
               alt={title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               fallbackSrc="/placeholder.svg"
@@ -110,20 +63,13 @@ const UnifiedCard = ({
           )}
         </div>
 
-        <div
-          className="absolute top-2 sm:top-3 right-2 sm:right-3"
-          onClick={(e) => e.stopPropagation()} // ✨ prevents the modal from opening when clicking the bookmark
-        >
         {/* Bookmark Toggle - Always visible in top-right */}
-
-          {!isAdmin == true && (<BookmarkToggle
-            itemType={itemType}
-            title={title}
-            tags={tags}
-            className="absolute top-2 sm:top-3 right-2 sm:right-3"
-          />)}
-        
-      </div>
+        <BookmarkToggle
+          itemType={itemType}
+          title={title}
+          tags={tags}
+          className="absolute top-2 sm:top-3 right-2 sm:right-3"
+        />
       </div>
 
       <div className="p-4 sm:p-6">
@@ -131,7 +77,7 @@ const UnifiedCard = ({
         <h3 className="text-base sm:text-lg font-semibold text-card-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
           {title}
         </h3>
-        
+
         {/* Description */}
         {description && (
           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-3 sm:mb-4 line-clamp-2">
@@ -157,10 +103,10 @@ const UnifiedCard = ({
               </span>
             )}
           </div>
-          
+
           {/* Category Badge - repositioned to bottom-right */}
           {type && (
-            <Badge 
+            <Badge
               className="ml-2 bg-primary text-primary-foreground font-semibold text-xs capitalize"
             >
               {type}
@@ -168,11 +114,6 @@ const UnifiedCard = ({
           )}
         </div>
       </div>
-      {isAdmin && (<div className="flex justify-around border p-4">
-        <button onClick={() => onAccept(title)}>Accept</button>
-        <button onClick={() => onReject(title)}>Reject</button>
-      </div>)}
-      
     </Card>
   );
 };
