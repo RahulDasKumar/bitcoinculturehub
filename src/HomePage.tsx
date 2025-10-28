@@ -50,7 +50,7 @@ export default function HomePage() {
                             </h1>
 
                             <p className="text-xl text-white leading-relaxed max-w-lg drop-shadow-sm">
-                            A new frontier of learning and belonging. Explore crypto through culture, knowledge, and connection.
+                            A new frontier of learning and belonging. Explore Bitcoin through culture, knowledge, and connection.
 
                             </p>
 
