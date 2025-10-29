@@ -16,7 +16,8 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const json = await res.json();
-        
+        console.log(json)
+        console.log('printing')
         const dataArray = Array.isArray(json) ? json : json.data || [];
 
         const filteredData = dataArray.filter(entry => entry.accepted === true);

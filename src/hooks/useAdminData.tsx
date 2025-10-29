@@ -21,10 +21,10 @@ export const useAdminData = (skip: number = 0, limit: number = 10) => {
 
         const filteredData = dataArray.filter(entry => entry.accepted === false);
         console.log(filteredData)
+        console.log('after filtering ^')
         filteredData.forEach(element => {
           element.image_url = element.image_url?.replace(/\/\/explore/g, "/explore") || element.image_url;
         });
-        console.log(filteredData);
         console.log(filteredData);
 
         setData(filteredData);

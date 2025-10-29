@@ -4,7 +4,7 @@ import DynamicImage from "@/components/DynamicImage";
 import BookmarkToggle from "@/components/BookmarkToggle";
 import BitcoinUpvote from "@/components/BitcoinUpvote";
 import { toast } from "sonner";
-
+const BACKEND_URL = "https://bch-backend-7vjs.onrender.com"
 interface UnifiedCardProps {
   title: string;
   description?: string;
@@ -48,7 +48,7 @@ const UnifiedCard = ({
   const onAccept = async (title)=>{
     console.log('accept')
     console.log(title)
-    const response = await fetch(`https://bch-backend-7vjs.onrender.com/explore/accept-by-title/${encodeURIComponent(title)}`, {
+    const response = await fetch(`${BACKEND_URL}/explore/accept-by-title/${encodeURIComponent(title)}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const UnifiedCard = ({
 
   const onReject =async (title)=>{
     console.log('reject')
-    const response = await fetch(`https://bch-backend-7vjs.onrender.com/explore/delete-by-title/${encodeURIComponent(title)}`,{
+    const response = await fetch(`${BACKEND_URL}/explore/delete-by-title/${encodeURIComponent(title)}`,{
       method:"DELETE",
       headers:{
         "Content-Type": "application/json",
