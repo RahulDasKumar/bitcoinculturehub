@@ -54,15 +54,16 @@ const SubmitContent = () => {
       data.append("type", contentType);
       data.append("tags", formData.tags);
       if (file) data.append("file", file);
-      console.log("📤 Submitting to:", `${import.meta.env.VITE_API_URL}/explore`);
+      console.log("📤 Submitting to:", `https://bch-backend-7vjs.onrender.com/explore`);
       console.log("📦 FormData:", [...data.entries()]);
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/explore`, {
+      const response = await fetch(`https://bch-backend-7vjs.onrender.com/explore`, {
         method: "POST",
         body: data,
       });
-
+      console.log(response,'WOOOOOOOOOOOO')
       if (response.ok) {
+        console.log('added to database')
         toast.success("🎉 Content submitted successfully!");
         setTimeout(() => navigate("/explore"), 800);
       } else {

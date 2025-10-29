@@ -8,7 +8,7 @@ import {
 import { User } from "lucide-react";
 import useAuthStore from "@/hooks/use-auth";
 
-const ADMIN_EMAIL = "dasrkd3@gmail.com";
+const ADMIN_EMAIL = "dasrkd3@gmail.com"; 
 
 const Header = () => {
   const location = useLocation();
@@ -59,8 +59,8 @@ const Header = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about" || location.pathname === "/manifesto"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
                     }`}
                 >
                   About
@@ -78,11 +78,11 @@ const Header = () => {
               <Link
                 to="/about"
                 className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                   }`}
               >
-                About
+                About Now
               </Link>
             )}
 
@@ -90,8 +90,8 @@ const Header = () => {
             <Link
               to="/explore"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/explore"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
             >
               Explore
@@ -102,8 +102,8 @@ const Header = () => {
               <Link
                 to="/admin"
                 className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/admin"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                   }`}
               >
                 Admin
@@ -116,8 +116,8 @@ const Header = () => {
                 <button
                   onClick={handleProfileClick}
                   className={`p-2 rounded-full transition ${isLoggedIn
-                    ? "bg-primary text-primary-foreground hover:opacity-90"
-                    : "hover:bg-accent"
+                      ? "bg-primary text-primary-foreground hover:opacity-90"
+                      : "hover:bg-accent"
                     }`}
                   title={isLoggedIn ? "Profile" : "Login"}
                 >

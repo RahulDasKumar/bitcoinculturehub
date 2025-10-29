@@ -1,2 +1,1 @@
-export const API_BASE_URL =
-import.meta.env.VITE_API_BASE_URL || "https://bch-backend-7vjs.onrender.com";
+export const API_BASE_URL = "https://bch-backend-7vjs.onrender.com";

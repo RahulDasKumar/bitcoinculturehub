@@ -41,7 +41,7 @@ const Login: React.FC = () => {
                     password: pw,
                 }),
             });
-
+            
             if (!res.ok) {
                 const errorData = await res.json();
                 setMessage(`Error: ${errorData.detail || "Login failed"}`);
@@ -59,7 +59,7 @@ const Login: React.FC = () => {
             setMessage(`Login successful!`);
             navigate("/");
         } catch (err) {
-            console.error(err);
+            console.error(err.message);
             setMessage("Network error. Try again.");
         }
     };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useExploreData = (skip: number = 0, limit: number = 10) => {
+export const useAdminData = (skip: number = 0, limit: number = 10) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,17 +14,18 @@ export const useExploreData = (skip: number = 0, limit: number = 10) => {
 
         const res = await fetch(`${apiUrl}/explore`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
+        console.log(res)
         const json = await res.json();
         console.log(json)
-        console.log('printing')
         const dataArray = Array.isArray(json) ? json : json.data || [];
 
-        const filteredData = dataArray.filter(entry => entry.accepted === true);
+        const filteredData = dataArray.filter(entry => entry.accepted === false);
+        console.log(filteredData)
+        console.log('after filtering ^')
         filteredData.forEach(element => {
           element.image_url = element.image_url?.replace(/\/\/explore/g, "/explore") || element.image_url;
         });
-        console.log(filteredData)
+        console.log(filteredData);
 
         setData(filteredData);
 
