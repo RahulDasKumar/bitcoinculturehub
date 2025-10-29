@@ -64,6 +64,7 @@ const ExplorePage = () => {
   }, [selectedCategory, allItems, searchTerm]);
 
   // Visible items to render (no pagination yet)
+  
   const visibleItems = filteredData;
 
   // ------------------------------
