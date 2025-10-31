@@ -18,6 +18,9 @@ import ExplorePage from "./pages/explore/Explore";
 import Profile from "./pages/Profile";
 import SubmitContent from "./pages/explore/SubmitContent";
 import AdminPage from "./pages/explore/Admin";
+import PressReleasePage from "./pages/Press-Release/studentportal";
+
+console.log("✅ App routes loaded");
 
 const queryClient = new QueryClient();
 
@@ -40,6 +43,7 @@ const App = () => (
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />
           <Route path="/admin" element={<AdminPage/>}/>
+          <Route path="/press-release" element={<PressReleasePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
