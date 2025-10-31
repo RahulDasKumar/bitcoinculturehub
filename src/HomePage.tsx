@@ -20,6 +20,8 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import PressRelease from "./components/PressRelease"
+
 
 export default function HomePage() {
     const [showPulse, setShowPulse] = useState(false)
@@ -310,6 +312,9 @@ export default function HomePage() {
                     </div>
                 </div> */}
             </div>
+
+            <PressRelease />
+            <div className="bg-slate-900 py-12 lg:py-14"></div>
 
             {/* Houses, Archetypes, Citadels Section */}
             <div className="bg-white py-20 lg:py-24">
