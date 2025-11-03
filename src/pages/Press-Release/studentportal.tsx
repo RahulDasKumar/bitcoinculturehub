@@ -76,7 +76,7 @@ export default function PressReleasePage() {
               className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-full text-base font-semibold shadow-md transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
               onClick={() =>
                 window.open(
-                  "https://bsnsummit.vercel.app/"
+                  "https://www.bitcoinstudentsnetwork.org"
                 )
               }
             >
