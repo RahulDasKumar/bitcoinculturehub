@@ -19,6 +19,8 @@ import Profile from "./pages/Profile";
 import SubmitContent from "./pages/explore/SubmitContent";
 import AdminPage from "./pages/explore/Admin";
 import PressReleasePage from "./pages/Press-Release/studentportal";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 console.log("✅ App routes loaded");
 
@@ -45,6 +47,9 @@ const App = () => (
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/press-release" element={<PressReleasePage />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
