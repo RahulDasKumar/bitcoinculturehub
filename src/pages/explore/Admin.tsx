@@ -33,8 +33,14 @@ const AdminPage = () => {
     const limit = 10;
 
 
-    const { data: allItems, loading, error } = useAdminData(skip, limit);
+const { data, loading, error } = useAdminData(skip, limit);
+const [allItems, setAllItems] = useState<ExploreItem[]>([]);
 
+useEffect(() => {
+  if (data) {
+    setAllItems(data);
+  }
+}, [data]);
 
     useEffect(() => {
         // If user is not logged in or not admin
@@ -95,6 +101,16 @@ const AdminPage = () => {
         setIsLoadingMore(false);
     };
 
+    //Handler to remove a card
+    const handleRejectSuccess = (title: string) => {
+  setAllItems((prev) => prev.filter((item) => item.title !== title));
+};
+
+    //Handler to accept card
+const handleAcceptSuccess = (title: string) => {
+  setAllItems((prev) => prev.filter((item) => item.title !== title));
+};
+
 
     if (loading && allItems.length === 0) {
         return (
@@ -151,6 +167,9 @@ const AdminPage = () => {
                                         itemId={item.realId}
                                         itemType={item.type}
                                         isAdmin={true}
+                                         onRejectSuccess={handleRejectSuccess}
+                                           onAcceptSuccess={handleAcceptSuccess}     // ⬅ ADD THIS
+
                                     />
                                 ))}
                             </div>
