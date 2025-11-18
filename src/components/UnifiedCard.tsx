@@ -14,7 +14,11 @@ interface UnifiedCardProps {
   onClick?: () => void; // for modal trigger
   itemId: string; // for bookmarking
   itemType: string; // for bookmarking
-  isAdmin?:boolean
+  isAdmin?:boolean;
+  onRejectSuccess?: (title: string) => void; // NEW
+  onAcceptSuccess?: (title: string) => void;   // ⬅ NEW
+
+
 }
 
 const UnifiedCard = ({ 
@@ -27,6 +31,8 @@ const UnifiedCard = ({
   itemId,
   itemType,
   isAdmin = false,
+  onRejectSuccess,
+  onAcceptSuccess,
 }: UnifiedCardProps) => {
   const handleClick = () => {
     if (onClick) {
@@ -45,38 +51,46 @@ const UnifiedCard = ({
       ? image_url
       : `http://localhost:8000${image_url}`
     : "/placeholder.svg";
-  const onAccept = async (title)=>{
-    console.log('accept')
-    console.log(title)
-    const response = await fetch(`${BACKEND_URL}/explore/accept-by-title/${encodeURIComponent(title)}`, {
+  const onAccept = async (title: string) => {
+  const response = await fetch(
+    `${BACKEND_URL}/explore/accept-by-title/${encodeURIComponent(title)}`,
+    {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      }},)
-    if (response.ok){
-      toast("Artifact Accepted")
+      headers: { "Content-Type": "application/json" },
     }
-    else{
-      toast(response.statusText)
-    }
-  }
+  );
 
-  const onReject =async (title)=>{
-    console.log('reject')
-    const response = await fetch(`${BACKEND_URL}/explore/delete-by-title/${encodeURIComponent(title)}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type": "application/json",
-      }
-    })
-    if (response.ok){
-      toast("Artifac Deleted")
-    }
-    else{
-      toast(response.statusText)
-    }
+  if (response.ok) {
+    toast("Artifact Accepted");
 
+    // 🔥 Remove card immediately
+    if (onAcceptSuccess) {
+      onAcceptSuccess(title);
+    }
+  } else {
+    toast(response.statusText);
   }
+};
+
+
+const onReject = async (title: string) => {
+  const response = await fetch(`${BACKEND_URL}/explore/delete-by-title/${encodeURIComponent(title)}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    toast("Artifact Deleted");
+
+    // 🔥 Notify AdminPage to remove the card immediately
+    if (onRejectSuccess) {
+      onRejectSuccess(title);
+    }
+  } else {
+    toast(response.statusText);
+  }
+};
+
   return (
     <Card 
       className={`group ${onClick ? 'cursor-pointer' : ''} bg-card border-border hover:border-primary/50 transition-all duration-300 overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`}
