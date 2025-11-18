@@ -168,7 +168,7 @@ const SubmitContent = () => {
 
               {/* File Upload */}
               <div className="space-y-2">
-                <Label htmlFor="file">Upload Image (optional)</Label>
+                <Label htmlFor="file">Upload Image</Label>
                 <Input
                   id="file"
                   type="file"
