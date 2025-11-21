@@ -172,7 +172,7 @@ const ExplorePage = () => {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
                 {visibleItems.map((item) => {
-                  // 🟡 Add your log here — this runs before rendering each card
+           
                   console.log("🟡 Card item image:", item.image_url, "→", `${API_BASE_URL}${item.image_url}`);
 
                   return (
@@ -181,7 +181,7 @@ const ExplorePage = () => {
                       title={item.title}
                       description={item.description}
                       tags={item.tags || []}
-                      image_url={`${API_BASE_URL}${item.image_url}`}  // ✅ full URL to backend
+                      image_url={`${API_BASE_URL}${item.image_url}`} 
                       type={item.category}
                       onClick={() => handleCardClick(item)}
                       itemId={item.realId}
