@@ -18,9 +18,9 @@ import ExplorePage from "./pages/explore/Explore";
 import Profile from "./pages/Profile";
 import SubmitContent from "./pages/explore/SubmitContent";
 import AdminPage from "./pages/explore/Admin";
-import PressReleasePage from "./pages/Press-Release/studentportal";
+import OpportunityEngine from "./components/Opportunity-Engine/OpportunityEngine";
+import SubmitOpportunity from "./components/Opportunity-Engine/SubmitOpportunity";
 
-console.log("✅ App routes loaded");
 
 const queryClient = new QueryClient();
 
@@ -42,6 +42,8 @@ const App = () => (
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />
+          <Route path="/opportunity" element={<OpportunityEngine/>}></Route>
+          <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/press-release" element={<PressReleasePage />} />
           <Route path="*" element={<NotFound />} />

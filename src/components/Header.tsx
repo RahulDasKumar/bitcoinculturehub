@@ -95,8 +95,18 @@ const Header = () => {
                 }`}
             >
               Explore
-            </Link>
 
+            </Link>
+            <Link
+              to="/opportunity"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Opportunity Engine
+
+            </Link>
             {/* Admin Link (only for admin) */}
             {isAdmin && (
               <Link
