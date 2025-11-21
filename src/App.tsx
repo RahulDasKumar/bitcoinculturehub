@@ -20,7 +20,7 @@ import SubmitContent from "./pages/explore/SubmitContent";
 import AdminPage from "./pages/explore/Admin";
 import OpportunityEngine from "./components/Opportunity-Engine/OpportunityEngine";
 import SubmitOpportunity from "./components/Opportunity-Engine/SubmitOpportunity";
-
+import PressReleasePage from "./components/PressRelease"
 
 const queryClient = new QueryClient();
 
