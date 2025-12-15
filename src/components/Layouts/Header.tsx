@@ -109,7 +109,15 @@ const Header = () => {
                 Admin
               </Link>
             )}
-
+            <Link
+              to="/awards"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/explore"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Awards
+            </Link>
             {/* 👤 Profile / Login */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

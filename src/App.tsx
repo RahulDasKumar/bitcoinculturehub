@@ -21,6 +21,7 @@ import AdminPage from "./pages/explore/Admin";
 import OpportunityEngine from "./components/Opportunity-Engine/OpportunityEngine";
 import SubmitOpportunity from "./components/Opportunity-Engine/SubmitOpportunity";
 import PressReleasePage from "./components/PressRelease"
+import AwardPage from "./components/AwardShow/AwardPage";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/submit-content" element={<SubmitContent />} />
           <Route path="/opportunity" element={<OpportunityEngine/>}></Route>
           <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
+          <Route path="/awards" element={<AwardPage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/press-release" element={<PressReleasePage />} />
           <Route path="*" element={<NotFound />} />
