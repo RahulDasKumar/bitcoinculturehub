@@ -31,7 +31,8 @@ import { AdminDashboard } from "./components/Admin/Dashboard";
 import OpportunityEngineBeta from "./components/Opportunity-Engine-v2/OpportunityEngine";
 import EventPage2 from "./components/Events-Page-Beta/Events";
 import AboutUs from "./components/About-Us-Beta/Manifesto";
-import AwardPage from "./components/Awards-Page/AwardPage";
+import AwardPage from "./components/AwardShow/AwardPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,6 +54,7 @@ const App = () => (
           <Route path="/submit-content" element={<SubmitContent />} />
           <Route path="/opportunity" element={<OpportunityEngineBeta />}></Route>
           <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
+          <Route path="/awards" element={<AwardPage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/events" element={<EventPage2/>}></Route>
           <Route path="/forum" element={<Forum/>}></Route>
