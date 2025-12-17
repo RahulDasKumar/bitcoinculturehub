@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import BookmarkButton from "../../components/BookmarkButton";
 import { FEATURE_EXPLORE_MODAL_NAV } from "@/lib/features";
-import { API_BASE_URL } from "@/config";
+import { API_URL } from "@/config";
 
 interface ModalItem {
   id?: string;

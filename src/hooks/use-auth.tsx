@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { ProfileInformation } from "../components/types";
 
 export interface User {
     username: string;
@@ -7,34 +8,53 @@ export interface User {
 }
 
 interface AuthState {
-    user: User | null;
+    user: Partial<ProfileInformation> | null;
     isLoggedIn: boolean;
-    login: (userData: User) => void;
+    token: string;
+    login: (ProfileInformation: Partial<ProfileInformation>, token: string) => void;
     logout: () => void;
-    updateProfile: (updates: Partial<User>) => void;
+    updateProfile: (updates: Partial<ProfileInformation>) => void;
 }
-
 
 const useAuthStore = create<AuthState>()(
     persist(
         (set, get) => ({
             user: null,
             isLoggedIn: false,
+            token: null,
 
-            login: (userData) => {
-                set({ user: userData, isLoggedIn: true });
+            login: (userData, token) => {
+                set({ user: userData, isLoggedIn: true, token: token });
             },
 
             logout: () => {
                 set({ user: null, isLoggedIn: false });
             },
 
-            updateProfile: (updates) => {
+            updateProfile: async (updates) => {
                 const currentUser = get().user;
-                if (currentUser) {
+                const token = get().token;
+                console.log(currentUser)
+                console.log(token)
+                if (currentUser && token) {
+
                     const updatedUser = { ...currentUser, ...updates };
+                    const update = await fetch('http://127.0.0.1:8000/profile', {
+                        method: 'PATCH',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify(
+                            updates
+                        )
+                    });
+
+                    console.log(updatedUser)
                     set({ user: updatedUser });
+
                 }
+
             },
         }),
         {
@@ -42,6 +62,7 @@ const useAuthStore = create<AuthState>()(
             partialize: (state) => ({
                 user: state.user,
                 isLoggedIn: state.isLoggedIn,
+                token: state.token
             }),
         }
     )

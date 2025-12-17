@@ -96,6 +96,16 @@ const Header = () => {
             >
               Explore
             </Link>
+            <Link
+              to="/organization-auth"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Org
+            </Link>
+
 
             {/* Admin Link (only for admin) */}
             {isAdmin && (
@@ -109,6 +119,17 @@ const Header = () => {
                 Admin
               </Link>
             )}
+            
+            <Link
+              to="/events"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Org
+            </Link>
+
 
             {/* 👤 Profile / Login */}
             <DropdownMenu>

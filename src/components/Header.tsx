@@ -54,27 +54,7 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="flex items-center gap-1">
-            {/* About conditional behavior */}
-            {location.pathname === "/about" ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about" || location.pathname === "/manifesto"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                >
-                  About
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link to="/about">About</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/manifesto">Manifesto</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
+
               <Link
                 to="/about"
                 className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about"
@@ -84,10 +64,10 @@ const Header = () => {
               >
                 About
               </Link>
-            )}
+            
 
             {/* Explore */}
-            <Link
+            {/* <Link
               to="/explore"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/explore"
                 ? "bg-primary text-primary-foreground"
@@ -96,8 +76,8 @@ const Header = () => {
             >
               Explore
 
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               to="/opportunity"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
                 ? "bg-primary text-primary-foreground"
@@ -106,7 +86,37 @@ const Header = () => {
             >
               Opportunity Engine
 
+            </Link> */}
+            <Link
+              to="/events"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Events
+
             </Link>
+
+            <Link
+              to="/awards"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/awards"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Awards
+
+            </Link>
+            {/* <Link
+              to="/organization-auth"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Org
+            </Link> */}
             {/* Admin Link (only for admin) */}
             {isAdmin && (
               <Link
