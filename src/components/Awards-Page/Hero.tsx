@@ -70,7 +70,7 @@ export const Hero = ({ onStartVoting, onNominate }: HeroProps) => {
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
 
   return (
-    <section className="bg-accent text-white relative">
+    <section className="bg-black text-white relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide) => (

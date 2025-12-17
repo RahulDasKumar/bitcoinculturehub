@@ -44,7 +44,7 @@ const AwardsPage = () => {
             <ClassOf2025 />
 
             {/* Proof of Work Awards Section Divider */}
-            <section className="bg-accent text-white py-10 md:py-12">
+            <section className="bg-black text-white relative text-white py-10 md:py-12">
                 <div className="container mx-auto max-w-7xl px-4">
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.85] tracking-tighter mb-1">
                         PROOF OF WORK AWARDS*
