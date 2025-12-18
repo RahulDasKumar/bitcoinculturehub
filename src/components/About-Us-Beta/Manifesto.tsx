@@ -27,17 +27,17 @@ const LEADERS: Leader[] = [
     {
         name: "Kyle Knight",
         role: "Founder CEO",
-        image: "/images/TeamPhotos/kyle.png"
+        image: "images/TeamPhotos/kyle.png"
     },
     {
         name: "Sean Mihlich",
         role: "Head of Business Development",
-        image: "/images/TeamPhotos/sean.jpg"
+        image: "images/TeamPhotos/sean.jpg"
     },
     {
         name: "Rahul Das",
         role: "Head of Engineering",
-        image: "/images/TeamPhotos/rahul.jpg"
+        image: "images/TeamPhotos/rahul.jpg"
     }
 ];
 

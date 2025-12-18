@@ -4,6 +4,7 @@ import { Search, ChevronDown, Calendar, MapPin, Users, Info, ArrowRight, Externa
 import { CONFERENCES, MEETUPS, VIRTUAL_EVENTS } from './data';
 import { Event } from './types';
 import Header from '../Header';
+import FeaturedEventBanner from './FeaturedEventBanner';
 
 const EventPage2: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -198,6 +199,8 @@ const EventPage2: React.FC = () => {
                         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{plannedMonths.length}/12 months</span>
                     </div>
                 </div>
+
+                <FeaturedEventBanner/>
 
                 {/* Weekly Section */}
                 {/* <section className="mb-20">

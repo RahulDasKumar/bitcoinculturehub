@@ -4,7 +4,7 @@ import { CategoryGrid } from "@/components/AwardShow/CategoryGrid";
 import { NominationModal } from "@/components/AwardShow/NominationModal";
 import { KarmaDrawer } from "@/components/AwardShow/KarmaDrawer";
 import { HowItWorks } from "@/components/AwardShow/HowItWorks";
-import { ClassOf2025 } from "@/components/AwardShow/ClassOf2025";
+import ClassOf2025  from "@/components/AwardShow/ClassOf2025";
 import { NomineesModal } from "@/components/AwardShow/NomineesModal";
 import { Button } from "@/components/ui/button";
 import Header from "../Layouts/Header";
@@ -43,7 +43,7 @@ const AwardPage = () => {
             <ClassOf2025 />
 
             {/* Proof of Work Awards Section Divider */}
-            <section className="bg-accent text-white py-10 md:py-12">
+            <section className="bg-black text-white py-10 md:py-12">
                 <div className="container mx-auto max-w-7xl px-4">
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-display leading-[0.85] tracking-tighter mb-1">
                         PROOF OF WORK AWARDS*
