@@ -5,43 +5,105 @@ interface Inductee {
   name: string;
   title: string;
   house: string;
-  image?: string;
+  image: string;
 }
 
 const inductees: Inductee[] = [
-  { id: "1", name: "Satoshi Nakamoto", title: "The Creator", house: "House of Signal" },
-  { id: "2", name: "Hal Finney", title: "The Pioneer", house: "House of Builders" },
-  { id: "3", name: "Nick Szabo", title: "The Visionary", house: "House of Signal" },
-  { id: "4", name: "Ross Ulbricht", title: "The Liberator", house: "House of Freedom" },
-  { id: "5", name: "Laszlo Hanyecz", title: "The Pioneer", house: "House of Builders" },
-  { id: "6", name: "Adam Back", title: "The Innovator", house: "House of Builders" },
-  { id: "7", name: "Jack Dorsey", title: "The Amplifier", house: "House of Signal" },
-  { id: "8", name: "Wei Dai", title: "The Architect", house: "House of Signal" },
-  { id: "9", name: "David Chaum", title: "The Godfather", house: "House of Signal" },
-  { id: "10", name: "Andreas Antonopoulos", title: "The Educator", house: "House of Signal" },
+  {
+    id: "1",
+    name: "Satoshi Nakamoto",
+    title: "The Creator",
+    house: "House of Signal",
+    image: "/images/POW-Photos/satoshinakamoto.png",
+  },
+  {
+    id: "2",
+    name: "Hal Finney",
+    title: "The Pioneer",
+    house: "House of Builders",
+    image: "/images/POW-Photos/halfinney.png",
+  },
+  {
+    id: "3",
+    name: "Nick Szabo",
+    title: "The Visionary",
+    house: "House of Signal",
+    image: "/images/POW-Photos/NickSzabo.png",
+  },
+  {
+    id: "4",
+    name: "Ross Ulbricht",
+    title: "The Liberator",
+    house: "House of Freedom",
+    image: "/images/POW-Photos/rossulbricht.png",
+  },
+  {
+    id: "5",
+    name: "Laszlo Hanyecz",
+    title: "The Pioneer",
+    house: "House of Builders",
+    image: "/images/POW-Photos/laszloh.png",
+  },
+  {
+    id: "6",
+    name: "Adam Back",
+    title: "The Innovator",
+    house: "House of Builders",
+    image: "/images/POW-Photos/adamback.png",
+  },
+  {
+    id: "7",
+    name: "Jack Dorsey",
+    title: "The Amplifier",
+    house: "House of Signal",
+    image: "/images/POW-Photos/jackdorsey.png",
+  },
+  {
+    id: "8",
+    name: "Wei Dai",
+    title: "The Architect",
+    house: "House of Signal",
+    image: "/images/POW-Photos/weidei.png",
+  },
+  {
+    id: "9",
+    name: "David Chaum",
+    title: "The Godfather",
+    house: "House of Signal",
+    image: "/images/POW-Photos/davidchaum.png",
+  },
+  {
+    id: "10",
+    name: "Andreas Antonopoulos",
+    title: "The Educator",
+    house: "House of Signal",
+    image: "/images/POW-Photos/andreas.png",
+  },
 ];
 
-export const ClassOf2025 = () => {
+export default function ClassOf2025Page() {
   return (
-    <section className="bg-background py-16 md:py-24">
+    <section className="bg-background py-20">
       <div className="container mx-auto max-w-7xl px-4">
-        {/* Intro Text */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h1 className="text-4xl md:text-6xl font-display uppercase tracking-tight mb-6">
+            Bitcoin Culture Hall of Fame
+          </h1>
           <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-            The Bitcoin Culture Hall of Fame celebrates the visionaries, builders, and pioneers whose proof-of-work laid the foundation for a decentralized future. Each inductee represents an indelible contribution to Bitcoin's technology, philosophy, or cultural impact.
+            The Bitcoin Culture Hall of Fame honors the visionaries, builders, and pioneers whose proof-of-work laid the foundation for a decentralized future.
           </p>
         </div>
 
-        {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-display uppercase tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-display uppercase tracking-tight">
             Class of 2025
           </h2>
         </div>
 
-        <div className="border-t border-border mb-12" />
+        <div className="border-t border-border mb-14" />
 
-        {/* Inductee Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {inductees.map((inductee, index) => (
             <motion.div
@@ -52,16 +114,15 @@ export const ClassOf2025 = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              {/* Portrait Placeholder */}
-              <div className="aspect-[3/4] rounded-lg bg-gradient-to-b from-primary/20 to-primary/5 border-2 border-primary/30 mb-3 overflow-hidden relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
-                    <span className="text-2xl font-display text-primary/60">
-                      {inductee.name.charAt(0)}
-                    </span>
-                  </div>
-                </div>
-                {/* Decorative frame corners */}
+              {/* Portrait */}
+              <div className="relative aspect-[3/4] rounded-lg overflow-hidden border-2 border-primary/30 mb-3 bg-black">
+                <img
+                  src={inductee.image}
+                  alt={inductee.name}
+                  className="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
+
+                {/* Decorative corners */}
                 <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary/40" />
                 <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary/40" />
                 <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary/40" />
@@ -84,13 +145,14 @@ export const ClassOf2025 = () => {
           ))}
         </div>
 
-        {/* 2026 Announcement */}
-        <div className="text-center mt-12">
+        {/* Footer */}
+        <div className="text-center mt-20">
           <p className="text-sm uppercase tracking-wider text-muted-foreground">
-            Nominations for Class of 2026 Open on January 1st
+            Nominations for the Class of 2026 open January 1st
           </p>
         </div>
       </div>
     </section>
   );
-};
+}
+

@@ -8,7 +8,7 @@ import {
 import { User } from "lucide-react";
 import useAuthStore from "@/hooks/use-auth";
 
-const ADMIN_EMAIL = "dasrkd3@gmail.com"; 
+const ADMIN_EMAIL = "dasrkd3@gmail.com";
 
 const Header = () => {
   const location = useLocation();
@@ -54,78 +54,90 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="flex items-center gap-1">
-            {/* About conditional behavior */}
-            {location.pathname === "/about" ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about" || location.pathname === "/manifesto"
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                    }`}
-                >
-                  About
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link to="/about">About</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/manifesto">Manifesto</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
+
               <Link
                 to="/about"
                 className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                  }`}
-              >
-                About Now
-              </Link>
-            )}
-
-            {/* Explore */}
-            <Link
-              to="/explore"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/explore"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                }`}
-            >
-              Explore
-            </Link>
-
-            {/* Admin Link (only for admin) */}
-            {isAdmin && (
-              <Link
-                to="/admin"
-                className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/admin"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                   }`}
               >
-                Admin
+                About
               </Link>
-            )}
-            <Link
-              to="/awards"
+            
+
+            {/* Explore */}
+            {/* <Link
+              to="/explore"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/explore"
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
             >
-              Awards
+              Explore
+
+            </Link> */}
+            {/* <Link
+              to="/opportunity"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Opportunity Engine
+
+            </Link> */}
+            <Link
+              to="/events"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Events
+
             </Link>
+
+            <Link
+              to="/awards"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/awards"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Awards
+
+            </Link>
+            {/* <Link
+              to="/organization-auth"
+              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                }`}
+            >
+              Org
+            </Link> */}
+            {/* Admin Link (only for admin) */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/admin"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  }`}
+              >
+                Admin
+              </Link>
+            )}
+
             {/* 👤 Profile / Login */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
                   onClick={handleProfileClick}
                   className={`p-2 rounded-full transition ${isLoggedIn
-                      ? "bg-primary text-primary-foreground hover:opacity-90"
-                      : "hover:bg-accent"
+                    ? "bg-primary text-primary-foreground hover:opacity-90"
+                    : "hover:bg-accent"
                     }`}
                   title={isLoggedIn ? "Profile" : "Login"}
                 >
