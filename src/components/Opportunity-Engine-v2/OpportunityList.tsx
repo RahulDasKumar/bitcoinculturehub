@@ -10,26 +10,30 @@ interface ListProps {
 
 const OpportunityList = ({ opportunities, applicants }: ListProps) => {
     const { applyToOpportunity } = useOrganizationStore();
-    const { token, user } = useAuthStore();
+    const { token, user, isLoggedIn } = useAuthStore();
 
     // Build fast lookup for applied opportunities
     const appliedOpportunityIds = new Set(
         applicants.map(app => String(app.opportunity_id))
     );
 
-    const baseApplication: ApplicantInformation = {
-        username: user.username,
-        avatar: user.avatar,
-        location: user.location,
-        email: user.email,
-        opportunity_id: '',
-        status: '',
-        appliedAt: '',
-        org_id: ''
-    };
+    // Only create baseApplication if logged in
+    const baseApplication: ApplicantInformation | null = isLoggedIn
+        ? {
+            username: user.username,
+            avatar: user.avatar,
+            location: user.location,
+            email: user.email,
+            opportunity_id: '',
+            status: '',
+            appliedAt: '',
+            org_id: ''
+        }
+        : null;
 
     const handleApply = (oppId: string, orgId: string) => {
-        console.log('apply button being clicked')
+        if (!baseApplication) return; // safety check
+
         const applicationWithOpp: ApplicantInformation = {
             ...baseApplication,
             opportunity_id: oppId,
@@ -97,18 +101,22 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
 
                             <div className="w-full md:w-auto">
                                 <button
-                                    disabled={hasApplied}
+                                    disabled={hasApplied || !isLoggedIn} // disable if applied or not logged in
                                     onClick={() =>
-                                        !hasApplied && handleApply(opp.id, opp.org_id)
+                                        !hasApplied && isLoggedIn && handleApply(opp.id, opp.org_id)
                                     }
                                     className={`font-bold uppercase text-xs py-2 px-6 tracking-widest transition-colors w-full md:w-auto
-                                        ${hasApplied
+                                        ${hasApplied || !isLoggedIn
                                             ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                             : 'bg-black hover:bg-gray-800 text-white'
                                         }
                                     `}
                                 >
-                                    {hasApplied ? 'Applied' : 'Claim'}
+                                    {hasApplied
+                                        ? 'Applied'
+                                        : !isLoggedIn
+                                            ? 'Login to Claim'
+                                            : 'Claim'}
                                 </button>
                             </div>
                         </div>
