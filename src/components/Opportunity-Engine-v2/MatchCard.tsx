@@ -7,29 +7,48 @@ import { useOrganizationStore } from '@/hooks/use-organization';
 interface MatchCardProps {
   opportunity: Opportunity;
   variant?: 'grid' | 'list';
+  applicants: ApplicantInformation[];
 }
 
-const MatchCard: React.FC<MatchCardProps> = ({ opportunity, variant = 'grid' }) => {
+const MatchCard: React.FC<MatchCardProps> = ({ opportunity, applicants,variant = 'grid' }) => {
   const isGrid = variant === 'grid';
   const { applyToOpportunity } = useOrganizationStore()
   const { token, user } = useAuthStore()
-  const application: ApplicantInformation = {
+
+  const baseApplication: ApplicantInformation = {
     username: user.username,
     avatar: user.avatar,
     location: user.location,
     email: user.email,
-    opp_id: user.id,
+    opportunity_id: '',
     status: '',
-    appliedAt: ''
+    appliedAt: '',
+    org_id: ''
   };
 
-  
+  const handleApply = (oppId: string, orgId: string) => {
+    console.log('apply button being clicked')
+    const applicationWithOpp: ApplicantInformation = {
+      ...baseApplication,
+      opportunity_id: oppId,
+      status: 'applied',
+      org_id: orgId,
+      appliedAt: new Date().toISOString()
+    };
+
+    applyToOpportunity(token, applicationWithOpp);
+  };
+  let hasApplied = false
+  applicants.forEach(app=>{
+    if(app.opportunity_id == opportunity.id){
+      hasApplied = true
+    }
+  })
   // Dynamic border color based on match percentage or special status
   // const borderColor = opportunity.matchPercentage > 90 ? 'border-[#FF6B00]' : 'border-gray-200';
   // const borderWidth = opportunity.matchPercentage > 90 ? 'border-2' : 'border';
   const borderColor = 'border-gray-200';
   const borderWidth = 'border-2';
-
   return (
     <div className={`bg-white ${borderWidth} ${borderColor} p-5 flex flex-col h-full hover:shadow-lg transition-shadow duration-200`}>
       {/* Header tags */}
@@ -59,7 +78,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ opportunity, variant = 'grid' }) 
         {opportunity.title}
       </h3>
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">
-        {opportunity.title}
+        {opportunity.org_name}
       </p>
 
       {/* Description Snippet (Simulated) */}
@@ -74,7 +93,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ opportunity, variant = 'grid' }) 
       <div className="mt-auto space-y-2 mb-6">
         <div className="flex items-center text-xs font-semibold text-gray-700 uppercase">
             <Clock className="w-3.5 h-3.5 mr-2 text-gray-400" />
-            {opportunity.timeCommitment}
+          {opportunity.time_commitment}
         </div>
         <div className="flex items-center text-xs font-semibold text-gray-700 uppercase">
             <MapPin className="w-3.5 h-3.5 mr-2 text-gray-400" />
@@ -90,11 +109,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ opportunity, variant = 'grid' }) 
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1 mb-6">
-          {opportunity.categories.map(tag => (
-              <span key={tag} className="border border-gray-200 text-gray-500 text-[10px] font-bold uppercase px-1.5 py-0.5">
-                  {tag}
-              </span>
-          ))}
+   
       </div>
 
       {/* Status Indicators */}
@@ -128,9 +143,22 @@ const MatchCard: React.FC<MatchCardProps> = ({ opportunity, variant = 'grid' }) 
         )} */}
       </div>
 
-      <button className="w-full bg-black hover:bg-gray-800 text-white font-bold uppercase text-xs py-3 tracking-widest transition-colors">
-        Claim This
-      </button>
+      <div className="w-full md:w-auto">
+        <button
+          disabled={hasApplied}
+          onClick={() =>
+            !hasApplied && handleApply(opportunity.id, opportunity.org_id)
+          }
+          className={`font-bold uppercase text-xs py-2 px-6 tracking-widest transition-colors w-full md:w-auto
+                                        ${hasApplied
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-black hover:bg-gray-800 text-white'
+            }
+                                    `}
+        >
+          {hasApplied ? 'Applied' : 'Claim'}
+        </button>
+      </div>
     </div>
   );
 };

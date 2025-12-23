@@ -34,7 +34,7 @@ export const ViewApplicantsModal = ({
     } = useOrganizationStore();
 
     const applicants = applicantsByOpportunity[opp_id] || [];
-    console.log(applicantsByOpportunity)
+    console.log(applicants)
     // Fetch applicants ONLY when the sheet opens and data isn't cached
     useEffect(() => {
         if (open && !applicantsByOpportunity[opp_id]) {

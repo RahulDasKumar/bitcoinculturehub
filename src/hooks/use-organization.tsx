@@ -11,6 +11,7 @@ interface OrgStore {
     applicants: ApplicantInformation[]
     loading: boolean;
     all_organization:Organization[],
+    user_applications:ApplicantInformation[],
     applicantsByOpportunity: Record<string, ApplicantInformation[]>;
     fetchMyOrganizations: (token: string) => Promise<void>;
     fetchOrganizationsOpportunity:(org_id:string)=>Promise<void>;
@@ -20,6 +21,7 @@ interface OrgStore {
     findAllApplicants:(org_id:string,opp_id:string)=>Promise<void>;
     applyToOpportunity:(token:string, application)=>Promise<void>;
     fetchAllOrganizations:()=>Promise<void>
+    findUserApplicants:()=>Promise<void>
 
 
 
@@ -33,6 +35,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     applicants:[],
     applicantsByOpportunity:{},
     all_organization:[],
+    user_applications:[],
     fetchMyOrganizations: async (token: string) => {
         set({ loading: true });
         try {
@@ -43,8 +46,8 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             });
 
             const data = await res.json();
-            console.log(data)
-            set({ organizations: data.organizations });
+            console.log(data, 'is the data')
+            set({ organizations: Array.isArray(data) ? data : [] });
         } catch (err) {
             console.error("Failed to load organizations:", err);
         } finally {
@@ -58,8 +61,8 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
 
             });
             const data = await res.json();
-            console.log(data)
-            set({ opportunities: data });
+            console.log(data,'is this empty?')
+            set({ opportunities: data || []});
         } catch (err) {
             console.error("Failed to load organizations:", err);
         } finally {
@@ -94,19 +97,18 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     fetchAllOpportunity: async () => {
         set({ loading: true });
         try {
-            const res = await fetch(`${API_URL}/org`, {
+            const res = await fetch(`${API_URL}/general/opportunity`, {
                 method:"GET",
 
             });
 
-            const data = await res.json();
+            let data = await res.json();
             console.log(data,'is the data')
-            const cleaned = data.map(element => ({
-                ...element,
-                org_id: element.PK.replace("ORG#", "")
-            }));
-            console.log(cleaned)
-            set({ all_opportunities: cleaned });
+            if(data == null){
+                data = []
+            }
+
+            set({ all_opportunities: data });
         
         } catch (err) {
             console.error("Failed to load organizations:", err);
@@ -160,11 +162,43 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
         } finally {
         }
     },
+    findUserApplicants: async () => {
+        const token = useAuthStore.getState().token;
+
+        set({ loading: true });
+
+        try {
+            const res = await fetch(`${API_URL}/general/myapplications`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to fetch user applications");
+            }
+
+            const data = await res.json();
+
+            set({ user_applications: data });
+        } catch (err) {
+            console.error(err);
+        } finally {
+            set({ loading: false });
+        }
+    },
     applyToOpportunity: async (token, application) => {
         set({ loading: true });
-        console.log(application)
+        set((state) => ({
+            user_applications: [
+                ...state.user_applications,
+                application,
+            ],
+        }));
         try {
-            const res = await fetch(`${API_URL}/org/${application.org_id}/opportunities/${application.opp_id}/apply`, {
+            const res = await fetch(`${API_URL}/org/${application.org_id}/opportunities/${application.opportunity_id}/apply`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -188,7 +222,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     fetchAllOrganizations: async () => {
         set({ loading: true });
         try {
-            const res = await fetch(`${API_URL}/general/org`, {
+            const res = await fetch(`${API_URL}/general/orgs`, {
                 method: "GET",
 
             });
@@ -196,7 +230,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             const data = await res.json();
             console.log(data, 'is the data')
 
-            set({ all_organization: data });
+            set({ all_organization: data || [] });
 
         } catch (err) {
             console.error("Failed to load organizations:", err);

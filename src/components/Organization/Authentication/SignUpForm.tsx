@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Organization } from '../../types';
 import { OrgCard } from '../OrgCard';
 import { useEffect } from 'react';
-
+import { API_URL } from '@/config';
 import {
     Network,
     Plus,
@@ -45,7 +45,8 @@ const SignUpForm = () => {
         if (activeTab === "dashboard" && token) {
             fetchMyOrganizations(token);
             console.log(organizations)
-
+            console.log("running in organization")
+            
         }
     }, [activeTab, token]);
     const handleCreateProfile = async () => {
@@ -60,7 +61,7 @@ const SignUpForm = () => {
         };
 
         try {
-            const res = await fetch("http://127.0.0.1:8000/org/", {
+            const res = await fetch(`${API_URL}/org/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -327,6 +328,7 @@ const SignUpForm = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 pb-10">
                                         {organizations
                                             .filter(org =>
+                                                org.status === "verified" &&
                                                 org.name.toLowerCase().includes(searchTerm.toLowerCase())
                                             )
                                             .map(org => (
@@ -343,13 +345,14 @@ const SignUpForm = () => {
 
                                                     <button
                                                         className="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm hover:bg-slate-700 transition"
-                                                        onClick={()=>nav(`/organization-dashboard/${org.id}`)}
+                                                        onClick={() => nav(`/organization-dashboard/${org.id}`)}
                                                     >
                                                         View Dashboard
                                                     </button>
                                                 </div>
                                             ))}
                                     </div>
+
                                 </div>
 
                         )}

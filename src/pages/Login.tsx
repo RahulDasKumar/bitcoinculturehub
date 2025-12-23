@@ -15,7 +15,7 @@ const Login: React.FC = () => {
     const location = useLocation();
 
     const [name,setName] = useState("")
-
+    const [tag,setTag] = useState("")
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate()
@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://bch-backend-7vjs.onrender.com/auth/login", {
+            const res = await fetch("http://127.0.0.1:8000/authorize/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,12 +49,15 @@ const Login: React.FC = () => {
             }
 
             const data = await res.json();
-            console.log("Login response:", data);
-
+            console.log(data)
             login({
                 username: data.username,
-                email: data.email
-            });
+                email: data.email,
+                bio:data.bio,
+                links: data.links,
+                location:" ",
+                avatar:data.profile_picture,
+            },data.access_token);
 
             setMessage(`Login successful!`);
             navigate("/");

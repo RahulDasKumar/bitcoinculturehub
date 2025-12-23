@@ -70,25 +70,25 @@ export default function OrganizationDashboard() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <Card className="p-6">
                         <Eye className="w-5 h-5 text-primary" />
-                        <div className="text-3xl font-bold">{organization.totalViews || 0}</div>
+                        <div className="text-3xl font-bold">{ 0}</div>
                         <div className="text-sm text-muted-foreground">Total Views</div>
                     </Card>
 
                     <Card className="p-6">
                         <BarChart3 className="w-5 h-5 text-primary" />
-                        <div className="text-3xl font-bold">{organization.activeListings || 0}</div>
+                        <div className="text-3xl font-bold">{ 0}</div>
                         <div className="text-sm text-muted-foreground">Active Listings</div>
                     </Card>
 
                     <Card className="p-6">
                         <Bookmark className="w-5 h-5 text-primary" />
-                        <div className="text-3xl font-bold">{organization.saves || 0}</div>
+                        <div className="text-3xl font-bold">{ 0}</div>
                         <div className="text-sm text-muted-foreground">Saves</div>
                     </Card>
 
                     <Card className="p-6">
                         <CheckCircle2 className="w-5 h-5 text-primary" />
-                        <div className="text-3xl font-bold">{organization.completed || 0}</div>
+                        <div className="text-3xl font-bold">{ 0}</div>
                         <div className="text-sm text-muted-foreground">Completed</div>
                     </Card>
                 </div>

@@ -33,13 +33,16 @@ export enum FilterCategory {
 }
 
 export interface ApplicantInformation{
-    opp_id: string;
+    opportunity_id: string;
     username: string;
     avatar?: string;
     email: string;
     location: string;
     status:string;
     appliedAt:string;
+    org_id:string;
+    opportunity_name?:string;
+    opportunity_type?:string
 }
 
 export interface Reply {
@@ -114,6 +117,7 @@ export interface Member {
 }
 
 export interface Opportunity {
+    time_commitment: string;
     id: string;
     title: string;
     type: string;
@@ -122,6 +126,7 @@ export interface Opportunity {
     timeCommitment:string;
     categories:string[],
     org_id?:string
+    org_name?:string;
 }
 
 export interface Organization {
