@@ -77,7 +77,7 @@ const Header = () => {
               Explore
 
             </Link> */}
-            {/* <Link
+            <Link
               to="/opportunity"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
                 ? "bg-primary text-primary-foreground"
@@ -86,7 +86,7 @@ const Header = () => {
             >
               Opportunity Engine
 
-            </Link> */}
+            </Link>
             <Link
               to="/events"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
@@ -108,7 +108,7 @@ const Header = () => {
               Awards
 
             </Link>
-            {/* <Link
+            <Link
               to="/organization-auth"
               className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
                 ? "bg-primary text-primary-foreground"
@@ -116,7 +116,7 @@ const Header = () => {
                 }`}
             >
               Org
-            </Link> */}
+            </Link>
             {/* Admin Link (only for admin) */}
             {isAdmin && (
               <Link

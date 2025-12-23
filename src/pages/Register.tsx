@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-
+import { API_URL } from "@/config";
 const Register: React.FC = () => {
   const location = useLocation();
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const Register: React.FC = () => {
     setMessage(""); // reset message
 
     try {
-      const res = await fetch("https://bch-backend-7vjs.onrender.com/auth/signup", {
+      const res = await fetch(`${API_URL}/authorize/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

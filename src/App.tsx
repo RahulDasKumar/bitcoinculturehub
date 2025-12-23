@@ -32,6 +32,7 @@ import OpportunityEngineBeta from "./components/Opportunity-Engine-v2/Opportunit
 import EventPage2 from "./components/Events-Page-Beta/Events";
 import AboutUs from "./components/About-Us-Beta/Manifesto";
 import AwardPage from "./components/AwardShow/AwardPage";
+import ProfileBeta from "./Profile-Beta/ProfileBeta";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,7 @@ const App = () => (
           <Route path="/join" element={<Waitlist/>}/>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/profile" element={<ProfileBeta />}></Route>
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />
           <Route path="/opportunity" element={<OpportunityEngineBeta />}></Route>

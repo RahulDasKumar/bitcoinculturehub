@@ -11,11 +11,11 @@ import FooterCTA from './FooterCTA';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import Header from '../Header';
 const OpportunityEngineBeta: React.FC = () => {
-    const {all_opportunities, fetchAllOpportunity}= useOrganizationStore()
+    const {all_opportunities, fetchAllOpportunity,findUserApplicants,user_applications}= useOrganizationStore()
     useEffect(()=>{
         fetchAllOpportunity()
-    }, [fetchAllOpportunity])
-
+        findUserApplicants()
+    }, [])
 
     return (
         <div className="min-h-screen bg-white">
@@ -51,7 +51,7 @@ const OpportunityEngineBeta: React.FC = () => {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                                 {all_opportunities.map(match => (
-                                    <MatchCard key={match.id} opportunity={match} />
+                                    <MatchCard key={match.id} opportunity={match} applicants={user_applications} />
                                 ))}
                             </div>
                         </div>
@@ -66,7 +66,7 @@ const OpportunityEngineBeta: React.FC = () => {
                                 <span className="text-xs text-gray-400 font-bold uppercase tracking-wide">5 Available</span>
                             </div>
 
-                            <OpportunityList opportunities={all_opportunities} />
+                            <OpportunityList opportunities={all_opportunities}  applicants={user_applications} />
                         </div>
 
                         {/* Organizations Grid */}

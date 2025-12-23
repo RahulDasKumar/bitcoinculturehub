@@ -7,7 +7,7 @@ import { HowItWorks } from "@/components/AwardShow/HowItWorks";
 import ClassOf2025  from "@/components/AwardShow/ClassOf2025";
 import { NomineesModal } from "@/components/AwardShow/NomineesModal";
 import { Button } from "@/components/ui/button";
-import Header from "../Layouts/Header";
+import Header from "../Header";
 
 const AwardPage = () => {
     const [userKarma] = useState(1240);

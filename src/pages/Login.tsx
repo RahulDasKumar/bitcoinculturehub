@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import useAuthStore from "../hooks/use-auth"
+import { API_URL } from "@/config";
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
 
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
     const location = useLocation();
 
     const [name,setName] = useState("")
-
+    const [tag,setTag] = useState("")
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate()
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://bch-backend-7vjs.onrender.com/auth/login", {
+            const res = await fetch(`${API_URL}/authorize/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,12 +50,15 @@ const Login: React.FC = () => {
             }
 
             const data = await res.json();
-            console.log("Login response:", data);
-
+            console.log(data)
             login({
                 username: data.username,
-                email: data.email
-            });
+                email: data.email,
+                bio:data.bio,
+                links: data.links,
+                location:" ",
+                avatar:data.profile_picture,
+            },data.access_token);
 
             setMessage(`Login successful!`);
             navigate("/");
