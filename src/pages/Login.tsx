@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import useAuthStore from "../hooks/use-auth"
+import { API_URL } from "@/config";
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
 
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch("http://127.0.0.1:8000/authorize/login", {
+            const res = await fetch(`${API_URL}/authorize/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
