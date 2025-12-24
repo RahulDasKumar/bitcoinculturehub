@@ -131,7 +131,9 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             const data = await res.json();
             console.log(data, 'is the data')
             set({
-                opportunities: [...get().opportunities, data],
+                opportunities: get().opportunities.map(o =>
+                    o.id === data.id ? data : o
+                ),
             });
         } catch (err) {
             console.error("Failed to load organizations:", err);

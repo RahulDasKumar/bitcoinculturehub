@@ -24,6 +24,7 @@ interface AddOpportunityModalProps {
     opp_id:string;
 }
 
+
 export const EditOpportunityModal = ({
     opportunityTitle,
     opportunityType,

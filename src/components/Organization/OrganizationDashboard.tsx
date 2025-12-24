@@ -14,6 +14,7 @@ import { ArrowLeftIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import { EditOpportunityModal } from "./EditOpportunityModal";
 import { ViewApplicantsModal } from "./ViewOpportunityModal";
+import { API_URL } from "@/config";
 
 export default function OrganizationDashboard() {
     const { orgId } = useParams<{ orgId: string }>();
@@ -27,7 +28,7 @@ export default function OrganizationDashboard() {
 
         const fetchOrg = async () => {
             setLoading(true);
-            const res = await fetch(`http://127.0.0.1:8000/org/${orgId}`, {
+            const res = await fetch(`${API_URL}/org/${orgId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
