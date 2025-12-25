@@ -12,6 +12,7 @@ interface OrgStore {
     loading: boolean;
     all_organization:Organization[],
     user_applications:ApplicantInformation[],
+    currentOrganization:Organization
     applicantsByOpportunity: Record<string, ApplicantInformation[]>;
     fetchMyOrganizations: (token: string) => Promise<void>;
     fetchOrganizationsOpportunity:(org_id:string)=>Promise<void>;
@@ -22,6 +23,9 @@ interface OrgStore {
     applyToOpportunity:(token:string, application)=>Promise<void>;
     fetchAllOrganizations:()=>Promise<void>
     findUserApplicants:()=>Promise<void>
+    editOrganization: (org_id:string,organization:Partial<Organization>,token:string)=>Promise<void>
+    fetchOrganizationDashboard: (orgId:string, token:string)=>Promise<void>
+
 
 
 
@@ -36,6 +40,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     applicantsByOpportunity:{},
     all_organization:[],
     user_applications:[],
+    currentOrganization:null,
     fetchMyOrganizations: async (token: string) => {
         set({ loading: true });
         try {
@@ -239,7 +244,44 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
         } finally {
             set({ loading: false });
         }
+    },
+    editOrganization: async (org_id:string,organization:Partial<Organization>, token:string) =>{
+        set({ loading: true });
+        try {
+            const res = await fetch(`${API_URL}/org/${org_id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(organization)
+            });
+
+            const data = await res.json();
+            console.log(data, 'is the data')
+
+            set({ currentOrganization: data });
+
+        } catch (err) {
+            console.error("Failed to update organization", err);
+        } finally {
+            set({ loading: false });
+        }
     }
+    ,
+    fetchOrganizationDashboard: async (orgId, token) => {
+        const res = await fetch(`${API_URL}/org/${orgId}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            set({ currentOrganization: data });
+        } else {
+            set({ currentOrganization: null });
+        }
+    },
+
 
 
 }));

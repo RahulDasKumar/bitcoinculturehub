@@ -21,33 +21,16 @@ export default function OrganizationDashboard() {
     const token = useAuthStore((s) => s.token);
     const [organization, setOrganization] = useState<Organization>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const { opportunities, fetchOrganizationsOpportunity } = useOrganizationStore();
+    const { opportunities, fetchOrganizationsOpportunity, currentOrganization, fetchOrganizationDashboard } = useOrganizationStore();
     const navigate = useNavigate();
     useEffect(() => {
         if (!orgId || !token) return;
-
-        const fetchOrg = async () => {
-            setLoading(true);
-            const res = await fetch(`${API_URL}/org/${orgId}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setOrganization(data);
-
-            } else {
-                setOrganization(null);
-            }
-            setLoading(false);
-        };
-
-        fetchOrg();
+        fetchOrganizationDashboard(orgId,token)
         fetchOrganizationsOpportunity(orgId)
-        console.log(opportunities)
     }, [orgId, token]);
 
 
-    if (!organization) return <p className="text-muted-foreground">Organization not found</p>;
+    if (!currentOrganization) return <p className="text-muted-foreground">Organization not found</p>;
     return (
         <div className="min-h-screen bg-background">
             <Header />
@@ -58,12 +41,12 @@ export default function OrganizationDashboard() {
             
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h2 className="text-2xl font-bold mb-1">{organization.name} Dashboard</h2>
+                        <h2 className="text-2xl font-bold mb-1">{currentOrganization.name} Dashboard</h2>
                         <p className="text-muted-foreground">Manage opportunities & track performance</p>
                     </div>
                     <div className="flex items-center space-between">
-                        <AddOpportunityModal opportunityTitle={organization.name} opportunityType={organization.type} opportunityDescription={organization.description} org_id={orgId}/>
-                    <EditOrganizationModal organization={undefined}/>
+                        <AddOpportunityModal opportunityTitle={currentOrganization.name} opportunityType={currentOrganization.type} opportunityDescription={currentOrganization.description} org_id={orgId}/>
+                        <EditOrganizationModal organization={currentOrganization}/>
                     </div>
                 </div>
 

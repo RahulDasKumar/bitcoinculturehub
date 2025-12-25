@@ -10,29 +10,27 @@ import {
 import { Edit } from "lucide-react";
 import { Input } from "./Authentication/ui/Input";
 import { Button } from "@/components/ui/button";
+import { useOrganizationStore } from "@/hooks/use-organization";
+import useAuthStore from "@/hooks/use-auth";
+import { Organization } from "../types";
 
-export interface EditOrganizationModalProps {
-    organization: Partial<{
-        id: string;
-        name: string;
-        type: string;
-        location: string;
-        email: string;
-        status: string;
-        submittedAt: string;
-        description: string;
-        website: string;
-    }>;
+interface EditOrganizationModalProps {
+    organization: Partial<Organization>
+
 }
 
-export const EditOrganizationModal = ({ organization }: EditOrganizationModalProps) => {
-    const [formData, setFormData] = useState({
-        name: "",
-        location:  "",
-        website: "",
-        description:  "",
-    });
 
+export const EditOrganizationModal = ({ organization }: EditOrganizationModalProps) => {
+    const { editOrganization } = useOrganizationStore()
+    const { token } = useAuthStore()
+
+    const [formData, setFormData] = useState<Partial<Organization>>({
+        name: organization.name,
+        location: organization.location,
+        website: organization.website,
+        description: organization.description,
+    })
+    console.log(organization, '  is the organization')
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -58,7 +56,7 @@ export const EditOrganizationModal = ({ organization }: EditOrganizationModalPro
                     <Input
                         label="Organization Name"
                         name="name"
-                        placeholder="Enter organization name"
+                        placeholder={organization.name}
                         value={formData.name}
                         onChange={handleInputChange}
                         required
@@ -67,7 +65,7 @@ export const EditOrganizationModal = ({ organization }: EditOrganizationModalPro
                     <Input
                         label="Location"
                         name="location"
-                        placeholder="Enter location"
+                        placeholder={organization.location}
                         value={formData.location}
                         onChange={handleInputChange}
                         required
@@ -76,7 +74,7 @@ export const EditOrganizationModal = ({ organization }: EditOrganizationModalPro
                     <Input
                         label="Website"
                         name="website"
-                        placeholder="Enter website URL"
+                        placeholder={organization.website}
                         value={formData.website}
                         onChange={handleInputChange}
                     />
@@ -94,8 +92,7 @@ export const EditOrganizationModal = ({ organization }: EditOrganizationModalPro
                 <Button
                     className="mt-9"
                     onClick={() => {
-                        console.log("Updated organization data:", formData);
-                       
+                        editOrganization(organization.id,formData,token)
                     }}
                 >
                     Save Changes
