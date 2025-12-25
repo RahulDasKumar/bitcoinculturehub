@@ -151,3 +151,15 @@ export interface ArtPiece {
     status: VerificationStatus;
     submittedAt: string;
 }
+
+export interface BitcoinEvent {
+    id: string;
+    event_name: string;
+    city?: string;
+    country?: string;
+    continent?: string;
+    start_date?: string;
+    end_date?: string;
+    twitter_url?: string;
+    website_url?: string;
+}

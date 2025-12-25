@@ -1,18 +1,29 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search, ChevronDown, Calendar, MapPin, Users, Info, ArrowRight, ExternalLink, X, Bookmark, Star, ChevronUp } from 'lucide-react';
 import { CONFERENCES, MEETUPS, VIRTUAL_EVENTS } from './data';
 import { Event } from './types';
 import Header from '../Header';
 import FeaturedEventBanner from './FeaturedEventBanner';
-
+import { useEventsStore } from '@/hooks/use-events';
 const EventPage2: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [plannedMonths, setPlannedMonths] = useState<string[]>(['FEB', 'MAY']);
     const [expandedEvents, setExpandedEvents] = useState<Set<string>>(new Set(['prague26']));
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [interestedEvents, setInterestedEvents] = useState<Set<string>>(new Set());
+    const {
+        events,
+        page,
+        totalPages,
+        loading,
+        fetchEvents,
+    } = useEventsStore();
 
+    useEffect(() => {
+        fetchEvents(1, 20); // page 1, 20 events
+        console.log(events)
+    }, [fetchEvents]);
     const toggleMonth = (month: string) => {
         setPlannedMonths(prev =>
             prev.includes(month) ? prev.filter(m => m !== month) : [...prev, month]
@@ -36,15 +47,40 @@ const EventPage2: React.FC = () => {
 
     const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
+    const normalizedEvents = useMemo(() => {
+        return events.map(e => {
+            const start = e.start_date ? new Date(e.start_date) : null;
+            const end = e.end_date ? new Date(e.end_date) : null;
+
+            const month = start
+                ? start.toLocaleString("en-US", { month: "short" }).toUpperCase()
+                : "TBD";
+
+            const dateRange =
+                start && end
+                    ? `${start.getDate()} – ${end.getDate()}`
+                    : "TBD";
+
+            return {
+                ...e,
+                month,
+                location: [e.city, e.country].filter(Boolean).join(", "),
+                dateRange,
+                description: "Details coming soon", // optional placeholder
+                tags: [],
+            };
+        });
+    }, [events]);
+
     const filteredConferences = useMemo(() => {
-        if (!searchQuery) return CONFERENCES;
+        if (!searchQuery) return normalizedEvents;
+
         const q = searchQuery.toLowerCase();
-        return CONFERENCES.filter(c =>
-            c.name.toLowerCase().includes(q) ||
-            c.location.toLowerCase().includes(q) ||
-            c.description.toLowerCase().includes(q)
+        return normalizedEvents.filter(c =>
+            c.event_name.toLowerCase().includes(q) ||
+            c.location.toLowerCase().includes(q)
         );
-    }, [searchQuery]);
+    }, [searchQuery, normalizedEvents]);
 
     return (
         <div className="min-h-screen bg-white text-black selection:bg-orange-100 relative">
@@ -302,7 +338,7 @@ const EventPage2: React.FC = () => {
                                                                     </div>
                                                                 )}
                                                                 <h4 className={`text-2xl font-display uppercase transition-colors ${isExpanded ? 'text-[#F7931A]' : 'group-hover:text-[#F7931A]'}`}>
-                                                                    {conference.name}
+                                                                    {conference.event_name}
                                                                 </h4>
                                                                 <div className="flex items-center gap-1.5 text-gray-400 text-sm mt-1 uppercase font-bold tracking-wider">
                                                                     <MapPin size={12} />
@@ -381,6 +417,27 @@ const EventPage2: React.FC = () => {
                         </button>
                     </div>
                 </section>
+                <div className="flex justify-center items-center gap-6 mt-16">
+                    <button
+                        disabled={page <= 1}
+                        onClick={() => fetchEvents(page - 1)}
+                        className="border px-6 py-2 text-xs font-black uppercase disabled:opacity-40"
+                    >
+                        Previous
+                    </button>
+
+                    <span className="text-xs font-bold uppercase tracking-widest text-gray-400">
+                        Page {page} of {totalPages}
+                    </span>
+
+                    <button
+                        disabled={page >= totalPages}
+                        onClick={() => fetchEvents(page + 1)}
+                        className="border px-6 py-2 text-xs font-black uppercase disabled:opacity-40"
+                    >
+                        Next
+                    </button>
+                </div>
 
                 {/* Local Meetups */}
                 {/* <section className="mb-24">
