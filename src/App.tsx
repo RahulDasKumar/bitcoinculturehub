@@ -33,6 +33,9 @@ import EventPage2 from "./components/Events-Page-Beta/Events";
 import AboutUs from "./components/About-Us-Beta/Manifesto";
 import AwardPage from "./components/AwardShow/AwardPage";
 import ProfileBeta from "./Profile-Beta/ProfileBeta";
+import OrganizationPage from "./components/OrganizationPage/OrganizationPage";
+import OwnerDashboard from "./components/OwnerDashboard/OwnerDashboard";
+import PostOpportunity from "./components/PostOpportunity/App";
 
 const queryClient = new QueryClient();
 
@@ -55,15 +58,19 @@ const App = () => (
           <Route path="/submit-content" element={<SubmitContent />} />
           <Route path="/opportunity" element={<OpportunityEngineBeta />}></Route>
           <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
+          <Route path="/post-opportunity/:orgId" element={<PostOpportunity />} />
           <Route path="/awards" element={<AwardPage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
           <Route path="/events" element={<EventPage2/>}></Route>
           <Route path="/forum" element={<Forum/>}></Route>
           <Route path="/organization-dashboard/:orgId" element={<OrganizationDashboard />} />
+          <Route path="/org-page/:orgId" element={<OrganizationPage/>}/>
           <Route path="/press-release" element={<PressReleasePage />} />
           <Route path="/organization-auth" element={<SignUpModal />} />
           <Route path="/awards" element={<AwardPage />} />
+          <Route path="/org-dash/:orgId" element={<OwnerDashboard/>}></Route>
           <Route path="/test-dash" element={<AdminDashboard/>}></Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

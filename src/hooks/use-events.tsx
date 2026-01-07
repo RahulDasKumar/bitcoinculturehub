@@ -45,7 +45,7 @@ export const useEventsStore = create<EventsState>((set) => ({
                 page: data.page,
                 pageSize: data.page_size,
                 total: data.total,
-                totalPages: data.total_pages,
+                totalPages: data.total_pages + 1,
                 loading: false,
             });
         } catch (err: any) {

@@ -345,7 +345,7 @@ const SignUpForm = () => {
 
                                                     <button
                                                         className="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm hover:bg-slate-700 transition"
-                                                        onClick={() => nav(`/organization-dashboard/${org.id}`)}
+                                                        onClick={() => nav(`/org-page/${org.id}`)}
                                                     >
                                                         View Dashboard
                                                     </button>

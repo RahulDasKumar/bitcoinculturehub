@@ -16,7 +16,7 @@ const OpportunityEngineBeta: React.FC = () => {
         fetchAllOpportunity()
         findUserApplicants()
     }, [])
-
+    const matched_opportunities = all_opportunities.slice(0,3)
     return (
         <div className="min-h-screen bg-white">
             <Header/>
@@ -50,7 +50,7 @@ const OpportunityEngineBeta: React.FC = () => {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                                {all_opportunities.map(match => (
+                                {matched_opportunities.map(match => (
                                     <MatchCard key={match.id} opportunity={match} applicants={user_applications} />
                                 ))}
                             </div>

@@ -50,8 +50,8 @@ const Login: React.FC = () => {
             }
 
             const data = await res.json();
-            console.log(data)
             login({
+                id:data.user_id,
                 username: data.username,
                 email: data.email,
                 bio:data.bio,

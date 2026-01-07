@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { Organization,Opportunity, ApplicantInformation } from "@/components/types";
+import { Organization, Opportunity, ApplicantInformation, ProfileInformation } from "@/components/types";
 import { toast } from "./use-toast";
 import useAuthStore from "./use-auth";
 import { API_URL } from "../config";
-
+const devurl = 'http://127.0.0.1:8000'
 interface OrgStore {
     organizations: Organization[];
     opportunities:Opportunity[],
@@ -12,11 +12,13 @@ interface OrgStore {
     loading: boolean;
     all_organization:Organization[],
     user_applications:ApplicantInformation[],
-    currentOrganization:Organization
+    currentOrganization:Partial<Organization>
     applicantsByOpportunity: Record<string, ApplicantInformation[]>;
+    organizatonMembers: ProfileInformation[];
     fetchMyOrganizations: (token: string) => Promise<void>;
     fetchOrganizationsOpportunity:(org_id:string)=>Promise<void>;
     postOpportunity: (org:Partial<Opportunity>,token:string)=>Promise<void>;
+    deleteOpportunity: (opportunityId: string, orgId: string, token: string)=>Promise<void>;
     fetchAllOpportunity:()=>Promise<void>
     editOpportunity: (opportunity: Partial<Opportunity>, token: string,opp_id:string,org_id:string)=>Promise<void>;
     findAllApplicants:(org_id:string,opp_id:string)=>Promise<void>;
@@ -25,8 +27,8 @@ interface OrgStore {
     findUserApplicants:()=>Promise<void>
     editOrganization: (org_id:string,organization:Partial<Organization>,token:string)=>Promise<void>
     fetchOrganizationDashboard: (orgId:string, token:string)=>Promise<void>
-
-
+    fetchGeneralDashboard:(orgId:string)=>Promise<void>
+    fetchOrganizationMembers:(orgId:string,token:string)=>Promise<void>
 
 
 }
@@ -41,6 +43,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     all_organization:[],
     user_applications:[],
     currentOrganization:null,
+    organizatonMembers:[],
     fetchMyOrganizations: async (token: string) => {
         set({ loading: true });
         try {
@@ -76,8 +79,10 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     },
     postOpportunity: async (opportunity:Partial<Opportunity>,token:string) =>{
         set({ loading: true });
+
         try{
-            const org_id = opportunity.id
+            console.log(opportunity,' is the response')
+            const org_id = opportunity.org_id
             const response = await fetch(`${API_URL}/org/${org_id}/opportunities`,{
                 method:'POST',
                 headers: {
@@ -99,6 +104,33 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             set({loading:false})
         }
     },
+    deleteOpportunity: async (opportunityId: string, orgId: string, token: string) => {
+        set({ loading: true });
+
+        try {
+            const response = await fetch(`${API_URL}/org/${orgId}/opportunities/${opportunityId}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                set({
+                    opportunities: get().opportunities.filter(o => o.id !== opportunityId),
+                });
+                console.log(`Opportunity ${opportunityId} deleted successfully.`);
+            } else {
+                const errorData = await response.json();
+                console.error("Failed to delete opportunity:", errorData);
+            }
+        } catch (err) {
+            console.error("Error deleting opportunity:", err);
+        } finally {
+            set({ loading: false });
+        }
+    },
+
     fetchAllOpportunity: async () => {
         set({ loading: true });
         try {
@@ -260,8 +292,9 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             const data = await res.json();
             console.log(data, 'is the data')
 
-            set({ currentOrganization: data });
 
+            set({ currentOrganization: data });
+            console.log(data)
         } catch (err) {
             console.error("Failed to update organization", err);
         } finally {
@@ -273,15 +306,39 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
         const res = await fetch(`${API_URL}/org/${orgId}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
-
+        console.log(res)
         if (res.ok) {
             const data = await res.json();
             set({ currentOrganization: data });
+            console.log(data, ' IS THE DATA')
         } else {
             set({ currentOrganization: null });
         }
     },
-
-
+    fetchGeneralDashboard: async (orgId) => {
+        const res = await fetch(`${API_URL}/org/${orgId}/public`, {
+        });
+        console.log(res)
+        if (res.ok) {
+            const data = await res.json();
+            set({ currentOrganization: data });
+            console.log(data)
+        } else {
+            set({ currentOrganization: null });
+        }
+    },
+    fetchOrganizationMembers : async (orgId,token) => {
+        const res = await fetch(`${API_URL}/org/${orgId}/members`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(res)
+        if (res.ok) {
+            const data = await res.json();
+            set({ organizatonMembers: data });
+            console.log(data)
+        } else {
+            set({ organizatonMembers: null });
+        }
+    },
 
 }));

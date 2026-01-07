@@ -117,16 +117,25 @@ export interface Member {
 }
 
 export interface Opportunity {
+    status: string;
     time_commitment: string;
     id: string;
     title: string;
     type: string;
     description: string;
-    location:string;
-    timeCommitment:string;
-    categories:string[],
-    org_id?:string
+    location?: {
+    type: string;
+    text?: string;
+    }           
+    categories:string[];
+    org_id?:string;
     org_name?:string;
+    tools?:string[];
+    output_type?:string[]
+    estimated_hours?:number;
+    due_date?:string;
+    skill_level?:string;
+    summary?:string;
 }
 
 export interface Organization {
