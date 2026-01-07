@@ -29,7 +29,7 @@ export default function OrganizationDashboard() {
         fetchOrganizationsOpportunity(orgId)
     }, [orgId, token]);
 
-
+    console.log(opportunities)
     if (!currentOrganization) return <p className="text-muted-foreground">Organization not found</p>;
     return (
         <div className="min-h-screen bg-background">
@@ -111,7 +111,7 @@ export default function OrganizationDashboard() {
                                 </div>
                                 <div className="flex gap-2">
                                     <EditOpportunityModal org_id={orgId} opp_id={opportunity.id} opportunityTitle={opportunity.title}
-                                        opportunityType={opportunity.type}  
+                                        opportunityType={opportunity.type}  opportunityCategories ={opportunity.categories} 
                                         opportunityDescription={opportunity.description} location={opportunity.location}/>
                                     <ViewApplicantsModal opportunityTitle={opportunity.title} opp_id={opportunity.id} org_id={orgId}></ViewApplicantsModal>
                                 </div>

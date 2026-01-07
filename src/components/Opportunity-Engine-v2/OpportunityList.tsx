@@ -12,12 +12,10 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
     const { applyToOpportunity } = useOrganizationStore();
     const { token, user, isLoggedIn } = useAuthStore();
 
-    // Build fast lookup for applied opportunities
     const appliedOpportunityIds = new Set(
         applicants.map(app => String(app.opportunity_id))
     );
-
-    // Only create baseApplication if logged in
+    console.log(opportunities)
     const baseApplication: ApplicantInformation | null = isLoggedIn
         ? {
             username: user.username,
@@ -73,13 +71,20 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
                             <p className="text-sm text-gray-600 mb-4 max-w-2xl line-clamp-1">
                                 {opp.description}
                             </p>
+                            <div className="flex flex-wrap gap-3">
+                                {opp.categories.map(tag => (
+                                    <span key={tag} className="bg-gray-100 text-gray-600 text-[10px] font-bold uppercase px-2 py-1">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div> 
                         </div>
 
                         <div className="flex flex-row md:flex-col justify-between items-center md:items-end min-w-[140px] border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 gap-4">
                             <div className="space-y-1 text-right hidden md:block">
                                 <div className="flex items-center justify-end text-xs font-bold text-gray-800 uppercase">
                                     <Clock className="w-3 h-3 mr-1.5 text-gray-400" />
-                                    {opp.timeCommitment}
+                                    {opp.time_commitment}
                                 </div>
                                 <div className="flex items-center justify-end text-xs font-bold text-gray-800 uppercase">
                                     <MapPin className="w-3 h-3 mr-1.5 text-gray-400" />
@@ -91,7 +96,7 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
                             <div className="flex flex-col gap-1 md:hidden">
                                 <div className="flex items-center text-[10px] font-bold text-gray-800 uppercase">
                                     <Clock className="w-3 h-3 mr-1.5 text-gray-400" />
-                                    {opp.timeCommitment}
+                                    {opp.time_commitment}
                                 </div>
                                 <div className="flex items-center text-[10px] font-bold text-gray-800 uppercase">
                                     <MapPin className="w-3 h-3 mr-1.5 text-gray-400" />

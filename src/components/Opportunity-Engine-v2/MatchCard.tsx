@@ -15,7 +15,6 @@ const MatchCard: React.FC<MatchCardProps> = ({ opportunity, applicants, variant 
   const { token, user, isLoggedIn } = useAuthStore();
   const isGrid = variant === 'grid';
 
-  // Only create baseApplication if user is logged in
   const baseApplication: ApplicantInformation | null = isLoggedIn
     ? {
       username: user.username,

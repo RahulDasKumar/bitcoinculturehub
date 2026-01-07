@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useOrganizationStore } from '@/hooks/use-organization';
+import { useNavigate } from 'react-router-dom';
 
 
 const OrganizationGrid: React.FC = () => {
     const { all_organization,fetchAllOrganizations} = useOrganizationStore()
+    const nav = useNavigate()
     useEffect(()=>{
         fetchAllOrganizations()
     }, [fetchAllOrganizations])
@@ -22,8 +24,8 @@ const OrganizationGrid: React.FC = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {all_organization.map(org => (
-                <div key={org.id} className="border border-gray-200 aspect-square flex flex-col items-center justify-center p-6 hover:border-black transition-colors group cursor-pointer bg-white">
-                    <div className="w-16 h-16 bg-black text-white flex items-center justify-center text-2xl font-black mb-4 group-hover:bg-[#FF6B00] transition-colors">
+                  <div key={org.id} className="border border-gray-200 aspect-square flex flex-col items-center justify-center p-6 hover:border-black transition-colors group cursor-pointer bg-white" onClick={() => nav(`/org-page/${org.id}`)}>
+                      <div className="w-16 h-16 bg-black text-white flex items-center justify-center text-2xl font-black mb-4 group-hover:bg-[#FF6B00] transition-colors" >
                         {org.name[0]}
                     </div>
                     <div className="text-center">

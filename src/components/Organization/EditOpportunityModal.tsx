@@ -22,6 +22,7 @@ interface AddOpportunityModalProps {
     location?: string;
     org_id: string;
     opp_id:string;
+    opportunityCategories:string[]
 }
 
 
@@ -29,6 +30,7 @@ export const EditOpportunityModal = ({
     opportunityTitle,
     opportunityType,
     opportunityDescription,
+    opportunityCategories,
     location,
     org_id,
     opp_id
@@ -58,20 +60,29 @@ export const EditOpportunityModal = ({
 
     const timeUnits = ["Hours", "Days", "Weeks", "Months"];
     const { editOpportunity } = useOrganizationStore()
-
+    console.log(opportunityCategories)
     const [formData, setFormData] = useState<Partial<Opportunity>>({
         title: opportunityTitle,
         type: opportunityType,
         description: opportunityDescription,
         id: org_id,
         location: location,
-        timeCommitment: "",
-        categories: []
+        time_commitment: "",
+        categories: opportunityCategories || []
     });
-
+    useEffect(() => {
+        setFormData(prev => ({
+            ...prev,
+            categories: opportunityCategories || [],
+            title: opportunityTitle || prev.title,
+            type: opportunityType || prev.type,
+            description: opportunityDescription || prev.description,
+            location: location || prev.location,
+        }));
+    }, [opportunityCategories, opportunityTitle, opportunityType, opportunityDescription, location]);
     const [duration, setDuration] = useState("");
     const [unit, setUnit] = useState("Hours");
-
+    
     useEffect(() => {
         if (duration) {
             setFormData(prev => ({ ...prev, timeCommitment: `${duration} ${unit}` }));
@@ -128,7 +139,7 @@ export const EditOpportunityModal = ({
                             {options.map((option) => (
                                 <Button
                                     key={option}
-                                    variant={formData.type === option ? "default" : "outline"}
+                                    variant={formData.categories.includes(option) ? "default" : "outline"}
                                     size="sm"
                                     onClick={() => setFormData(prev => ({ ...prev, type: option }))}
                                 >
@@ -201,7 +212,6 @@ export const EditOpportunityModal = ({
 
                 <Button className="mt-9 w-full"
                     onClick={() => {
-                        console.log(formData)
                         editOpportunity(formData, token,opp_id,org_id)
                     }}>
                     Submit
