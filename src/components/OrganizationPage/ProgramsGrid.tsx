@@ -14,7 +14,7 @@ const ProgramsGrid = ({ opportunities, user_applications }) => {
 
 
   return <>
-    <div>
+    <div id='programs'>
       {/* Filters */}
       <div className="flex flex-wrap gap-4 mb-10">
         {filters.map(filter => (

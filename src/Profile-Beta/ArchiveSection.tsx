@@ -4,6 +4,7 @@ import { Bookmark, Award, Zap, Calendar, Flag } from 'lucide-react';
 import { BitcoinHomebaseAPI } from './api';
 import { TimelineItem } from './types';
 import Loader from './ui/Loader';
+import ComingSoonOverlay from './CommingSoonOverlay';
 
 const ArchiveSection: React.FC = () => {
   const [archive, setArchive] = useState<TimelineItem[]>([]);
@@ -26,6 +27,8 @@ const ArchiveSection: React.FC = () => {
   if (loading) return <section className="mb-12"><Loader /></section>;
 
   return (
+    <ComingSoonOverlay active={true} bannerRotation="rotate-[-2deg]">
+
     <section className="mb-12">
       <SectionHeader 
         icon={Bookmark} 
@@ -70,6 +73,7 @@ const ArchiveSection: React.FC = () => {
         </div>
       </div>
     </section>
+    </ComingSoonOverlay>
   );
 };
 

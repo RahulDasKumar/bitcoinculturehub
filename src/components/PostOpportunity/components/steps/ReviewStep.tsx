@@ -4,6 +4,7 @@ import { FormData } from '../../types';
 import useAuthStore from '@/hooks/use-auth';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from 'react-router-dom';
 
 interface StepProps {
   data: FormData;
@@ -11,7 +12,7 @@ interface StepProps {
 }
 
 const ReviewStep: React.FC<StepProps> = ({ data, update }) => {
-  
+  const nav = useNavigate()
   const {token}= useAuthStore()
   const { postOpportunity } = useOrganizationStore()
   const { toasts, dismiss, toast } = useToast()
@@ -21,9 +22,13 @@ const ReviewStep: React.FC<StepProps> = ({ data, update }) => {
     }
     postOpportunity(data, token)
     toast({
-      title: "Success",
-      description: "Submit ",
+      title: "Job Created",
+      description: "Opportunity Created - Successful ",
     });
+    setTimeout(()=>{
+      nav("/opportunity")
+    },500)
+   
   }
   const checklist = [
     { label: 'Title specified', checked: !!data.title },
@@ -33,6 +38,9 @@ const ReviewStep: React.FC<StepProps> = ({ data, update }) => {
     { label: 'Skills specified', checked: data.categories.length > 0 },
   ];
 
+  const finishedCount = checklist.filter(item => item.checked).length;
+  const totalCount = checklist.length
+  const clarityScore = (finishedCount / totalCount) * 100
   return (
     <div className="p-8">
       <div className="flex items-center gap-2 mb-6">
@@ -43,21 +51,21 @@ const ReviewStep: React.FC<StepProps> = ({ data, update }) => {
       <hr className="mb-8 border-gray-300" />
 
       {/* Clarity Score Card */}
-      <div className="border border-gray-300 rounded-sm p-6 mb-8">
+      {/* <div className="border border-gray-300 rounded-sm p-6 mb-8">
         <div className="flex justify-between items-start mb-4">
           <div>
             <h4 className="text-[11px] font-bold uppercase tracking-widest text-gray-800 mb-1">CLARITY SCORE</h4>
             <p className="text-[10px] text-gray-400">How clearly is this opportunity defined?</p>
           </div>
           <div className="text-right">
-            <span className="text-4xl font-bold text-red-500">0%</span>
+            <span className="text-4xl font-bold text-red-500">{clarityScore}%</span>
             <p className="text-[10px] text-red-500 font-bold uppercase">Incomplete</p>
           </div>
         </div>
         <div className="w-full h-1 bg-gray-100 rounded-full">
-          <div className="w-[10%] h-full bg-red-500 rounded-full"></div>
+          <div className={`w-[${clarityScore}%] h-full bg-red-500 rounded-full`}></div>
         </div>
-      </div>
+      </div> */}
 
       {/* Quick Improvements */}
       <div className="mb-8">

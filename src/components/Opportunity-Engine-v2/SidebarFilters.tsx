@@ -102,7 +102,7 @@ const SidebarFilters: React.FC = () => {
         </div>
       </FilterSection>
 
-      <FilterSection
+      {/* <FilterSection
         title={FilterCategory.REWARDS_LOGISTICS}
         isOpen={openSections[FilterCategory.REWARDS_LOGISTICS]}
         onToggle={() => toggleSection(FilterCategory.REWARDS_LOGISTICS)}
@@ -125,7 +125,7 @@ const SidebarFilters: React.FC = () => {
       >
         <div className="text-xs text-gray-400 py-2">Quality filters...</div>
       </FilterSection>
-      
+       */}
       <button className="text-xs text-gray-400 mt-2 hover:text-black uppercase font-bold tracking-wide w-full text-center py-2">
         Filters update instantly
       </button>

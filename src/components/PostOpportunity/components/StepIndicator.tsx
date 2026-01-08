@@ -11,7 +11,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep }) => {
     { id: Step.BASICS, label: 'Basics' },
     { id: Step.SCOPE, label: 'Scope' },
     { id: Step.SKILLS, label: 'Skills' },
-    { id: Step.REWARDS, label: 'Rewards', status: 'completed' },
+    // { id: Step.REWARDS, label: 'Rewards', status: 'completed' },
     { id: Step.VISIBILITY, label: 'Visibility', status: 'completed' },
     { id: Step.REVIEW, label: 'Review' },
   ];

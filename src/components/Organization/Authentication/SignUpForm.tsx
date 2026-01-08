@@ -92,7 +92,7 @@ const SignUpForm = () => {
         }
     };
 
-    const filteredOrgs = orgs.filter(org =>
+    const filteredOrgs = organizations.filter(org =>
         org.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 

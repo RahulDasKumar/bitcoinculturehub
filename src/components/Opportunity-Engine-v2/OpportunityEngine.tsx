@@ -23,8 +23,8 @@ const OpportunityEngineBeta: React.FC = () => {
             <Hero />
             <Mission />
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 pb-20">
-                <SearchBar />
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 pb-20 mt-3">
+                {/* <SearchBar /> */}
 
                 <div className="flex flex-col lg:flex-row gap-8 mt-8">
                     {/* Sidebar */}

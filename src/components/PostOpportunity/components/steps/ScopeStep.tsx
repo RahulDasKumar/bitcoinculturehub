@@ -100,27 +100,7 @@ const ScopeStep: React.FC<StepProps> = ({ data, update }) => {
         </div>
       </div>
 
-       {/* Estimated Hours Slider Repeat (as per screenshot 2) */}
-       <div>
-        <div className="flex justify-between items-center mb-4">
-          <label className="text-[11px] font-bold uppercase text-gray-800">ESTIMATED HOURS: {data.estimated_hours}H</label>
-        </div>
-        <div className="px-2 pb-8">
-          <input 
-            type="range" 
-            min="5" 
-            max="100" 
-            value={data.estimated_hours}
-            onChange={(e) => update({ estimated_hours: parseInt(e.target.value) })}
-            className="w-full h-2 bg-black rounded-lg appearance-none cursor-pointer accent-orange-500" 
-          />
-          <div className="flex justify-between mt-4 text-[10px] text-gray-400 font-bold uppercase">
-            <span>5h</span>
-            <span>50h</span>
-            <span>100h</span>
-          </div>
-        </div>
-      </div>
+
     </div>
   );
 };
