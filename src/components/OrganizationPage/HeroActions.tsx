@@ -3,12 +3,20 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Organization } from '../types';
 import useAuthStore from '@/hooks/use-auth';
+import gsap from 'gsap';
+import ScrollToPlugin from 'gsap/src/ScrollToPlugin';
 const HeroActions = ({organization}) => {
 
-  const showEditButton = ()=>{
+  gsap.registerPlugin(ScrollToPlugin);
 
+  const handleClick = () => {
+    gsap.to(window, {
+      duration: 1.4,
+      scrollTo: "#programs",
+      ease: "power3.inOut"
+    });
   }
-  const {user,token} = useAuthStore()
+  const {user} = useAuthStore()
   const nav = useNavigate()
   const canEdit =  user?.id == organization.owner_id
 
@@ -18,7 +26,7 @@ const HeroActions = ({organization}) => {
         Join the Network
         <span className="ml-2">→</span>
       </button>
-      <button className="bg-white border-2 border-black hover:bg-gray-50 text-black px-8 py-3.5 font-bold rounded-sm text-sm uppercase tracking-wide transition-all">
+      <button className="bg-white border-2 border-black hover:bg-gray-50 text-black px-8 py-3.5 font-bold rounded-sm text-sm uppercase tracking-wide transition-all" onClick={handleClick}>
         View Opportunities
       </button>
       <button className="bg-white border-2 border-black hover:bg-gray-50 text-black px-8 py-3.5 font-bold rounded-sm text-sm uppercase tracking-wide transition-all">
