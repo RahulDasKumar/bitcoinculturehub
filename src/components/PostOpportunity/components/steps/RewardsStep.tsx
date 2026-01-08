@@ -23,15 +23,15 @@ const RewardsStep: React.FC<StepProps> = ({ data, update }) => {
         <div className="bg-orange-500 text-white w-6 h-6 flex items-center justify-center font-bold text-xs">4</div>
         <h2 className="text-sm font-bold uppercase tracking-widest">REWARDS</h2>
       </div>
-      
+
       <hr className="mb-8 border-gray-300" />
 
       {/* Info Banner */}
       <div className="mb-8 bg-gray-50 border-l-4 border-orange-500 p-4 flex gap-3">
-         <div className="flex-1">
-            <p className="text-xs font-bold text-gray-800 mb-1">Most builders join BCH to build proof-of-work and momentum.</p>
-            <p className="text-xs text-gray-400">Compensation is optional — recognition matters most.</p>
-         </div>
+        <div className="flex-1">
+          <p className="text-xs font-bold text-gray-800 mb-1">Most builders join BCH to build proof-of-work and momentum.</p>
+          <p className="text-xs text-gray-400">Compensation is optional — recognition matters most.</p>
+        </div>
       </div>
 
       {/* Proof of Work Credit (Static/Locked as per screenshot) */}
@@ -61,7 +61,7 @@ const RewardsStep: React.FC<StepProps> = ({ data, update }) => {
             <p className="text-[10px] text-gray-400 font-medium">Additional perks for the builder</p>
           </div>
         </div>
-        
+
 
       </div>
 

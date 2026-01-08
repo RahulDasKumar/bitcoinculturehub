@@ -59,8 +59,6 @@ const PostOpportunity = () => {
         return <ScopeStep data={formData} update={updateFormData} />;
       case Step.SKILLS:
         return <SkillsStep data={formData} update={updateFormData} />;
-      case Step.REWARDS:
-        return <RewardsStep data={formData} update={updateFormData} />;
       case Step.VISIBILITY:
         return <VisibilityStep data={formData} update={updateFormData} />;
       case Step.REVIEW:

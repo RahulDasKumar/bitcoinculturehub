@@ -3,9 +3,9 @@ export enum Step {
   BASICS = 0,
   SCOPE = 1,
   SKILLS = 2,
-  REWARDS = 3,
-  VISIBILITY = 4,
-  REVIEW = 5
+  // REWARDS = 3,
+  VISIBILITY = 3,
+  REVIEW = 4
 }
 
 export type FormData = {

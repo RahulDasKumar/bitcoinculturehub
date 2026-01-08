@@ -26,11 +26,11 @@ const ProfileBeta: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 space-y-4">
         <ThisWeek />
         <div className="w-full border-t border-gray-200 my-8"></div>
-        <CalendarSection />
+        <PipelineSection />
         <div className="w-full border-t border-gray-200 my-8"></div>
         <ExploreSection />
         <div className="w-full border-t border-gray-200 my-8"></div>
-        <PipelineSection />
+        <CalendarSection />
         <div className="w-full border-t border-gray-200 my-8"></div>
         <ResumeSection />
         <div className="w-full border-t border-gray-200 my-8"></div>

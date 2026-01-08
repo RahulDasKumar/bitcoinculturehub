@@ -4,6 +4,7 @@ import { BookOpen, ArrowRight, User } from 'lucide-react';
 import { BitcoinHomebaseAPI } from './api';
 import { Article } from './types';
 import Loader from './ui/Loader';
+import ComingSoonOverlay from './CommingSoonOverlay';
 
 const ExploreSection: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -33,7 +34,8 @@ const ExploreSection: React.FC = () => {
 
   if (loading) return <section className="mb-12"><Loader /></section>;
 
-  return (
+  return <>
+    <ComingSoonOverlay active={true} bannerRotation="rotate-[-2deg]">
     <section className="mb-12">
       <SectionHeader 
         icon={BookOpen} 
@@ -117,7 +119,8 @@ const ExploreSection: React.FC = () => {
         </div>
       </div>
     </section>
-  );
+  </ComingSoonOverlay>
+  </>;
 };
 
 export default ExploreSection;

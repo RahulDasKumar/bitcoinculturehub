@@ -44,7 +44,7 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
     };
 
     return (
-        <div className="space-y-4">
+        <div id='opportunity-list' className="space-y-4">
             {opportunities.map((opp) => {
                 const hasApplied = appliedOpportunityIds.has(String(opp.id));
 
@@ -88,7 +88,7 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
                                 </div>
                                 <div className="flex items-center justify-end text-xs font-bold text-gray-800 uppercase">
                                     <MapPin className="w-3 h-3 mr-1.5 text-gray-400" />
-                                    {opp.location}
+                                    {opp.location.text}
                                 </div>
                             </div>
 
@@ -100,7 +100,7 @@ const OpportunityList = ({ opportunities, applicants }: ListProps) => {
                                 </div>
                                 <div className="flex items-center text-[10px] font-bold text-gray-800 uppercase">
                                     <MapPin className="w-3 h-3 mr-1.5 text-gray-400" />
-                                    {opp.location}
+                                    {opp.location.text}
                                 </div>
                             </div>
 

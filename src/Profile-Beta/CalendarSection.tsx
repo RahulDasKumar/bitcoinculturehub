@@ -1,6 +1,7 @@
 import React from 'react';
 import SectionHeader from './ui/SectionHeader';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import ComingSoonOverlay from './CommingSoonOverlay';
 
 const CalendarSection: React.FC = () => {
   // Hardcoded visual calendar for December 2025
@@ -8,6 +9,8 @@ const CalendarSection: React.FC = () => {
   const startDayOffset = 1; // Assuming Dec 1st 2025 starts on a Monday for visual matching roughly with screenshot (Screenshot shows 1st on Mon)
 
   return (
+    <ComingSoonOverlay active={true} bannerRotation="rotate-[-2deg]">
+
     <section className="mb-12">
       <SectionHeader icon={CalendarIcon} title="My Bitcoin Calendar" />
       
@@ -65,6 +68,7 @@ const CalendarSection: React.FC = () => {
         </div>
       </div>
     </section>
+    </ComingSoonOverlay>
   );
 };
 

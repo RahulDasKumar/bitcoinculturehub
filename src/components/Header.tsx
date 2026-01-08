@@ -57,9 +57,9 @@ const Header = () => {
 
               <Link
                 to="/about"
-                className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/about"
+                  ? "bg-black text-white"
+                  : "text-muted-foreground hover:text-white hover:bg-black"
                   }`}
               >
                 About
@@ -79,30 +79,30 @@ const Header = () => {
             </Link> */}
             <Link
               to="/opportunity"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/opportunity"
+                ? "bg-black text-white"
+                : "text-muted-foreground hover:text-white hover:bg-black"
                 }`}
             >
               Opportunity Engine
 
             </Link>
-            <Link
+            {/* <Link
               to="/events"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/events"
+                ? "bg-black text-white"
+                : "text-muted-foreground hover:text-white hover:bg-black"
                 }`}
             >
               Events
 
-            </Link>
+            </Link> */}
 
             <Link
               to="/awards"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/awards"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/awards"
+                ? "bg-black text-white"
+                : "text-muted-foreground hover:text-white hover:bg-black"
                 }`}
             >
               Awards
@@ -110,9 +110,9 @@ const Header = () => {
             </Link>
             <Link
               to="/organization-auth"
-              className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+              className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/organization-auth"
+                ? "bg-black text-white"
+                : "text-muted-foreground hover:text-white hover:bg-black"
                 }`}
             >
               Org
@@ -121,22 +121,21 @@ const Header = () => {
             {isAdmin && (
               <Link
                 to="/admin"
-                className={`px-4 py-2 rounded-lg transition-colors ${location.pathname === "/admin"
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                className={`font-black uppercase px-4 py-2 rounded-lg transition-colors ${location.pathname === "/admin"
+                  ? "bg-black text-white"
+                  : "text-muted-foreground hover:text-white hover:bg-black"
                   }`}
               >
                 Admin
               </Link>
             )}
 
-            {/* 👤 Profile / Login */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
                   onClick={handleProfileClick}
                   className={`p-2 rounded-full transition ${isLoggedIn
-                    ? "bg-primary text-primary-foreground hover:opacity-90"
+                    ? "bg-white text-primary-foreground hover:opacity-90"
                     : "hover:bg-accent"
                     }`}
                   title={isLoggedIn ? "Profile" : "Login"}
@@ -148,9 +147,9 @@ const Header = () => {
               {isLoggedIn && (
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/profile" className="font-black uppercase">Profile</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logoutHandler}>
+                  <DropdownMenuItem onClick={logoutHandler} className="font-black uppercase">
                     Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -118,7 +118,7 @@ const BasicsStep: React.FC<StepProps> = ({ data, update }) => {
       {/* Estimated Hours Slider */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <label className="text-[11px] font-bold uppercase text-gray-800">ESTIMATED HOURS: {data.estimated_hours}H</label>
+          <label className="text-[11px] font-bold uppercase text-gray-800">WEEKLY HOURS: {data.estimated_hours}H</label>
         </div>
         <div className="px-2 pb-8">
           <input 
