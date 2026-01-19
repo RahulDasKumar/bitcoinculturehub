@@ -4,13 +4,13 @@ export interface ProfileInformation {
     avatar?: string;
     karma: number;
     satsTipped: number;
-    satsEarned: number;
-    role: 'admin' | 'moderator' | 'builder' | 'user';
-    badges: string[];
-    email:string;
-    location:string;
-    bio:string;
-    links:string[]
+    satsEarned?: number;
+    role?: 'admin' | 'moderator' | 'builder' | 'user';
+    badges?: string[];
+    email?:string;
+    location?:string;
+    bio?:string;
+    links?:string[]
 
 }
 

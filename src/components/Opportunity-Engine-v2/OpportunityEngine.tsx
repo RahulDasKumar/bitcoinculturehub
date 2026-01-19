@@ -17,6 +17,8 @@ const OpportunityEngineBeta: React.FC = () => {
         findUserApplicants()
     }, [])
     const matched_opportunities = all_opportunities.slice(0,3)
+    const numberOfOpportunities = all_opportunities.length
+    console.log(all_opportunities)
     return (
         <div className="min-h-screen bg-white">
             <Header/>
@@ -63,7 +65,7 @@ const OpportunityEngineBeta: React.FC = () => {
                         <div className="mb-12">
                             <div className="flex items-center mb-6">
                                 <h3 className="text-xl font-black uppercase tracking-tight mr-4">All Opportunities</h3>
-                                <span className="text-xs text-gray-400 font-bold uppercase tracking-wide">5 Available</span>
+                                <span className="text-xs text-gray-400 font-bold uppercase tracking-wide">{numberOfOpportunities}Available</span>
                             </div>
 
                             <OpportunityList opportunities={all_opportunities}  applicants={user_applications} />

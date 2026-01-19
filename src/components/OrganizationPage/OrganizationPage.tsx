@@ -20,7 +20,9 @@ const OrganizationPage: React.FC = () => {
         user_applications,
         currentOrganization,
         fetchGeneralDashboard,
-        fetchOrganizationDashboard
+        fetchOrganizationDashboard,
+        fetchOrgPrompts,
+        orgPrompts
     } = useOrganizationStore();
     const { token, user, isLoggedIn } = useAuthStore();
 
@@ -29,13 +31,14 @@ const OrganizationPage: React.FC = () => {
 
         fetchOrganizationsOpportunity(orgId);
         fetchGeneralDashboard(orgId);
+        fetchOrgPrompts(orgId,token)
         findUserApplicants();
     }, [orgId]);
 
     if (!currentOrganization) return <div>Loading organization...</div>;
 
-    console.log(currentOrganization);
-
+    console.log(orgPrompts, ' printing org prompts');
+    console.log(orgId)
     return (
         <div className="min-h-screen bg-white">
             {/* Container to center content */}
@@ -71,7 +74,7 @@ const OrganizationPage: React.FC = () => {
                 <div className="mt-20 flex flex-col lg:flex-row gap-12">
                     {/* Left Column (Main Content) */}
                     <div className="flex-1 space-y-24">
-                        <InvolvementQuickActions />
+                        {/* <InvolvementQuickActions /> */}
 
                         <section id="get-involved">
                             <div className="mb-8">
@@ -81,8 +84,7 @@ const OrganizationPage: React.FC = () => {
                             <ProgramsGrid opportunities={opportunities} user_applications={user_applications} />
                         </section>
 
-                        <AboutSection />
-                        <TimelineSection />
+                        <AboutSection orgName={currentOrganization.name} orgPrompts={orgPrompts}/>
                     </div>
 
                     {/* Right Column (Sidebar) */}

@@ -1,13 +1,13 @@
 
 import React from 'react';
 import ComingSoonOverlay from '../../Profile-Beta/CommingSoonOverlay';
-
+import { useNavigate } from 'react-router-dom';
 
 const RELATED_ORGS = [
-  { id: '1', name: 'Bitcoin Policy Institute', badge: 'Partner', description: 'Research-driven Bitcoin policy advocacy', stats: 'Partner organization · 8 shared contributors', initials: 'BP' },
-  { id: '2', name: 'Summer of Bitcoin', badge: 'Verified', description: 'Open-source internship program for...', stats: 'Overlapping audience · 3 active opportunities', initials: 'So' },
-  { id: '3', name: 'Bitcoin Commons', badge: 'Community', description: 'Austin-based Bitcoin coworking & events', initials: 'BC' },
-  { id: '4', name: 'Chaincode Labs', badge: 'Verified', description: 'Bitcoin protocol research & education', stats: 'Similar opportunities · 94% completion rate', initials: 'CL' },
+  { id: '1', name: 'Bitcoin Culture Hub', badge: 'Community', description: 'Cultural Education and Bitcoin Adoption', stats: 'Partner organization · 8 shared contributors', initials: 'BP' },
+  { id: '2', name: 'Midwest Bitcoin Summit', badge: 'Conference', description: 'Open-source internship program for...', stats: 'Overlapping audience · 3 active opportunities', initials: 'So' },
+  { id: '3', name: 'Bitcoin Park', badge: 'Community', description: 'Austin-based Bitcoin coworking & events', initials: 'BC' },
+  { id: '4', name: 'Bitcoin Student Network', badge: 'Community', description: 'Bitcoin protocol research & education', stats: 'Similar opportunities · 94% completion rate', initials: 'CL' },
   { id: '5', name: 'Bitcoin Design', badge: 'Community', description: 'Open-source Bitcoin UX community', initials: 'BD' },
 ];
 
@@ -40,8 +40,9 @@ const SectionTitle: React.FC<{ children: React.ReactNode; subtitle?: string }> =
 );
 
 const Sidebar: React.FC = () => {
+
+  const nav = useNavigate()
   return <>
-    <ComingSoonOverlay active={true}>
     <aside className="space-y-12">
       <section>
         <SectionTitle subtitle="Active in similar work on BSN">Related Organizations</SectionTitle>
@@ -68,12 +69,13 @@ const Sidebar: React.FC = () => {
             </div>
           ))}
         </div>
-        <button className="w-full mt-4 py-3 border border-black text-[10px] font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white transition-all">
+        <button className="w-full mt-4 py-3 border border-black text-[10px] font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white transition-all" onClick={() => nav("/orgs")}>
           Explore All Organizations
         </button>
       </section>
 
       {/* Related Topics */}
+      <ComingSoonOverlay>
       <section>
         <SectionTitle subtitle="Follow to see more">Related Topics</SectionTitle>
         <div className="space-y-px border-t border-l border-gray-200">
@@ -90,9 +92,9 @@ const Sidebar: React.FC = () => {
           ))}
         </div>
       </section>
-
+      </ComingSoonOverlay>
       {/* Team */}
-      <section>
+      {/* <section>
         <div className="space-y-px border-t border-l border-gray-200">
           {TEAM.map(member => (
             <div key={member.id} className="p-4 border-b border-r border-gray-200 flex items-center gap-4 hover:bg-gray-50 cursor-pointer transition-colors">
@@ -103,7 +105,7 @@ const Sidebar: React.FC = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Related Opportunities */}
       <section>
@@ -123,12 +125,11 @@ const Sidebar: React.FC = () => {
             </div>
           ))}
         </div>
-        <button className="w-full mt-4 py-3 border border-black text-[10px] font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white transition-all">
+        <button className="w-full mt-4 py-3 border border-black text-[10px] font-bold uppercase tracking-widest text-black hover:bg-black hover:text-white transition-all" onClick={() => nav("/opportunity")}>
           Explore All Opportunities
         </button>
       </section>
     </aside>
-      </ComingSoonOverlay>
   </>;
 };
 

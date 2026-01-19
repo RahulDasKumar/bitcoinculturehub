@@ -4,9 +4,8 @@ import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-reac
 import ComingSoonOverlay from './CommingSoonOverlay';
 
 const CalendarSection: React.FC = () => {
-  // Hardcoded visual calendar for December 2025
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const startDayOffset = 1; // Assuming Dec 1st 2025 starts on a Monday for visual matching roughly with screenshot (Screenshot shows 1st on Mon)
+  const startDayOffset = 1; 
 
   return (
     <ComingSoonOverlay active={true} bannerRotation="rotate-[-2deg]">
