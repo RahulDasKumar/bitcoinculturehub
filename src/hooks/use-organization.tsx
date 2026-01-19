@@ -3,6 +3,11 @@ import { Organization, Opportunity, ApplicantInformation, ProfileInformation } f
 import { toast } from "./use-toast";
 import useAuthStore from "./use-auth";
 import { API_URL } from "../config";
+
+export interface OrganizationPrompt {
+    prompt_key: string;
+    custom_text: string;
+}
 const devurl = 'http://127.0.0.1:8000'
 interface OrgStore {
     organizations: Organization[];
@@ -15,6 +20,13 @@ interface OrgStore {
     currentOrganization:Partial<Organization>
     applicantsByOpportunity: Record<string, ApplicantInformation[]>;
     organizatonMembers: ProfileInformation[];
+    orgPrompts: OrganizationPrompt[],
+    upsertOrgPrompt: (
+        orgId: string,
+        prompt: OrganizationPrompt,
+        token: string
+    ) => Promise<void>;
+    fetchOrgPrompts: (orgId: string, token: string) => Promise<void>;
     fetchMyOrganizations: (token: string) => Promise<void>;
     fetchOrganizationsOpportunity:(org_id:string)=>Promise<void>;
     postOpportunity: (org:Partial<Opportunity>,token:string)=>Promise<void>;
@@ -28,7 +40,9 @@ interface OrgStore {
     editOrganization: (org_id:string,organization:Partial<Organization>,token:string)=>Promise<void>
     fetchOrganizationDashboard: (orgId:string, token:string)=>Promise<void>
     fetchGeneralDashboard:(orgId:string)=>Promise<void>
-    fetchOrganizationMembers:(orgId:string,token:string)=>Promise<void>
+    fetchOrganizationMembers:(orgId:string)=>Promise<void>
+    addOrganizationMember:(orgId:string,userId:string,role:string)=>Promise<void>
+    removeOrganizationMember: (orgId: string, userId: string) => Promise<void>
 
 
 }
@@ -44,6 +58,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     user_applications:[],
     currentOrganization:null,
     organizatonMembers:[],
+    orgPrompts: [],
     fetchMyOrganizations: async (token: string) => {
         set({ loading: true });
         try {
@@ -327,9 +342,9 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             set({ currentOrganization: null });
         }
     },
-    fetchOrganizationMembers : async (orgId,token) => {
+    fetchOrganizationMembers : async (orgId) => {
         const res = await fetch(`${API_URL}/org/${orgId}/members`, {
-            headers: { Authorization: `Bearer ${token}` },
+            // headers: { Authorization: `Bearer ${token}` },
         });
         console.log(res)
         if (res.ok) {
@@ -340,5 +355,107 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             set({ organizatonMembers: null });
         }
     },
+    fetchOrgPrompts: async (orgId: string, token: string) => {
+        try {
+            const res = await fetch(`${API_URL}/org/${orgId}/prompts`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!res.ok) throw new Error("Failed to fetch prompts");
+
+            const data: OrganizationPrompt[] = await res.json();
+
+            const defaultPrompts: OrganizationPrompt[] = [
+                { prompt_key: "what_it_is", custom_text: "What It Is" },
+                { prompt_key: "who_its_for", custom_text: "Who It's For" },
+                { prompt_key: "why_it_exists", custom_text: "Why It Exists" },
+                { prompt_key: "how_it_operates", custom_text: "How It Operates" },
+            ];
+
+            // 🔑 Build a lookup map from DB
+            const dbPromptMap = new Map(
+                (Array.isArray(data) ? data : []).map(p => [p.prompt_key, p])
+            );
+
+            // 🔑 Merge: DB value ALWAYS wins
+            const mergedPrompts = defaultPrompts.map(defaultPrompt => {
+                return dbPromptMap.get(defaultPrompt.prompt_key) ?? defaultPrompt;
+            });
+
+            // 🔑 Only create defaults if NOTHING exists
+            if (data.length === 0) {
+                await fetch(`${API_URL}/org/${orgId}/prompts`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({ prompts: defaultPrompts }),
+                });
+            }
+
+            set({ orgPrompts: mergedPrompts });
+        } catch (err) {
+            console.error("Failed to fetch org prompts", err);
+        }
+    },
+
+ upsertOrgPrompt: async (orgId, prompt, token) => {
+        try {
+            const res = await fetch(`${API_URL}/org/${orgId}/prompts`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(prompt),
+            });
+
+            if (!res.ok) throw new Error("Failed to save prompt");
+
+            set(state => ({
+                orgPrompts: [
+                    ...state.orgPrompts.filter(p => p.prompt_key !== prompt.prompt_key),
+                    prompt,
+                ],
+            }));
+        } catch (err) {
+            console.error("Failed to upsert org prompt", err);
+        }
+    },
+    addOrganizationMember: async (orgId: string, userId: string, role: string) => {
+        const res = await fetch(`${API_URL}/org/${orgId}/members`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, role :role}),
+        });
+
+        if (res.ok) {
+            const newMember = await res.json();
+            set({ organizatonMembers: [newMember, ...get().organizatonMembers] });
+        } else {
+            const error = await res.json();
+            alert(error.detail || 'Failed to add member');
+        }
+    },
+
+    removeOrganizationMember: async (orgId: string, userId: string) => {
+        const res = await fetch(`${API_URL}/org/${orgId}/members`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId }),
+        });
+
+        if (res.ok) {
+            set({
+                organizatonMembers: get().organizatonMembers.filter((m) => m.id !== userId),
+            });
+        } else {
+            const error = await res.json();
+            alert(error.detail || 'Failed to remove member');
+        }
+    }
 
 }));

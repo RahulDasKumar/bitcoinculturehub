@@ -17,7 +17,7 @@ const OrganizationGrid: React.FC = () => {
                 <h3 className="text-xl font-black uppercase tracking-tight mb-1">All Organizations</h3>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wide">Trusted by builders worldwide</p>
             </div>
-            <button className="text-xs font-bold uppercase border border-gray-300 px-3 py-1 hover:bg-black hover:text-white transition-colors flex items-center">
+              <button className="text-xs font-bold uppercase border border-gray-300 px-3 py-1 hover:bg-black hover:text-white transition-colors flex items-center" onClick={() => { nav('/orgs')}}>
                 See All <ArrowRight className="ml-1 w-3 h-3" />
             </button>
         </div>

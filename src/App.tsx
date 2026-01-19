@@ -27,7 +27,6 @@ import Opportunity from "./components/Opportunity/Opportunity";
 import OrganizationDashboard from "./components/Organization/OrganizationDashboard";
 import ProfilePage from "./components/Profile/ProfilePage";
 import { SignUpModal } from "./components/Organization/Authentication/SignUpModal";
-import { AdminDashboard } from "./components/Admin/Dashboard";
 import OpportunityEngineBeta from "./components/Opportunity-Engine-v2/OpportunityEngine";
 import EventPage2 from "./components/Events-Page-Beta/Events";
 import AboutUs from "./components/About-Us-Beta/Manifesto";
@@ -36,7 +35,8 @@ import ProfileBeta from "./Profile-Beta/ProfileBeta";
 import OrganizationPage from "./components/OrganizationPage/OrganizationPage";
 import OwnerDashboard from "./components/OwnerDashboard/OwnerDashboard";
 import PostOpportunity from "./components/PostOpportunity/App";
-
+import Directory from "./components/AllOrganization/Directory";
+import NetworkAdministration from "./components/Admin/NetworkAdministration";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -56,11 +56,14 @@ const App = () => (
           <Route path="/profile" element={<ProfileBeta />}></Route>
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />
-          <Route path="/opportunity" element={<OpportunityEngineBeta />}></Route>
+          <Route path="/opportunity" element={<OpportunityEngineBeta />}>
+            <Route path=":id" element={<OpportunityEngineBeta />} />
+          </Route>
+          
           <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
           <Route path="/post-opportunity/:orgId" element={<PostOpportunity />} />
           <Route path="/awards" element={<AwardPage/>}/>
-          <Route path="/admin" element={<AdminPage/>}/>
+          <Route path="/admin" element={<NetworkAdministration />}/>
           <Route path="/events" element={<EventPage2/>}></Route>
           <Route path="/forum" element={<Forum/>}></Route>
           <Route path="/organization-dashboard/:orgId" element={<OrganizationDashboard />} />
@@ -69,9 +72,9 @@ const App = () => (
           <Route path="/organization-auth" element={<SignUpModal />} />
           <Route path="/awards" element={<AwardPage />} />
           <Route path="/org-dash/:orgId" element={<OwnerDashboard/>}></Route>
-          <Route path="/test-dash" element={<AdminDashboard/>}></Route>
-
+          <Route path="/orgs" element={<Directory/>}></Route>
           <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
