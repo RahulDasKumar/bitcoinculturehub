@@ -20,6 +20,7 @@ import {
     XCircle,
 } from 'lucide-react';
 import { useOrganizationStore } from '@/hooks/use-organization';
+import { API_URL } from '@/config';
 const devurl = 'http://127.0.0.1:8000'
 
 interface ViewApplicantsModalProps {
@@ -48,7 +49,7 @@ export const ViewApplicantsModal = ({
     console.log(applicants)
     const downloadResume = async (resume_key: string) => {
         const res = await fetch(
-            `${devurl}/profile/applications/resume-url/${resume_key}`,
+            `${API_URL}/profile/applications/resume-url/${resume_key}`,
             
         );
 
