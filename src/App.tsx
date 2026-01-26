@@ -3,8 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import About from "./pages/About";
 // import Manifesto from "./pages/Manifesto";
 import NotFound from "./pages/NotFound";
 import BitcoinCultureHub from "./Badge";
@@ -13,19 +11,12 @@ import HomePage from "./HomePage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Waitlist from "./pages/WaitList-Components/Waitlist";
-import BookmarkToggle from "@/components/BookmarkToggle";
 import ExplorePage from "./pages/explore/Explore"; 
-import Profile from "./pages/Profile";
 import SubmitContent from "./pages/explore/SubmitContent";
-import AdminPage from "./pages/explore/Admin";
-import OpportunityEngine from "./components/Opportunity-Engine/OpportunityEngine";
-import SubmitOpportunity from "./components/Opportunity-Engine/SubmitOpportunity";
 import PressReleasePage from "./components/PressRelease"
 import EventPage from "./components/Events/EventPage";
 import Forum from "./components/Forum/Forum";
-import Opportunity from "./components/Opportunity/Opportunity";
 import OrganizationDashboard from "./components/Organization/OrganizationDashboard";
-import ProfilePage from "./components/Profile/ProfilePage";
 import { SignUpModal } from "./components/Organization/Authentication/SignUpModal";
 import OpportunityEngineBeta from "./components/Opportunity-Engine-v2/OpportunityEngine";
 import EventPage2 from "./components/Events-Page-Beta/Events";
@@ -37,6 +28,7 @@ import OwnerDashboard from "./components/OwnerDashboard/OwnerDashboard";
 import PostOpportunity from "./components/PostOpportunity/App";
 import Directory from "./components/AllOrganization/Directory";
 import NetworkAdministration from "./components/Admin/NetworkAdministration";
+import Homepage from "./components/HomePage/Homepage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -46,7 +38,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/intro" element={<BitcoinCultureHub/>}/>
           <Route path="/quiz" element={<Quiz/>}/>
           <Route path="/about" element={<AboutUs />}/>
@@ -59,8 +51,6 @@ const App = () => (
           <Route path="/opportunity" element={<OpportunityEngineBeta />}>
             <Route path=":id" element={<OpportunityEngineBeta />} />
           </Route>
-          
-          <Route path="/submit-opportunity" element={<SubmitOpportunity />} />
           <Route path="/post-opportunity/:orgId" element={<PostOpportunity />} />
           <Route path="/awards" element={<AwardPage/>}/>
           <Route path="/admin" element={<NetworkAdministration />}/>

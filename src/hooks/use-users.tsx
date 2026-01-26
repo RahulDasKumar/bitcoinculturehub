@@ -7,6 +7,7 @@ interface UserStore {
     globalUsers: ProfileInformation[];
     fetchGlobalUsers: () => Promise<void>;
     set: (state: Partial<UserStore>) => void;
+    
 }
 
 const devurl = 'http://127.0.0.1:8000'

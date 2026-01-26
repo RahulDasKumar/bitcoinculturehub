@@ -374,17 +374,14 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
                 { prompt_key: "how_it_operates", custom_text: "How It Operates" },
             ];
 
-            // 🔑 Build a lookup map from DB
             const dbPromptMap = new Map(
                 (Array.isArray(data) ? data : []).map(p => [p.prompt_key, p])
             );
 
-            // 🔑 Merge: DB value ALWAYS wins
             const mergedPrompts = defaultPrompts.map(defaultPrompt => {
                 return dbPromptMap.get(defaultPrompt.prompt_key) ?? defaultPrompt;
             });
 
-            // 🔑 Only create defaults if NOTHING exists
             if (data.length === 0) {
                 await fetch(`${API_URL}/org/${orgId}/prompts`, {
                     method: "PUT",

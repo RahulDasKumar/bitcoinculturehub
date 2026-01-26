@@ -7,8 +7,13 @@ import ResumeSection from './ResumeSection';
 import ArchiveSection from './ArchiveSection';
 import GoalsSection from './GoalsSection';
 import Header from '@/components/Header';
-
+import ResumeHub from './Resume';
+import useAuthStore from '@/hooks/use-auth';
+import ProfileBadge from './ProfileBadge';
+import SectionHeader from './ui/SectionHeader';
+import { FileUser, Plus } from 'lucide-react';
 const ProfileBeta: React.FC = () => {
+  const { user } = useAuthStore()
   return (
     <main className="min-h-screen bg-white text-black font-sans selection:bg-bitcoin selection:text-white pb-20">
       <Header/>
@@ -23,8 +28,16 @@ const ProfileBeta: React.FC = () => {
         <div className="w-full h-[4px] bg-black mt-6 mb-8"></div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 space-y-4">
-        <ThisWeek />
+      <div className="max-w-7xl mx-auto px-4 space-y-4 ">
+        <SectionHeader
+          icon={FileUser}
+          title="Resume Section"
+        />
+        <div className='flex flex-row space-even justify-evenly'>
+        <ResumeHub />
+          <ProfileBadge username={user.username}/>
+        </div>
+        
         <div className="w-full border-t border-gray-200 my-8"></div>
         <PipelineSection />
         <div className="w-full border-t border-gray-200 my-8"></div>

@@ -1,21 +1,22 @@
 import * as React from "react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { API_URL } from "@/config";
+
 const Register: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
-  const navigate = useNavigate()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -25,12 +26,17 @@ const Register: React.FC = () => {
     setMessage(""); // reset message
 
     try {
+      const body: any = { ...formData };
+
+      const searchParams = new URLSearchParams(location.search);
+      const inviteToken = searchParams.get("token");
+      console.log(inviteToken, ' is the invite token')
+      if (inviteToken) body.invite_token = inviteToken;
+
       const res = await fetch(`${API_URL}/authorize/signup`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) {
@@ -39,8 +45,8 @@ const Register: React.FC = () => {
         return;
       }
 
-      const data = await res.json();
-      navigate("/login")
+      // Signup successful — ALWAYS redirect to login
+      navigate("/login");
     } catch (err) {
       setMessage("Network error. Try again.");
     }
@@ -55,7 +61,7 @@ const Register: React.FC = () => {
 
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            {/* ...SVG code unchanged... */}
+            {/* ...SVG or logo here */}
           </div>
 
           {/* Title */}
@@ -69,8 +75,8 @@ const Register: React.FC = () => {
             <Link
               to="/login"
               className={`flex-1 text-center px-5 py-2 rounded-full text-sm font-medium transition-colors ${location.pathname === "/login"
-                ? "bg-orange-600 text-white"
-                : "text-zinc-300 hover:text-white"
+                  ? "bg-orange-600 text-white"
+                  : "text-zinc-300 hover:text-white"
                 }`}
             >
               Sign In
@@ -78,8 +84,8 @@ const Register: React.FC = () => {
             <Link
               to="/register"
               className={`flex-1 text-center px-5 py-2 rounded-full text-sm font-medium transition-colors ${location.pathname === "/register"
-                ? "bg-orange-600 text-white"
-                : "text-zinc-300 hover:text-white"
+                  ? "bg-orange-600 text-white"
+                  : "text-zinc-300 hover:text-white"
                 }`}
             >
               Sign Up

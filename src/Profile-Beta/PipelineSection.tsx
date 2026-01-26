@@ -9,7 +9,7 @@ const PipelineSection: React.FC = () => {
   const { findUserApplicants, user_applications } = useOrganizationStore();
   const [loading, setLoading] = useState(true);
 
-  const STAGES = ["applied", "IN_PROGRESS", "completed"]; // hardcoded stages
+  const STAGES = ["applied", "IN_PROGRESS", "completed"]; 
 
   // Group applicants by status
   const groupedApplicants: Record<string, ApplicantInformation[]> = STAGES.reduce((acc, stage) => {
@@ -26,7 +26,7 @@ const PipelineSection: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await findUserApplicants(); // populate user_applications
+        await findUserApplicants(); 
       } catch (error) {
         console.error("Failed to fetch user applications", error);
       } finally {

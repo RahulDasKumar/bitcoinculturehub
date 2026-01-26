@@ -11,6 +11,7 @@ export interface ProfileInformation {
     location?:string;
     bio?:string;
     links?:string[]
+    resume_link?:string
 
 }
 

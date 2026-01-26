@@ -1,10 +1,10 @@
 
 export enum UserRole {
-  OWNER = 'Owner',
+  OWNER = 'owner',
   VP = 'VP',
-  ADMIN = 'Admin',
-  MEMBER = 'Member',
-  CONTRIBUTOR = 'Contributor'
+  ADMIN = 'admin',
+  MEMBER = 'member',
+  CONTRIBUTOR = 'contributor'
 }
 
 export interface User {
