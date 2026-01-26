@@ -3,7 +3,7 @@ import Hero from './Hero';
 import Mission from './Mission';
 import SearchBar from './SearchBar';
 import SidebarFilters from './SidebarFilters';
-import MatchCard from './MatchCard';
+import MatchCard from '../OpportunityComponents/MatchCard';
 import FeaturedBanner from './FeaturedBanner';
 import OpportunityList from './OpportunityList';
 import OrganizationGrid from './OrganizationGrid';

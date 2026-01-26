@@ -20,7 +20,7 @@ const Login: React.FC = () => {
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate()
-
+    const devurl = 'http://127.0.0.1:8000'
     const [formData, setFormData] = useState({
         email: "",
         password: "",

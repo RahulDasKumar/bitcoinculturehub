@@ -37,8 +37,7 @@ const OrganizationPage: React.FC = () => {
 
     if (!currentOrganization) return <div>Loading organization...</div>;
 
-    console.log(orgPrompts, ' printing org prompts');
-    console.log(orgId)
+
     return (
         <div className="min-h-screen bg-white">
             {/* Container to center content */}

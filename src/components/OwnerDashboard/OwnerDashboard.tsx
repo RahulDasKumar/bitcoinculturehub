@@ -14,12 +14,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DetailCard from './DetailCard';
 import EditModal from './EditModal';
 import SectionHeader from './SectionHeader';
-
+import GenerateInvite  from '../GenerateLinkButton/GenerateInvite';
 export default function OwnerDashboard() {
   const { orgId } = useParams<{ orgId: string }>();
   const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s)=>s.user)
   const nav = useNavigate();
-
+  const isAdmin = user.email == 'dasrkd3@gmail.com'
+  console.log(user.email)
   const {
     opportunities,
     fetchOrganizationsOpportunity,
@@ -81,6 +83,14 @@ export default function OwnerDashboard() {
             <Badge variant="outline"><Users size={10} /> Student-Led</Badge>
             <Badge variant="orange"><CheckCircle size={10} /> Verified on BCH</Badge>
           </div>
+          <GenerateInvite orgId={orgId} role={'member'} token={token} />
+          {isAdmin && (
+            <div className="flex flex-row items-start">
+              <p className="text-lg text-gray-500 mb-6">Admin Only</p>
+              <GenerateInvite orgId={orgId} role="owner" token={token} />
+            </div>
+          )}
+          
         </header>
 
         {/* Sections */}

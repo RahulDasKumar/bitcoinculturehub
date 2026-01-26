@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Opportunity } from '../types';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import { useParams } from "react-router-dom";
-import MatchCard from '../Opportunity-Engine-v2/MatchCard';
+import MatchCard from '../OpportunityComponents/MatchCard';
 import ComingSoonOverlay from '../../Profile-Beta/CommingSoonOverlay';
 
 
