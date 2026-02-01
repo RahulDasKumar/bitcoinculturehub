@@ -31,7 +31,7 @@ const HeroActions: React.FC<HeroActionsProps> = ({ organization }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      console.log(orgId)
       if (!res.ok) return false;
       const data = await res.json();
       return data.is_owner === true;
@@ -45,7 +45,7 @@ const HeroActions: React.FC<HeroActionsProps> = ({ organization }) => {
     const fetchOwnerStatus = async () => {
       if (token && organization?.id) {
         const isOwner = await checkIsOrgOwner(organization.id, token);
-        console.log('is owner',isOwner,token)
+        console.log(organization, user.id)
         setCanEdit(isOwner);
       } else {
         setCanEdit(false); // Not logged in or no token

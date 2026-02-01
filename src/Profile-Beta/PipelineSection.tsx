@@ -9,7 +9,7 @@ const PipelineSection: React.FC = () => {
   const { findUserApplicants, user_applications } = useOrganizationStore();
   const [loading, setLoading] = useState(true);
 
-  const STAGES = ["applied", "IN_PROGRESS", "completed"]; 
+  const STAGES = ["applied", "interview", "in_progress", "completed"]; 
 
   // Group applicants by status
   const groupedApplicants: Record<string, ApplicantInformation[]> = STAGES.reduce((acc, stage) => {

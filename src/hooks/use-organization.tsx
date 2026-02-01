@@ -21,13 +21,14 @@ interface OrgStore {
     applicantsByOpportunity: Record<string, ApplicantInformation[]>;
     organizatonMembers: ProfileInformation[];
     orgPrompts: OrganizationPrompt[],
+    ownedOrganizations:Organization[],
     upsertOrgPrompt: (
         orgId: string,
         prompt: OrganizationPrompt,
         token: string
     ) => Promise<void>;
     fetchOrgPrompts: (orgId: string, token: string) => Promise<void>;
-    fetchMyOrganizations: (token: string) => Promise<void>;
+    fetchMyOrganizations: () => Promise<void>;
     fetchOrganizationsOpportunity:(org_id:string)=>Promise<void>;
     postOpportunity: (org:Partial<Opportunity>,token:string)=>Promise<void>;
     deleteOpportunity: (opportunityId: string, orgId: string, token: string)=>Promise<void>;
@@ -43,6 +44,9 @@ interface OrgStore {
     fetchOrganizationMembers:(orgId:string)=>Promise<void>
     addOrganizationMember:(orgId:string,userId:string,role:string)=>Promise<void>
     removeOrganizationMember: (orgId: string, userId: string) => Promise<void>
+    archiveOrganization:(org_id:string)=>Promise<void>,
+    unarchiveOrganization:(org_id:string)=>Promise<void>,
+    fetchOwnedOrganization: ()=>Promise<void>
 
 
 }
@@ -50,6 +54,7 @@ interface OrgStore {
 export const useOrganizationStore = create<OrgStore>((set,get) => ({
     organizations: [],
     opportunities:[],
+    ownedOrganizations:[],
     loading: false,
     all_opportunities:[],
     applicants:[],
@@ -59,9 +64,10 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
     currentOrganization:null,
     organizatonMembers:[],
     orgPrompts: [],
-    fetchMyOrganizations: async (token: string) => {
+    fetchMyOrganizations: async () => {
         set({ loading: true });
         try {
+            const token = useAuthStore.getState().token;
             const res = await fetch(`${API_URL}/org/my`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -69,13 +75,33 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             });
 
             const data = await res.json();
-            console.log(data, 'is the data')
+            
             set({ organizations: Array.isArray(data) ? data : [] });
         } catch (err) {
             console.error("Failed to load organizations:", err);
         } finally {
             set({ loading: false });
         }
+    },
+    fetchOwnedOrganization: async ()=>{
+        set({ loading: true });
+        try {
+            const token = useAuthStore.getState().token;
+            const res = await fetch(`${API_URL}/org/owned-orgs`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+
+            set({ ownedOrganizations: Array.isArray(data) ? data : [] });
+        } catch (err) {
+            console.error("Failed to load organizations:", err);
+        } finally {
+            set({ loading: false });
+        }
+
     },
     fetchOrganizationsOpportunity: async (org_id:string) => {
         set({ loading: true });
@@ -235,7 +261,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             }
 
             const data = await res.json();
-
+            console.log(data,' user application')
             set({ user_applications: data });
         } catch (err) {
             console.error(err);
@@ -265,7 +291,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             console.log(data, 'is the data')
             
             if(!res.ok){
-                console.log("Running here")
+                console.log(res)
                 throw new Error("Already Applied Error")
             }
             set({ applicants: data });
@@ -453,6 +479,49 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             const error = await res.json();
             alert(error.detail || 'Failed to remove member');
         }
+    },
+    archiveOrganization: async (orgId:string)=>{
+        const token = useAuthStore.getState().token;
+
+        if (!token) {
+            throw new Error("No auth token found");
+        }
+
+        const res = await fetch(`${API_URL}/org/${orgId}/archive`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!res.ok) {
+            const error = await res.text();
+            throw new Error(`Failed to archive organization: ${error}`);
+        }
+
+    },
+    unarchiveOrganization: async (orgId: string) => {
+        const token = useAuthStore.getState().token;
+
+        if (!token) {
+            throw new Error("No auth token found");
+        }
+
+        const res = await fetch(`${API_URL}/org/${orgId}/unarchive`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!res.ok) {
+            const error = await res.text();
+            throw new Error(`Failed to archive organization: ${error}`);
+        }
+
     }
+
 
 }));

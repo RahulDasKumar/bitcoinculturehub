@@ -6,7 +6,7 @@ import LiveNowTable from './LiveNowTable';
 import NetworkSnapshot from './NetworkSnapshot';
 import SyncStatus from './SyncStatus';
 import ContributorsSection from './ContributorsSection';
-import OrganizationSettings from './OrganizationSettings';
+import OrganizationSettings from './Settings';
 import Header from '../Header';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import useAuthStore from "@/hooks/use-auth";
@@ -116,8 +116,10 @@ export default function OwnerDashboard() {
             />
           ))}
         </div>
-      </main>
+        <OrganizationSettings organization={currentOrganization}/>
 
+      </main>
+        
       {/* Edit Modal */}
       {sectionBeingEdited && (
         <EditModal

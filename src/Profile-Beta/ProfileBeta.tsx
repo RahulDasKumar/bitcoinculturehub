@@ -12,6 +12,7 @@ import useAuthStore from '@/hooks/use-auth';
 import ProfileBadge from './ProfileBadge';
 import SectionHeader from './ui/SectionHeader';
 import { FileUser, Plus } from 'lucide-react';
+import MyOrganization from './MyOrganizations';
 const ProfileBeta: React.FC = () => {
   const { user } = useAuthStore()
   return (
@@ -41,15 +42,7 @@ const ProfileBeta: React.FC = () => {
         <div className="w-full border-t border-gray-200 my-8"></div>
         <PipelineSection />
         <div className="w-full border-t border-gray-200 my-8"></div>
-        <ExploreSection />
-        <div className="w-full border-t border-gray-200 my-8"></div>
-        <CalendarSection />
-        <div className="w-full border-t border-gray-200 my-8"></div>
-        <ResumeSection />
-        <div className="w-full border-t border-gray-200 my-8"></div>
-        <ArchiveSection />
-        <div className="w-full border-t border-gray-200 my-8"></div>
-        <GoalsSection />
+        <MyOrganization/>
       </div>
 
       <footer className="max-w-7xl mx-auto px-4 py-8 border-t border-black text-center text-xs text-gray-400 uppercase">

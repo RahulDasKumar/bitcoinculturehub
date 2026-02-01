@@ -6,28 +6,54 @@ import { SubmitModal } from './SubmitModal';
 import { DetailModal } from './DetailModal';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import Header from '../Header';
+import { API_URL } from '@/config';
+import useAuthStore from '@/hooks/use-auth';
 
 const Directory: React.FC = () => {
     const { all_organization,fetchAllOrganizations} = useOrganizationStore()
     const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
     const [selectedOrg, setSelectedOrg] = useState<Organization | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
-
+    const token = useAuthStore(state => state.token);
 
     useEffect(()=>{
             fetchAllOrganizations()
         }, [fetchAllOrganizations])
 
 
-    const handleAddOrg = (data: Organization) => {
+    const handleAddOrg = async (data: Organization) => {
         const newOrg: Partial<Organization> = {
-            id: Math.random().toString(36).substr(2, 9),
             name: data.name,
             description: data.description,
             type: data.type,
-            email: data.email
+            email: data.email,
+            location:data.location
         };
-        // setOrgs(prev => [newOrg, ...prev]);
+        // call the api
+        try {
+                    const res = await fetch(`${API_URL}/org/`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: JSON.stringify(newOrg)
+                    });
+        
+                    if (!res.ok) {
+                        const err = await res.json();
+                        alert(err.detail || "Failed to create organization");
+                        return;
+                    }
+        
+                    const data = await res.json();
+                    console.log("Created org:", data);
+        
+        
+                } catch (e) {
+                    console.error(e);
+                    alert("Something went wrong");
+                }
         setIsSubmitModalOpen(false);
     };
 

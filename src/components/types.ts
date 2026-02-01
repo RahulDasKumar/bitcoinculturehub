@@ -150,6 +150,8 @@ export interface Organization {
     description?: string;
     website?: string;
     owner:Member
+    deleted_at?:string;
+    
 }
 
 export interface ArtPiece {
