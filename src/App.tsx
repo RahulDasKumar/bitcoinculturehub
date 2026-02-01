@@ -29,6 +29,7 @@ import PostOpportunity from "./components/PostOpportunity/App";
 import Directory from "./components/AllOrganization/Directory";
 import NetworkAdministration from "./components/Admin/NetworkAdministration";
 import Homepage from "./components/HomePage/Homepage";
+import AuthPage from "./components/Authentication/AuthenticationPage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -43,8 +44,7 @@ const App = () => (
           <Route path="/quiz" element={<Quiz/>}/>
           <Route path="/about" element={<AboutUs />}/>
           <Route path="/join" element={<Waitlist/>}/>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/register" element={<Register />}></Route>
+          <Route path="/auth" element={<AuthPage/>}/>
           <Route path="/profile" element={<ProfileBeta />}></Route>
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />

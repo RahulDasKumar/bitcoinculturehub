@@ -10,15 +10,18 @@ import OrganizationGrid from './OrganizationGrid';
 import FooterCTA from './FooterCTA';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import Header from '../Header';
+import { opportunities } from '../Forum/mockData';
 const OpportunityEngineBeta: React.FC = () => {
     const {all_opportunities, fetchAllOpportunity,findUserApplicants,user_applications}= useOrganizationStore()
     useEffect(()=>{
         fetchAllOpportunity()
         findUserApplicants()
     }, [])
+
+    console.log(opportunities)
     const matched_opportunities = all_opportunities.slice(0,3)
     const numberOfOpportunities = all_opportunities.length
-    console.log(all_opportunities)
+    console.log(user_applications, ' user applications')
     return (
         <div className="min-h-screen bg-white">
             <Header/>

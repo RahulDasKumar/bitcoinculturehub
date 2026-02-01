@@ -43,7 +43,7 @@ const SignUpForm = () => {
     const token = useAuthStore(state => state.token);
     useEffect(() => {
         if (activeTab === "dashboard" && token) {
-            fetchMyOrganizations(token);
+            fetchMyOrganizations();
             console.log(organizations)
             console.log("running in organization")
             

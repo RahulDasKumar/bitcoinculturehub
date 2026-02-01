@@ -22,7 +22,7 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({ isOpen, onClose, onSub
     const [email, setEmail] = useState('');
     const [description, setDescription] = useState('');
     const [selectedType, setSelectedType] = useState(null);
-
+    const [location, setLocation] = useState('');
     if (!isOpen) return null;
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -32,12 +32,14 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({ isOpen, onClose, onSub
             name,
             description,
             type: selectedType,
-            email
+            email,
+            location
         });
         // Reset form
         setName('');
         setEmail('');
         setDescription('');
+        setLocation('')
         setSelectedType(null);
     };
 
@@ -91,7 +93,17 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({ isOpen, onClose, onSub
                                     placeholder="Bitcoin Test"
                                 />
                             </div>
-
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-900 mb-2">Organization Location</label>
+                                <input
+                                    type="text"
+                                    required
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    className="w-full p-3 bg-gray-50 border border-gray-100 rounded-sm focus:bg-white focus:border-gray-400 outline-none transition-all text-sm placeholder:text-gray-300"
+                                    placeholder="New York City, NY"
+                                />
+                            </div>
                             <div>
                                 <label className="block text-sm font-semibold text-gray-900 mb-2">Contact Email</label>
                                 <input
@@ -128,7 +140,7 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({ isOpen, onClose, onSub
                         </button>
                         <button
                             type="submit"
-                            disabled={!selectedType || !name || !email || !description}
+                            disabled={!selectedType || !name || !email || !description || !location}
                             className="px-8 py-2.5 bg-black text-white text-[11px] font-bold uppercase tracking-widest border-2 border-transparent hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed ring-offset-2 ring-orange-500 focus:ring-2"
                             style={{ border: '2px solid transparent', boxShadow: '0 0 0 2px black, 0 0 0 4px #f97316' }}
                         >

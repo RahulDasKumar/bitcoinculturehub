@@ -14,6 +14,7 @@ const OpportunityCard = ({
     const { token, user, isLoggedIn } = useAuthStore();
     const {applyToOpportunity} = useOrganizationStore();
     const navigate = useNavigate();
+    console.log(user)
     const baseApplication: ApplicantInformation | null = isLoggedIn
             ? {
                 username: user.username,
@@ -27,6 +28,7 @@ const OpportunityCard = ({
             }
             : null;
     const handleApply = (oppId: string, orgId: string) => {
+        console.log('running here')
         if (!baseApplication) return;
         applyToOpportunity(token, {
             ...baseApplication,
@@ -80,6 +82,7 @@ const OpportunityCard = ({
                     disabled={hasApplied || !isLoggedIn}
                     onClick={(e) => {
                         e.stopPropagation();
+                        console.log(hasApplied)
                         if (!hasApplied && isLoggedIn) {
                             handleApply(opportunity.id, opportunity.org_id);
                         }
