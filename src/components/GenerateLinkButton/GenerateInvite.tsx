@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Clipboard } from "lucide-react"; // Lucide icon
 import { API_URL } from "@/config";
+const devurl = "http://127.0.0.1:8000"
+
 function GenerateInvite({ orgId, role, token }) {
     const [link, setLink] = useState("");
     const [toastVisible, setToastVisible] = useState(false);
@@ -14,7 +16,7 @@ function GenerateInvite({ orgId, role, token }) {
         }
 
         // Otherwise, generate the link
-        const res = await fetch(`${API_URL}/authorize/invite/create`, {
+        const res = await fetch(`${devurl}/authorize/invite/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +28,7 @@ function GenerateInvite({ orgId, role, token }) {
                 expires_in_hours: 24,
             }),
         });
-
+        
         if (!res.ok) {
             const err = await res.json();
             alert("Error: " + err.detail);

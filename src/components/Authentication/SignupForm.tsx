@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { API_URL } from "@/config";
+const devurl = "http://127.0.0.1:8000"
 interface SignupFormProps {
   setActiveTab: Dispatch<SetStateAction<string>>
 }

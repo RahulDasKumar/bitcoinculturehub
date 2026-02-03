@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, Globe, Users, CheckCircle, ExternalLinkIcon } from 'lucide-react';
+import { ArrowLeft, Globe, Users, CheckCircle, ExternalLinkIcon, MoreVertical, UserPlus, ShieldCheck } from 'lucide-react';
 import Badge from './Badge';
 import ActionCards from './ActionCards';
 import LiveNowTable from './LiveNowTable';
@@ -15,13 +15,14 @@ import DetailCard from './DetailCard';
 import EditModal from './EditModal';
 import SectionHeader from './SectionHeader';
 import GenerateInvite  from '../GenerateLinkButton/GenerateInvite';
+import InviteModal from './InviteModal';
 export default function OwnerDashboard() {
   const { orgId } = useParams<{ orgId: string }>();
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s)=>s.user)
   const nav = useNavigate();
   const isAdmin = user.email == 'dasrkd3@gmail.com'
-  console.log(user.email)
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const {
     opportunities,
     fetchOrganizationsOpportunity,
@@ -83,16 +84,35 @@ export default function OwnerDashboard() {
             <Badge variant="outline"><Users size={10} /> Student-Led</Badge>
             <Badge variant="orange"><CheckCircle size={10} /> Verified on BCH</Badge>
           </div>
-          <GenerateInvite orgId={orgId} role={'member'} token={token} />
-          {isAdmin && (
-            <div className="flex flex-row items-start">
-              <p className="text-lg text-gray-500 mb-6">Admin Only</p>
-              <GenerateInvite orgId={orgId} role="owner" token={token} />
-            </div>
-          )}
           
         </header>
+        <section className="mb-16 bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-start space-x-4">
+              <div className="bg-white p-3 rounded-xl shadow-sm border border-slate-200">
+                <ShieldCheck className="text-blue-600" size={28} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">Admin Control Center</h3>
+                <p className="text-slate-500 text-sm">Manage access, permissions, and team collaboration settings.</p>
+              </div>
+            </div>
 
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => setIsInviteModalOpen(true)}
+                className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg transform active:scale-95 space-x-2"
+              >
+                <UserPlus size={20} />
+                <span>Invite New Admin</span>
+              </button>
+
+              <button className="p-3 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors text-slate-600 shadow-sm">
+                <MoreVertical size={20} />
+              </button>
+            </div>
+          </div>
+        </section>
         {/* Sections */}
         <ActionCards orgId={orgId} />
         <LiveNowTable opportunities={opportunities} orgId={orgId} />
@@ -129,6 +149,13 @@ export default function OwnerDashboard() {
           orgID={orgId}
         />
       )}
+      <InviteModal
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
+        isAdmin={isAdmin}
+        orgId={orgId}
+        token={token}
+      />
     </div>
   );
 }
