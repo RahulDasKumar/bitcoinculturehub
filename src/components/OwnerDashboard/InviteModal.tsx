@@ -14,7 +14,7 @@ interface InviteModalProps {
 
 const InviteModal: React.FC<InviteModalProps> = ({ isOpen, onClose, isAdmin,token,orgId }) => {
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState<'admin' | 'member'>('member');
+    const [role, setRole] = useState<'owner' | 'member'>('member');
     const [sending, setSending] = useState(false);
     const [generating, setGenerating] = useState(false);
     const [generatedLink, setGeneratedLink] = useState<string | null>(null);
@@ -112,8 +112,8 @@ const InviteModal: React.FC<InviteModalProps> = ({ isOpen, onClose, isAdmin,toke
                             <div className="grid grid-cols-2 gap-4">
                                 {isAdmin && (<button
                                     type="button"
-                                    onClick={() => setRole('admin')}
-                                    className={`flex items-center justify-center space-x-2 py-3 rounded-2xl border-2 transition-all ${role === 'admin'
+                                    onClick={() => setRole('owner')}
+                                    className={`flex items-center justify-center space-x-2 py-3 rounded-2xl border-2 transition-all ${role === 'owner'
                                             ? 'border-blue-600 bg-blue-50 text-blue-700'
                                             : 'border-slate-100 bg-slate-50 text-slate-500 hover:border-slate-200'
                                         }`}

@@ -8,7 +8,6 @@ export const AuthCard: React.FC = () => {
 
   const searchParams = new URLSearchParams(location.search);
   const inviteToken = searchParams.get("token");
-  console.log(inviteToken, ' HERE ')
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>(inviteToken ? 'signup' :'login');
 
   return (
