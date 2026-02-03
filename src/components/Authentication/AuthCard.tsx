@@ -5,7 +5,11 @@ import { SignupForm } from './SignupForm';
 import Header from '../Header';
 
 export const AuthCard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
+
+  const searchParams = new URLSearchParams(location.search);
+  const inviteToken = searchParams.get("token");
+  console.log(inviteToken, ' HERE ')
+  const [activeTab, setActiveTab] = useState<'login' | 'signup'>(inviteToken ? 'signup' :'login');
 
   return (
     <div className="w-full max-w-[440px]">
