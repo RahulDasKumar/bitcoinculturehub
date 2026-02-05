@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Plus, Calendar, Briefcase } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -55,9 +56,9 @@ export const Footer: React.FC = () => {
           <div>
             <h5 className="text-[10px] font-black uppercase text-zinc-300 mb-6 tracking-[0.2em]">Platform</h5>
             <ul className="space-y-4 text-xs font-bold text-zinc-500 uppercase tracking-tight">
-              <li><a href="#" className="hover:text-white transition-colors">Events</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Organizations</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Opportunities</a></li>
+              <li><Link to="/events" className="hover:text-white transition-colors">Events</Link></li>
+              <li><Link to = "/orgs" className="hover:text-white transition-colors">Organizations</Link></li>
+              <li><Link to="/opportunity" className="hover:text-white transition-colors">Opportunities</Link></li>
             </ul>
           </div>
 
