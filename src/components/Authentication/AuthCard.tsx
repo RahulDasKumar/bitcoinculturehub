@@ -8,7 +8,10 @@ export const AuthCard: React.FC = () => {
 
   const searchParams = new URLSearchParams(location.search);
   const inviteToken = searchParams.get("token");
-  const [activeTab, setActiveTab] = useState<'login' | 'signup'>(inviteToken ? 'signup' :'login');
+  const mode = searchParams.get("mode");
+  const [activeTab, setActiveTab] = useState<'login' | 'signup'>(
+    inviteToken || mode === 'signup' ? 'signup' : 'login'
+  );
 
   return (
     <div className="w-full max-w-[440px]">
