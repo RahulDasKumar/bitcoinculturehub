@@ -4,6 +4,7 @@ import { Hero } from './Hero';
 import { SectionHeader } from './SectionHeader';
 import { OpportunityItem } from './OpportunityItem';
 import { OrganizationCard } from './OrganizationCard';
+import {Link} from 'react-router-dom'
 import { EventCard } from './EventCard';
 import { Footer } from './Footer';
 import { OPPORTUNITIES, ORGANIZATIONS } from './constants';
@@ -43,9 +44,9 @@ const Homepage: React.FC = () => {
 })}
           </div>
           <div className="flex justify-end">
-            <button className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:text-orange-500 transition-colors">
+            <Link to='/opportunity' className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:text-orange-500 transition-colors">
               View All Opportunities <span>→</span>
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -62,9 +63,9 @@ const Homepage: React.FC = () => {
             ))}
           </div>
           <div className="flex justify-end">
-            <button className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:text-orange-500 transition-colors">
+            <Link to="/orgs" className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:text-orange-500 transition-colors">
               View All Organizations <span>→</span>
-            </button>
+            </Link>
           </div>
         </section>
 

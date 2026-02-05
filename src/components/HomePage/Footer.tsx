@@ -36,9 +36,9 @@ export const Footer: React.FC = () => {
 
           <div className="flex flex-col items-center gap-4">
             <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">Not sure where to start?</p>
-            <button className="bg-white text-black px-8 py-3 font-bold uppercase text-xs hover:bg-zinc-200 transition-colors">
+            <Link to='/auth?mode=signup' className="bg-white text-black px-8 py-3 font-bold uppercase text-xs hover:bg-zinc-200 transition-colors">
               Create your profile
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="max-w-6xl mx-auto mt-24 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
-          <p>© 2025 Bitcoin Culture Hub. All rights reserved.</p>
+          <p>© 2026 Bitcoin Culture Hub. All rights reserved.</p>
           <p>Built for Bitcoiners, by Bitcoiners.</p>
         </div>
       </div>

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Building2, Briefcase } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -14,12 +15,12 @@ export const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-24">
-          <button className="bg-white text-black px-8 py-3 font-bold uppercase flex items-center justify-center gap-2 hover:bg-zinc-200 transition-colors">
+          <Link to='/opportunity' className="bg-white text-black px-8 py-3 font-bold uppercase flex items-center justify-center gap-2 hover:bg-zinc-200 transition-colors">
             Find Opportunities <span className="text-lg">→</span>
-          </button>
-          <button className="border border-white text-white px-8 py-3 font-bold uppercase hover:bg-white hover:text-black transition-all">
+          </Link>
+          <Link to='/events' className="border border-white text-white px-8 py-3 font-bold uppercase hover:bg-white hover:text-black transition-all">
             Explore Events
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
