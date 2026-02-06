@@ -77,7 +77,7 @@ const Header: React.FC = () => {
 
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={handleProfileClick} className="font-black uppercase">
-                  Settings
+                  View Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout} className="font-black uppercase">
                   Logout

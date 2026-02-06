@@ -4,6 +4,7 @@ import { Briefcase, Plus } from 'lucide-react';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import Loader from './ui/Loader';
 import { ApplicantInformation } from '@/components/types';
+import { Link } from 'react-router-dom';
 
 const PipelineSection: React.FC = () => {
   const { findUserApplicants, user_applications } = useOrganizationStore();
@@ -53,9 +54,9 @@ const PipelineSection: React.FC = () => {
         icon={Briefcase}
         title="Opportunities Pipeline"
         rightElement={
-          <button className="flex items-center gap-2 border border-black px-4 py-1.5 text-xs font-bold uppercase hover:bg-black hover:text-white transition-colors">
+          <Link to ='/opportunity' className="flex items-center gap-2 border border-black px-4 py-1.5 text-xs font-bold uppercase hover:bg-black hover:text-white transition-colors">
             <Plus className="w-3 h-3" /> Browse Opportunities
-          </button>
+          </Link>
         }
       />
 
