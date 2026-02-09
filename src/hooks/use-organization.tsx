@@ -47,7 +47,9 @@ interface OrgStore {
     archiveOrganization:(org_id:string)=>Promise<void>,
     unarchiveOrganization:(org_id:string)=>Promise<void>,
     fetchOwnedOrganization: ()=>Promise<void>
-
+    updateApplicantStatus:(org_id:string,opp_id:string,app_id,option:string)=>Promise<void>
+    handleOffer:(app_id:string,action: string
+    )=> Promise<void>
 
 }
 
@@ -521,7 +523,78 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             throw new Error(`Failed to archive organization: ${error}`);
         }
 
-    }
+    },
+    updateApplicantStatus: async (org_id: string, opp_id:string, app_id: string, option: string) => {
+        const token = useAuthStore.getState().token;
+        if (!token) {
+            throw new Error("No auth token found");
+        }
+
+        try {
+            const response = await fetch(
+                `${API_URL}/org/${org_id}/opportunities/${opp_id}/applicants`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        org_id: org_id,
+                        applicant_id: app_id,
+                        status: option
+                    }),
+                }
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Failed to update status: ${errorText}`);
+            }
+
+            const data = await response.json();
+            return data; // { id: ..., status: ... }
+        } catch (error) {
+            console.error("Error updating applicant status:", error);
+            throw error;
+        }
+    },
+    handleOffer: async (
+        app_id: string,
+        action: "in_progress" | "rejected"    ) => {
+        const token = useAuthStore.getState().token;
+        if (!token) throw new Error("No auth token");
+
+        const res = await fetch(
+            `${API_URL}/general/applications/${app_id}/status`,
+            {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ action }),
+            }
+        );
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail ?? "Failed to update application status");
+        }
+
+        const data: { id: string; status: string } = await res.json();
+
+        // Update Zustand store
+        set((state) => ({
+            user_applications: state.user_applications.map((app) =>
+                app.id === data.id
+                    ? { ...app, status: data.status }
+                    : app
+            ),
+        }));
+    },
+
+
 
 
 }));
