@@ -34,6 +34,7 @@ export enum FilterCategory {
 }
 
 export interface ApplicantInformation{
+    id?:string
     opportunity_id: string;
     username: string;
     avatar?: string;

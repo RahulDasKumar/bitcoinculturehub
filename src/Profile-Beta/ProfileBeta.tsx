@@ -13,6 +13,7 @@ import ProfileBadge from './ProfileBadge';
 import SectionHeader from './ui/SectionHeader';
 import { FileUser, Plus } from 'lucide-react';
 import MyOrganization from './MyOrganizations';
+import DecisionDesk from './DecisionDesk';
 const ProfileBeta: React.FC = () => {
   const { user } = useAuthStore()
   return (
@@ -41,6 +42,8 @@ const ProfileBeta: React.FC = () => {
         
         <div className="w-full border-t border-gray-200 my-8"></div>
         <PipelineSection />
+        <div className="w-full border-t border-gray-200 my-8"></div>
+        <DecisionDesk/>
         <div className="w-full border-t border-gray-200 my-8"></div>
         <MyOrganization/>
       </div>
