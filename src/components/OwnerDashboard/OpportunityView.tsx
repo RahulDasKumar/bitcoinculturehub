@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     Sheet,
     SheetContent,
@@ -30,16 +30,26 @@ interface ViewApplicantsModalProps {
     opp_id: string;
     org_id: string;
     children: React.ReactNode;
+    setCalendarModalOpen: React.Dispatch<React.SetStateAction<{
+        isOpen: boolean;
+        applicantId: string | null;
+        org_id:string|null;
+        opp_id:string|null
+    }>>;
 }
 
 export const ViewApplicantsModal = ({
     opportunityTitle,
     org_id,
     opp_id,
+    setCalendarModalOpen,
     children,
+
+
 }: ViewApplicantsModalProps) => {
     const [open, setOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const calendarResolverRef = useRef(null)
 
     const {
         findAllApplicants,
@@ -47,6 +57,32 @@ export const ViewApplicantsModal = ({
         loading, updateApplicantStatus
     } = useOrganizationStore();
 
+
+    const openCalendarAndWait = (applicant_id) => {
+        return new Promise((resolve) => {
+            calendarResolverRef.current = resolve
+            setCalendarModalOpen({
+                isOpen: true,
+                applicantId: applicant_id,
+                org_id:org_id,
+                opp_id:opp_id
+            })
+        })
+    }
+    const closeCalendar = () =>{
+        return new Promise((resolve)=>{
+            setCalendarModalOpen({
+                isOpen: false,
+                applicantId: null,
+                org_id:null,
+                opp_id:null
+            })
+
+            if(calendarResolverRef.current){
+                calendarResolverRef.current = null
+            }
+        })
+    }
     const applicants = applicantsByOpportunity[opp_id] || [];
     console.log(applicants)
     const downloadResume = async (resume_key: string) => {
@@ -179,14 +215,18 @@ export const ViewApplicantsModal = ({
                                                             <DropdownMenuItem
                                                                 key={option.status}
                                                                 className={`flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md cursor-pointer ${option.status === "rejected" ? "text-red-600 hover:bg-red-50" : ""}`}
-                                                                onClick={() => {
-                                                                    // Update the local applicant status
+                                                                onClick={async () => {
                                                                     applicant.status = option.status;
-                                                                    // Force state update
-                                                                    setOpen((prev) => !prev); // temporary trick to rerender; better: manage applicants in local state
+                                                                    setOpen((prev) => !prev); 
                                                                     setTimeout(() => setOpen(true), 0);
-                                                                    // Optional: call store method to persist change to backend
+                                                                    if (option.status == "interviewing"){
+                                                                        await openCalendarAndWait(applicant.id)
+                                                                        updateApplicantStatus(org_id, opp_id, applicant.id, option.status);
+
+                                                                    }
+                                                                    else{
                                                                     updateApplicantStatus(org_id, opp_id, applicant.id, option.status);
+                                                                    }
                                                                 }}
                                                             >
                                                                 <option.icon className={`w-4 h-4 ${option.color}`} />

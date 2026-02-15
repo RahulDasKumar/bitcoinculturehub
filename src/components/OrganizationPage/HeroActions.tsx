@@ -22,6 +22,8 @@ const HeroActions: React.FC<HeroActionsProps> = ({ organization }) => {
   
   // Check with backend if user is owner
   const checkIsOrgOwner = async (orgId: string, token?: string): Promise<boolean> => {
+
+    console.log('token during check is org owner', token)
     if (!token) return false; 
 
     try {
@@ -34,6 +36,7 @@ const HeroActions: React.FC<HeroActionsProps> = ({ organization }) => {
       console.log(orgId)
       if (!res.ok) return false;
       const data = await res.json();
+      
       return data.is_owner === true;
     } catch {
       return false;

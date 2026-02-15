@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, Megaphone, Eye, Edit2, Trash } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 import Badge from './Badge';
@@ -10,12 +10,18 @@ import { ViewApplicantsModal } from './OpportunityView';
 interface LiveNowProps {
   opportunities: Opportunity[];
   orgId: string;
+  setCalendarModalOpen: React.Dispatch<React.SetStateAction<{
+          isOpen: boolean;
+          applicantId: string | null;
+          org_id:string|null;
+          opp_id:string|null
+      }>>;
 }
 
-const LiveNowTable: React.FC<LiveNowProps> = ({ opportunities, orgId }) => {
+const LiveNowTable: React.FC<LiveNowProps> = ({ opportunities, orgId, setCalendarModalOpen }) => {
   const { deleteOpportunity } = useOrganizationStore();
   const { token } = useAuthStore();
-
+  
   const handleDelete = (oppId: string) => {
     deleteOpportunity(oppId, orgId, token);
   };
@@ -76,6 +82,7 @@ const LiveNowTable: React.FC<LiveNowProps> = ({ opportunities, orgId }) => {
                       opportunityTitle={item.title}
                       opp_id={item.id}
                       org_id={orgId}
+                      setCalendarModalOpen={setCalendarModalOpen}
                     >
                       <button className="hover:text-gray-600">
                         <Eye size={18} />
