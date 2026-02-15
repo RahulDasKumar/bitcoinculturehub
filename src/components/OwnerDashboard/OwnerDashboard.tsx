@@ -16,6 +16,7 @@ import EditModal from './EditModal';
 import SectionHeader from './SectionHeader';
 import GenerateInvite  from '../GenerateLinkButton/GenerateInvite';
 import InviteModal from './InviteModal';
+import CalendarInviteModal from './CalendarInvite';
 export default function OwnerDashboard() {
   const { orgId } = useParams<{ orgId: string }>();
   const token = useAuthStore((s) => s.token);
@@ -23,6 +24,13 @@ export default function OwnerDashboard() {
   const nav = useNavigate();
   const isAdmin = user.email == 'dasrkd3@gmail.com'
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [isCalendarModalOpen, setCalendarModalOpen] = useState({
+    isOpen: false,
+    applicantId: null as string | null,
+    org_id: null as string | null,
+    opp_id:null as string | null
+  });
+  
   const {
     opportunities,
     fetchOrganizationsOpportunity,
@@ -115,7 +123,7 @@ export default function OwnerDashboard() {
         </section>
         {/* Sections */}
         <ActionCards orgId={orgId} />
-        <LiveNowTable opportunities={opportunities} orgId={orgId} />
+        <LiveNowTable opportunities={opportunities} orgId={orgId} setCalendarModalOpen={setCalendarModalOpen} />
         {/* <NetworkSnapshot />
         <SyncStatus />
         <ContributorsSection /> */}
@@ -155,7 +163,19 @@ export default function OwnerDashboard() {
         isAdmin={isAdmin}
         orgId={orgId}
         token={token}
+        orgName={currentOrganization.name}
       />
+    <CalendarInviteModal
+        isOpen={isCalendarModalOpen.isOpen}
+        onClose={() => { setCalendarModalOpen({
+            isOpen: false,
+            applicantId: null,
+            opp_id:null,
+            org_id:null
+          });
+        } }
+        token={token}
+        applicant_id={isCalendarModalOpen.applicantId} org_id={isCalendarModalOpen.org_id} opp_id={isCalendarModalOpen.opp_id}    />
     </div>
   );
 }

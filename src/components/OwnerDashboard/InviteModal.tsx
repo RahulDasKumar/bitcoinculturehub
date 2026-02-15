@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { X, Mail, Shield, User, Send, Link, Copy, Check } from 'lucide-react';
 import { API_URL } from '@/config';
+import useAuthStore from '@/hooks/use-auth';
 const devurl = "http://127.0.0.1:8000"
 
 interface InviteModalProps {
@@ -10,22 +11,66 @@ interface InviteModalProps {
     isAdmin:boolean;
     token:string;
     orgId:string;
+    orgName:string;
 }
 
-const InviteModal: React.FC<InviteModalProps> = ({ isOpen, onClose, isAdmin,token,orgId }) => {
+
+
+const InviteModal: React.FC<InviteModalProps> = ({ isOpen, onClose, isAdmin,token,orgId,orgName }) => {
     const [email, setEmail] = useState('');
     const [role, setRole] = useState<'owner' | 'member'>('member');
     const [sending, setSending] = useState(false);
     const [generating, setGenerating] = useState(false);
     const [generatedLink, setGeneratedLink] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
-
+    const user = useAuthStore((s) => s.user)
     if (!isOpen) return null;
 
-    const handleSendInvite = (e: React.FormEvent) => {
+    const handleSendInvite = async (e: React.FormEvent) => {
         e.preventDefault();
         setSending(true);
         // Simulate API call
+        const res = await fetch(`${API_URL}/authorize/invite/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                org_id: orgId,
+                role: role,
+                expires_in_hours: 24,
+            }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            alert("Error: " + err.detail);
+            return;
+        }
+
+        const data = await res.json();
+        const link = data.invite_link
+        const emailBody =
+        {
+            org_id: orgId,
+            from_email:"rahul@bitcoinculturehub.com",
+            to_email: email,
+            join_link:link,
+            org_name: orgName,
+            sender_name: user.username,
+            sender_title: isAdmin ? "Website Admin" : "Organization Owner"
+
+        }
+        const sendEmail = await fetch(`${devurl}/email/send-join-org-email`,{
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify(emailBody)
+        })
+        console.log(sendEmail.json())
+        console.log("Email sending response message")
         setTimeout(() => {
             setSending(false);
             onClose();

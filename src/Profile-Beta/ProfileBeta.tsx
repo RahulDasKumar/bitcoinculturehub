@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ThisWeek from './ThisWeek';
 import CalendarSection from './CalendarSection';
 import ExploreSection from './ExploreSection';
@@ -14,8 +14,14 @@ import SectionHeader from './ui/SectionHeader';
 import { FileUser, Plus } from 'lucide-react';
 import MyOrganization from './MyOrganizations';
 import DecisionDesk from './DecisionDesk';
+import Scheduler from './Scheduler';
+import { useOpportunity } from '@/hooks/use-opportunity';
+import InterviewScheduler from './InterviewScheduler';
 const ProfileBeta: React.FC = () => {
   const { user } = useAuthStore()
+  const [showBookingUI, setShowBookingUI] = useState(false);
+  const { pendingInterviews, bookedInterviews, getPendingInterviews, getBookedInterviews } = useOpportunity();
+
   return (
     <main className="min-h-screen bg-white text-black font-sans selection:bg-bitcoin selection:text-white pb-20">
       <Header/>
@@ -42,6 +48,14 @@ const ProfileBeta: React.FC = () => {
         
         <div className="w-full border-t border-gray-200 my-8"></div>
         <PipelineSection />
+        <div className="w-full border-t border-gray-200 my-8"></div>
+    <Scheduler/>
+        <div className="w-full border-t border-gray-200 my-8"></div>
+
+        
+          
+        <InterviewScheduler />
+      
         <div className="w-full border-t border-gray-200 my-8"></div>
         <DecisionDesk/>
         <div className="w-full border-t border-gray-200 my-8"></div>
