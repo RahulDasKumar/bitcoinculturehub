@@ -6,7 +6,11 @@ import { API_URL } from "@/config";
 import useAuthStore from '@/hooks/use-auth';
 import { useNavigate } from 'react-router-dom';
 const devurl = 'http://127.0.0.1:8000'
-export const LoginForm: React.FC = () => {
+interface LoginFormProps {
+  onForgotPassword?: () => void;
+}
+
+export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState("");
@@ -73,9 +77,13 @@ export const LoginForm: React.FC = () => {
       <Button type="submit">Log In</Button>
       
       <div className="text-center">
-        <a href="#" className="text-[12px] text-[#888888] hover:text-[#333333] transition-colors">
+        <button
+          type="button"
+          onClick={onForgotPassword}
+          className="text-[12px] text-[#888888] hover:text-[#333333] transition-colors"
+        >
           Forgot password?
-        </a>
+        </button>
       </div>
     </form>
   );

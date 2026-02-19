@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { LoginForm } from './LoginForm';
 import { SignupForm } from './SignupForm';
+import { ForgotPasswordForm } from './ForgotPasswordForm';
 import Header from '../Header';
 
 export const AuthCard: React.FC = () => {
@@ -9,7 +10,7 @@ export const AuthCard: React.FC = () => {
   const searchParams = new URLSearchParams(location.search);
   const inviteToken = searchParams.get("token");
   const mode = searchParams.get("mode");
-  const [activeTab, setActiveTab] = useState<'login' | 'signup'>(
+  const [activeTab, setActiveTab] = useState<'login' | 'signup' | 'forgot-password'>(
     inviteToken || mode === 'signup' ? 'signup' : 'login'
   );
 
@@ -17,35 +18,39 @@ export const AuthCard: React.FC = () => {
     <div className="w-full max-w-[440px]">
       <div className="bg-white border border-[#eeeeee] overflow-hidden mb-6">
         {/* Tabs */}
-        <div className="flex border-b border-[#eeeeee]">
-          <button
-            onClick={() => setActiveTab('login')}
-            className={`flex-1 py-5 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all duration-200 ${
-              activeTab === 'login'
-                ? 'text-black border-b-2 border-black'
-                : 'text-[#999999] hover:text-[#666666]'
-            }`}
-          >
-            Log In
-          </button>
-          <button
-            onClick={() => setActiveTab('signup')}
-            className={`flex-1 py-5 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all duration-200 ${
-              activeTab === 'signup'
-                ? 'text-black border-b-2 border-black'
-                : 'text-[#999999] hover:text-[#666666]'
-            }`}
-          >
-            Create Account
-          </button>
-        </div>
+        {activeTab !== 'forgot-password' && (
+          <div className="flex border-b border-[#eeeeee]">
+            <button
+              onClick={() => setActiveTab('login')}
+              className={`flex-1 py-5 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all duration-200 ${
+                activeTab === 'login'
+                  ? 'text-black border-b-2 border-black'
+                  : 'text-[#999999] hover:text-[#666666]'
+              }`}
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => setActiveTab('signup')}
+              className={`flex-1 py-5 text-[11px] font-semibold tracking-[0.1em] uppercase transition-all duration-200 ${
+                activeTab === 'signup'
+                  ? 'text-black border-b-2 border-black'
+                  : 'text-[#999999] hover:text-[#666666]'
+              }`}
+            >
+              Create Account
+            </button>
+          </div>
+        )}
 
         {/* Form Content */}
         <div className="p-8 md:p-10">
           {activeTab === 'login' ? (
-            <LoginForm />
-          ) : (
+            <LoginForm onForgotPassword={() => setActiveTab('forgot-password')} />
+          ) : activeTab === 'signup' ? (
               <SignupForm setActiveTab={setActiveTab} />
+          ) : (
+              <ForgotPasswordForm onBack={() => setActiveTab('login')} />
           )}
         </div>
       </div>
