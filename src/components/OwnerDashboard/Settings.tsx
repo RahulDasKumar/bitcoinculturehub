@@ -21,14 +21,32 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
     const [notif1, setNotif1] = useState(true);
     const [notif2, setNotif2] = useState(false);
     const [notif3, setNotif3] = useState(false);
-
-    const { archiveOrganization, unarchiveOrganization } = useOrganizationStore();
+    const [orgName, setOrgName] = useState(organization.name ?? "");
+    const [orgEmail, setOrgEmail] = useState(organization.email ?? "");
+    const [orgMeetingLink, setOrgMeetingLink] = useState(organization.meeting_link ?? "");
+    const { archiveOrganization, unarchiveOrganization, editOrganization } = useOrganizationStore();
 
     const [archived, setArchived] = useState(Boolean(organization.deleted_at));
+
+    // Sync state if organization prop changes
+    useEffect(() => {
+        setOrgName(organization.name ?? "");
+        setOrgEmail(organization.email ?? "");
+        setOrgMeetingLink(organization.meeting_link ?? "");
+    }, [organization.name, organization.email, organization.meeting_link]);
 
     useEffect(() => {
         setArchived(Boolean(organization.deleted_at));
     }, [organization.deleted_at]);
+
+    const handleSubmit = (e: React.MouseEvent) => {
+        editOrganization(organization.id, {
+            ...organization,
+            name: orgName,
+            email: orgEmail,
+            meeting_link: orgMeetingLink,
+        });
+    };
 
     return (
         <section className="mb-16 mt-5">
@@ -64,7 +82,8 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
                                 </label>
                                 <input
                                     type="text"
-                                    defaultValue={organization.name}
+                                    value={orgName}
+                                    onChange={(e) => setOrgName(e.target.value)}
                                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none transition-shadow"
                                 />
                             </div>
@@ -77,10 +96,22 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
                                 </label>
                                 <input
                                     type="email"
-                                    defaultValue={organization.email}
+                                    value={orgEmail}
+                                    onChange={(e) => setOrgEmail(e.target.value)}
                                     className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none transition-shadow"
                                 />
                             </div>
+                        </div>
+                        <div className="space-y-1">
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                Meeting Link
+                            </label>
+                            <input
+                                type="text"
+                                value={orgMeetingLink}
+                                onChange={(e) => setOrgMeetingLink(e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none transition-shadow"
+                            />
                         </div>
                     </div>
 
@@ -111,7 +142,10 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
                         </div>
                     </div>
 
-                    <button className="mt-4 px-6 py-2 bg-orange-500 text-white rounded font-bold text-sm hover:bg-orange-600 transition-colors">
+                    <button
+                        className="mt-4 px-6 py-2 bg-orange-500 text-white rounded font-bold text-sm hover:bg-orange-600 transition-colors"
+                        onClick={handleSubmit}
+                    >
                         Save Changes
                     </button>
 
@@ -140,7 +174,7 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
                                         }`}
                                     onClick={async () => {
                                         await archiveOrganization(organization.id);
-                                        setArchived(true); // ✅ update local state immediately
+                                        setArchived(true);
                                     }}
                                 >
                                     <Archive size={14} /> Archive
@@ -163,7 +197,7 @@ const OrganizationSettings: React.FC<SettingsProps> = ({ organization }) => {
                                         }`}
                                     onClick={async () => {
                                         await unarchiveOrganization(organization.id);
-                                        setArchived(false); // ✅ update local state immediately
+                                        setArchived(false);
                                     }}
                                 >
                                     <Archive size={14} /> Unarchive

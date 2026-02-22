@@ -220,9 +220,8 @@ export const ViewApplicantsModal = ({
                                                                     setOpen((prev) => !prev); 
                                                                     setTimeout(() => setOpen(true), 0);
                                                                     if (option.status == "interviewing"){
+                                                                        await updateApplicantStatus(org_id, opp_id, applicant.id, option.status);
                                                                         await openCalendarAndWait(applicant.id)
-                                                                        updateApplicantStatus(org_id, opp_id, applicant.id, option.status);
-
                                                                     }
                                                                     else{
                                                                     updateApplicantStatus(org_id, opp_id, applicant.id, option.status);

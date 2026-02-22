@@ -38,7 +38,7 @@ interface OrgStore {
     applyToOpportunity:(token:string, application)=>Promise<void>;
     fetchAllOrganizations:()=>Promise<void>
     findUserApplicants:()=>Promise<void>
-    editOrganization: (org_id:string,organization:Partial<Organization>,token:string)=>Promise<void>
+    editOrganization: (org_id:string,organization:Partial<Organization>)=>Promise<void>
     fetchOrganizationDashboard: (orgId:string, token:string)=>Promise<void>
     fetchGeneralDashboard:(orgId:string)=>Promise<void>
     fetchOrganizationMembers:(orgId:string)=>Promise<void>
@@ -320,9 +320,11 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             set({ loading: false });
         }
     },
-    editOrganization: async (org_id:string,organization:Partial<Organization>, token:string) =>{
+    editOrganization: async (org_id:string,organization:Partial<Organization>) =>{
         set({ loading: true });
+        
         try {
+            const token = useAuthStore.getState().token;
             const res = await fetch(`${API_URL}/org/${org_id}`, {
                 method: "PATCH",
                 headers: {
@@ -542,7 +544,8 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
                     body: JSON.stringify({
                         org_id: org_id,
                         applicant_id: app_id,
-                        status: option
+                        status: option,
+                        opp_id:opp_id
                     }),
                 }
             );
@@ -553,6 +556,7 @@ export const useOrganizationStore = create<OrgStore>((set,get) => ({
             }
 
             const data = await response.json();
+            console.log(data, ' response to updating applicant')
             return data; // { id: ..., status: ... }
         } catch (error) {
             console.error("Error updating applicant status:", error);

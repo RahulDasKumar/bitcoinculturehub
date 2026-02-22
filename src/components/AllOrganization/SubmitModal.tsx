@@ -115,7 +115,7 @@ export const SubmitModal: React.FC<SubmitModalProps> = ({ isOpen, onClose, onSub
                                     placeholder="hello@example.com"
                                 />
                             </div>
-
+                            
                             <div>
                                 <label className="block text-sm font-semibold text-gray-900 mb-2">Bio</label>
                                 <textarea

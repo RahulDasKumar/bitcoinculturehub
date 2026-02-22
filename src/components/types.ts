@@ -150,6 +150,7 @@ export interface Organization {
     submittedAt: string;
     description?: string;
     website?: string;
+    meeting_link?:string;
     owner:Member
     deleted_at?:string;
     

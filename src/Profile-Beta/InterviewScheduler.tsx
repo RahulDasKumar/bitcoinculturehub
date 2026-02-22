@@ -8,7 +8,7 @@ export interface InterviewItem {
     role: string;
     date: Date;
     time: string;
-    link?: string;
+    meeting_link?: string;
 }
 const InterviewScheduler: React.FC = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -25,15 +25,15 @@ const InterviewScheduler: React.FC = () => {
         const interviewDate = new Date(interview.interview_datetime);
         return {
             id: interview.id,
-            company: 'Bitcoin Company', // Placeholder - will be populated with real data
-            role: 'Position', // Placeholder - will be populated with real data
+            company: interview.org_name, 
+            role: interview.opportunity_title,
             date: interviewDate,
             time: interviewDate.toLocaleTimeString('en-US', {
                 hour: 'numeric',
                 minute: '2-digit',
                 hour12: true
             }) + ' CST',
-            link: undefined // Add if you have meeting links in your backend
+            meeting_link: interview.meeting_link 
         };
     });
 
