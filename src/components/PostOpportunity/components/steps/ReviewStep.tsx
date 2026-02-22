@@ -44,7 +44,7 @@ const ReviewStep: React.FC<StepProps> = ({ data, update }) => {
   return (
     <div className="p-8">
       <div className="flex items-center gap-2 mb-6">
-        <div className="bg-orange-500 text-white w-6 h-6 flex items-center justify-center font-bold text-xs">6</div>
+        <div className="bg-orange-500 text-white w-6 h-6 flex items-center justify-center font-bold text-xs">5</div>
         <h2 className="text-sm font-bold uppercase tracking-widest">REVIEW</h2>
       </div>
       

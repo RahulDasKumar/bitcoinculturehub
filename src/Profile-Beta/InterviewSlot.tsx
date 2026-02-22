@@ -6,7 +6,7 @@ export interface InterviewItem {
     role: string;
     date: Date;
     time: string;
-    link?: string;
+    meeting_link?: string;
 }
 
 interface InterviewSlotPickerProps {
@@ -18,6 +18,7 @@ const InterviewSlotPicker: React.FC<InterviewSlotPickerProps> = ({
     selectedDate,
     confirmedInterviews,
 }) => {
+    
     return (
         <div className="w-full lg:w-[400px] bg-white p-6 border-t-[3px] lg:border-t-0 lg:border-l-[3px] border-black flex flex-col">
             <div className="mb-8">
@@ -44,9 +45,9 @@ const InterviewSlotPicker: React.FC<InterviewSlotPickerProps> = ({
                                     <h5 className="text-xl font-black uppercase leading-tight mb-1">{interview.role}</h5>
                                     <p className="text-sm font-bold text-gray-500 mb-4">{interview.company}</p>
 
-                                    {interview.link && (
+                                    {interview.meeting_link && (
                                         <a
-                                            href={interview.link}
+                                            href={interview.meeting_link}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 bg-black text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest hover:bg-[#f7931a] transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"

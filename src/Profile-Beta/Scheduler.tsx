@@ -35,15 +35,15 @@ const Scheduler: React.FC<SchedulerProps> = ({ onBook }) => {
     useEffect(() => {
         getPendingInterviews();
     }, []);
-
+    console.log(pendingInterviews, 'inside the scheduler component')
     // Transform backend data to frontend format
     const transformedSlots: InterviewSlot[] = useMemo(() => {
         return pendingInterviews.map(interview => {
             const interviewDate = new Date(interview.interview_datetime);
             return {
                 id: interview.id,
-                company: 'Bitcoin Company', // Placeholder - will be populated with real data
-                role: 'Position', // Placeholder - will be populated with real data
+                company: interview.org_name, // Placeholder - will be populated with real data
+                role: interview.opportunity_title, // Placeholder - will be populated with real data
                 date: interviewDate,
                 time: interviewDate.toLocaleTimeString('en-US', {
                     hour: 'numeric',

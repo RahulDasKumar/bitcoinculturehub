@@ -78,7 +78,6 @@ const CalendarInviteModal: React.FC<CalendarInviteModalProps> = ({
         setSending(true);
         console.log(selectedSlots)
 
-        // post or patch api should go around here
         try {
             await postInterviewTimes(org_id, opp_id, applicant_id, selectedSlots);
             alert("Interview slots sent successfully!");

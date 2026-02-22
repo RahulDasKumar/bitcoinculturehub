@@ -23,6 +23,9 @@ interface InterviewSlotResponse {
     opportunity_id: string;
     applicant_id: string;
     interview_datetime: string;
+    org_name:string;
+    opportunity_title:string;
+    meeting_link:string;
     status: "pending" | "booked" | "cancelled";
 }
 
@@ -137,6 +140,8 @@ export const useOpportunity = create<OpportunityStore>((set, get) => ({
             }
 
             const data = await res.json();
+
+            console.log(data,' here is the data right after the api call')
             set({ pendingInterviews: data });
 
             return data;

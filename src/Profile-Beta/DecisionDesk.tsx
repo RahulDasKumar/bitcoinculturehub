@@ -24,6 +24,7 @@ const DecisionDesk: React.FC = () => {
     const accepted_offer = groupedApplicants['offered']
 
     const handleDecision = async (id: string, decision: 'in_progress' | 'rejected') => {
+        console.log('clicking button')
         await handleOffer(id,decision)
     };
 
@@ -101,7 +102,6 @@ const DecisionDesk: React.FC = () => {
                                     Accept
                                 </button>
                                 <button
-                                    disabled={offer.status !== 'PENDING'}
                                     onClick={() => handleDecision(offer.id, 'rejected')}
                                     className={`px-4 py-3 border-2 border-black font-black text-xs uppercase tracking-widest transition-all ${offer.status === 'offered'
                                             ? 'hover:bg-red-50 hover:text-red-600'
