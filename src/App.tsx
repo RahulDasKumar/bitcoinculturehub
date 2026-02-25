@@ -30,6 +30,7 @@ import Directory from "./components/AllOrganization/Directory";
 import NetworkAdministration from "./components/Admin/NetworkAdministration";
 import Homepage from "./components/HomePage/Homepage";
 import AuthPage from "./components/Authentication/AuthenticationPage";
+import ResetPasswordPage from "./components/Authentication/ResetPasswordPage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/about" element={<AboutUs />}/>
           <Route path="/join" element={<Waitlist/>}/>
           <Route path="/auth" element={<AuthPage/>}/>
+          <Route path="/reset-password" element={<ResetPasswordPage/>}/>
           <Route path="/profile" element={<ProfileBeta />}></Route>
           <Route path="/explore" element={<ExplorePage />} /> 
           <Route path="/submit-content" element={<SubmitContent />} />
