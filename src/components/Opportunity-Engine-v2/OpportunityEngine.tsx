@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Hero from './Hero';
 import Mission from './Mission';
 import SearchBar from './SearchBar';
-import SidebarFilters from './SidebarFilters';
+import SidebarFilters, { ActiveFilters } from './SidebarFilters';
 import MatchCard from '../OpportunityComponents/MatchCard';
 import FeaturedBanner from './FeaturedBanner';
 import OpportunityList from './OpportunityList';
@@ -11,20 +11,84 @@ import FooterCTA from './FooterCTA';
 import { useOrganizationStore } from '@/hooks/use-organization';
 import Header from '../Header';
 import { opportunities } from '../Forum/mockData';
-const OpportunityEngineBeta: React.FC = () => {
-    const {all_opportunities, fetchAllOpportunity,findUserApplicants,user_applications}= useOrganizationStore()
-    useEffect(()=>{
-        fetchAllOpportunity()
-        findUserApplicants()
-    }, [])
 
-    console.log(opportunities)
-    const matched_opportunities = all_opportunities.slice(0,3)
-    const numberOfOpportunities = all_opportunities.length
-    console.log(user_applications, ' user applications')
+const OpportunityEngineBeta: React.FC = () => {
+    const { all_opportunities, fetchAllOpportunity, findUserApplicants, user_applications } = useOrganizationStore();
+
+    useEffect(() => {
+        fetchAllOpportunity();
+        findUserApplicants();
+    }, []);
+
+    console.log(opportunities);
+    console.log(user_applications, ' user applications');
+
+    // ── Filter State ─────────────────────────────────────────────────────────────
+    // Each array holds the tags the user has selected for that category.
+    // An empty array means "no filter applied" (show everything).
+    const [activeFilters, setActiveFilters] = useState<ActiveFilters>({
+        opportunityType: [],
+        location: [],
+        timeCommitment: [],
+    });
+
+    // Toggles a single tag on/off within a given filter category.
+    // If the tag is already selected, it removes it. Otherwise it adds it.
+    const toggleFilter = (category: keyof ActiveFilters, value: string) => {
+        setActiveFilters((prev) => {
+            const current = prev[category];
+            const updated = current.includes(value)
+                ? current.filter((v) => v !== value) // deselect
+                : [...current, value];               // select
+            return { ...prev, [category]: updated };
+        });
+    };
+
+    // Resets all filters back to their empty/default state
+    const clearFilters = () => {
+        setActiveFilters({ opportunityType: [], location: [], timeCommitment: [] });
+    };
+
+    // ── Filtering Logic ───────────────────────────────────────────────────────────
+    // Rules:
+    //   - Within a category: OR  (opportunity matches ANY selected tag)
+    //   - Across categories: AND (opportunity must pass ALL active category filters)
+    //   - Empty category    → no restriction (show all for that field)
+    const filteredOpportunities = all_opportunities.filter((opp) => {
+        // Opportunity Type — matches opp.type
+        if (activeFilters.opportunityType.length > 0) {
+            const match = activeFilters.opportunityType.some(
+                (tag) => opp.type?.toUpperCase() === tag
+            );
+            if (!match) return false;
+        }
+
+        // Location — matches opp.location.type (e.g. "REMOTE", "IN-PERSON", "HYBRID")
+        if (activeFilters.location.length > 0) {
+            const match = activeFilters.location.some(
+                (tag) => opp.location?.type?.toUpperCase() === tag
+            );
+            if (!match) return false;
+        }
+
+        // Time Commitment — matches opp.time_commitment (e.g. "FULL TIME", "1-5HRS")
+        if (activeFilters.timeCommitment.length > 0) {
+            const match = activeFilters.timeCommitment.some(
+                (tag) => opp.time_commitment?.toUpperCase() === tag
+            );
+            if (!match) return false;
+        }
+
+        return true;
+    });
+
+    // Top 3 matches still comes from the filtered set so they stay in sync
+    const matched_opportunities = filteredOpportunities.slice(0, 3);
+    const numberOfOpportunities = filteredOpportunities.length;
+
     return (
         <div className="min-h-screen bg-white">
-            <Header/>
+            <Header />
             <Hero />
             <Mission />
 
@@ -32,10 +96,14 @@ const OpportunityEngineBeta: React.FC = () => {
                 {/* <SearchBar /> */}
 
                 <div className="flex flex-col lg:flex-row gap-8 mt-8">
-                    {/* Sidebar */}
+                    {/* Sidebar — receives filter state and callbacks */}
                     <aside className="w-full lg:w-64 flex-shrink-0">
                         <div className="sticky top-24">
-                            <SidebarFilters />
+                            <SidebarFilters
+                                activeFilters={activeFilters}
+                                onToggleFilter={toggleFilter}
+                                onClearFilters={clearFilters}
+                            />
                         </div>
                     </aside>
 
@@ -64,14 +132,14 @@ const OpportunityEngineBeta: React.FC = () => {
                         {/* Featured Banner */}
                         <FeaturedBanner />
 
-                        {/* All Opportunities List */}
+                        {/* All Opportunities List — filtered results */}
                         <div className="mb-12">
                             <div className="flex items-center mb-6">
                                 <h3 className="text-xl font-black uppercase tracking-tight mr-4">All Opportunities</h3>
-                                <span className="text-xs text-gray-400 font-bold uppercase tracking-wide">{numberOfOpportunities}Available</span>
+                                <span className="text-xs text-gray-400 font-bold uppercase tracking-wide">{numberOfOpportunities} Available</span>
                             </div>
 
-                            <OpportunityList opportunities={all_opportunities}  applicants={user_applications} />
+                            <OpportunityList opportunities={filteredOpportunities} applicants={user_applications} />
                         </div>
 
                         {/* Organizations Grid */}

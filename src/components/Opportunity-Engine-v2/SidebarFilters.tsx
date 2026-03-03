@@ -11,15 +11,17 @@ interface SectionProps {
   children: React.ReactNode;
 }
 
+// Collapsible section wrapper — shows/hides filter group on click
 const FilterSection: React.FC<SectionProps> = ({ title, isOpen, onToggle, children }) => {
   return (
     <div className="border border-gray-200 mb-2 bg-white">
-      
+
       <button
         className="w-full flex justify-between items-center px-4 py-3 bg-white hover:bg-gray-50 transition-colors"
         onClick={onToggle}
       >
         <span className="text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+          {/* Orange dot shows when this section is open */}
           {isOpen ? <span className="w-1.5 h-1.5 bg-[#FF6B00] rounded-full"></span> : null}
           {title}
         </span>
@@ -30,7 +32,25 @@ const FilterSection: React.FC<SectionProps> = ({ title, isOpen, onToggle, childr
   );
 };
 
-const SidebarFilters: React.FC = () => {
+// Shape of the active filter state — one array per filter category
+export interface ActiveFilters {
+  opportunityType: string[];
+  location: string[];
+  timeCommitment: string[];
+}
+
+// Props SidebarFilters receives from OpportunityEngine:
+// - activeFilters: which tags are currently selected
+// - onToggleFilter: called when a tag button is clicked (adds/removes from active list)
+// - onClearFilters: called when "Clear Filters" is clicked
+interface SidebarFiltersProps {
+  activeFilters: ActiveFilters;
+  onToggleFilter: (category: keyof ActiveFilters, value: string) => void;
+  onClearFilters: () => void;
+}
+
+const SidebarFilters: React.FC<SidebarFiltersProps> = ({ activeFilters, onToggleFilter, onClearFilters }) => {
+  // Controls which accordion sections are open
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     [FilterCategory.BASICS]: true,
     [FilterCategory.SKILLS_FIT]: false,
@@ -41,6 +61,20 @@ const SidebarFilters: React.FC = () => {
   const toggleSection = (section: string) => {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
+
+  // True if ANY filter is active across all categories
+  const hasActiveFilters =
+    activeFilters.opportunityType.length > 0 ||
+    activeFilters.location.length > 0 ||
+    activeFilters.timeCommitment.length > 0;
+
+  // Returns the appropriate Tailwind class string based on whether the tag is selected
+  const filterButtonClass = (isActive: boolean) =>
+    `px-2 py-1 text-[10px] font-bold uppercase border transition-colors ${
+      isActive
+        ? 'bg-black text-white border-black'            // selected state: filled black
+        : 'border-gray-300 hover:border-black hover:bg-black hover:text-white bg-white text-gray-800' // default
+    }`;
 
   return (
     <div className="w-full">
@@ -54,13 +88,17 @@ const SidebarFilters: React.FC = () => {
         onToggle={() => toggleSection(FilterCategory.BASICS)}
       >
         <div className="space-y-6 mt-2">
+
+          {/* --- Opportunity Type --- */}
           <div>
             <h4 className="text-xs text-gray-500 uppercase font-semibold mb-2">Opportunity Type</h4>
             <div className="flex flex-wrap gap-2">
               {FILTER_TAGS.opportunityType.map((tag) => (
                 <button
                   key={tag}
-                  className="px-2 py-1 text-[10px] font-bold uppercase border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-colors bg-white text-gray-800"
+                  // Toggle this tag in the opportunityType filter array
+                  onClick={() => onToggleFilter('opportunityType', tag)}
+                  className={filterButtonClass(activeFilters.opportunityType.includes(tag))}
                 >
                   {tag}
                 </button>
@@ -68,13 +106,15 @@ const SidebarFilters: React.FC = () => {
             </div>
           </div>
 
+          {/* --- Location --- */}
           <div>
             <h4 className="text-xs text-gray-500 uppercase font-semibold mb-2">Location</h4>
             <div className="flex flex-wrap gap-2">
               {FILTER_TAGS.location.map((tag) => (
                 <button
                   key={tag}
-                  className="px-2 py-1 text-[10px] font-bold uppercase border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-colors bg-white text-gray-800"
+                  onClick={() => onToggleFilter('location', tag)}
+                  className={filterButtonClass(activeFilters.location.includes(tag))}
                 >
                   {tag}
                 </button>
@@ -82,53 +122,46 @@ const SidebarFilters: React.FC = () => {
             </div>
           </div>
 
+          {/* --- Time Commitment --- */}
           <div>
             <h4 className="text-xs text-gray-500 uppercase font-semibold mb-2">Time Commitment</h4>
             <div className="flex flex-wrap gap-2">
               {FILTER_TAGS.timeCommitment.map((tag) => (
                 <button
                   key={tag}
-                  className="px-2 py-1 text-[10px] font-bold uppercase border border-gray-300 hover:border-black hover:bg-black hover:text-white transition-colors bg-white text-gray-800"
+                  onClick={() => onToggleFilter('timeCommitment', tag)}
+                  className={filterButtonClass(activeFilters.timeCommitment.includes(tag))}
                 >
                   {tag}
                 </button>
               ))}
             </div>
           </div>
-          
+
           <p className="text-xs text-gray-400 italic">
             Filter by type, location, and time to find your next opportunity.
           </p>
         </div>
       </FilterSection>
 
-      {/* <FilterSection
-        title={FilterCategory.REWARDS_LOGISTICS}
-        isOpen={openSections[FilterCategory.REWARDS_LOGISTICS]}
-        onToggle={() => toggleSection(FilterCategory.REWARDS_LOGISTICS)}
-      >
-        <div className="text-xs text-gray-400 py-2">Reward filters...</div>
-      </FilterSection>
+      {/* Other filter sections (commented out until implemented) */}
+      {/* <FilterSection title={FilterCategory.REWARDS_LOGISTICS} ...> */}
+      {/* <FilterSection title={FilterCategory.SKILLS_FIT} ...> */}
+      {/* <FilterSection title={FilterCategory.ORGANIZER_QUALITY} ...> */}
 
-      <FilterSection
-        title={FilterCategory.SKILLS_FIT}
-        isOpen={openSections[FilterCategory.SKILLS_FIT]}
-        onToggle={() => toggleSection(FilterCategory.SKILLS_FIT)}
-      >
-        <div className="text-xs text-gray-400 py-2">Skill filters...</div>
-      </FilterSection>
-
-      <FilterSection
-        title={FilterCategory.ORGANIZER_QUALITY}
-        isOpen={openSections[FilterCategory.ORGANIZER_QUALITY]}
-        onToggle={() => toggleSection(FilterCategory.ORGANIZER_QUALITY)}
-      >
-        <div className="text-xs text-gray-400 py-2">Quality filters...</div>
-      </FilterSection>
-       */}
-      <button className="text-xs text-gray-400 mt-2 hover:text-black uppercase font-bold tracking-wide w-full text-center py-2">
-        Filters update instantly
-      </button>
+      {/* Show "Clear Filters" when any filter is active, otherwise show static hint text */}
+      {hasActiveFilters ? (
+        <button
+          onClick={onClearFilters}
+          className="text-xs text-red-500 mt-2 hover:text-red-700 uppercase font-bold tracking-wide w-full text-center py-2"
+        >
+          Clear Filters
+        </button>
+      ) : (
+        <p className="text-xs text-gray-400 mt-2 uppercase font-bold tracking-wide w-full text-center py-2">
+          Filters update instantly
+        </p>
+      )}
     </div>
   );
 };
